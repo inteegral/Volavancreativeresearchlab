@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Homepage -->
+  <url>
+    <loc>https://volavan.it/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <!-- About Page -->
+  <url>
+    <loc>https://volavan.it/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Residencies Page -->
+  <url>
+    <loc>https://volavan.it/residencies</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Artists Page -->
+  <url>
+    <loc>https://volavan.it/artists</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Journal Page -->
+  <url>
+    <loc>https://volavan.it/journal</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Application Page -->
+  <url>
+    <loc>https://volavan.it/candidature</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- 
+    NOTE: This is a static sitemap. 
+    For a dynamic sitemap that includes all residencies, artists, and journal posts from Sanity,
+    you should create a server-side endpoint that fetches data from Sanity and generates the XML.
+    
+    Example dynamic pages to include:
+    - /residencies/[slug] (all residency editions)
+    - /artists/[slug] (all artists)
+    - /journal/[slug] (all journal posts)
+  -->
+  
+</urlset>

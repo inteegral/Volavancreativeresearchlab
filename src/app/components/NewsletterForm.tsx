@@ -1,0 +1,106 @@
+import { useState, FormEvent } from 'react';
+import { toast } from 'sonner';
+import { trackEvent } from '../hooks/useAnalytics';
+import { Mail } from 'lucide-react';
+
+/**
+ * Newsletter Signup Form
+ * 
+ * TODO: Implementare con una delle seguenti opzioni sicure:
+ * 1. MailerLite Embedded Form (consigliato)
+ * 2. Serverless Function (Netlify/Vercel) come proxy
+ * 3. Formspree + Zapier/Make integration
+ * 
+ * NON usare API key direttamente nel frontend!
+ */
+
+interface NewsletterFormProps {
+  className?: string;
+  variant?: 'footer' | 'inline';
+}
+
+export function NewsletterForm({ className = '', variant = 'footer' }: NewsletterFormProps) {
+  const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    if (!email || !email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+      toast.error('Please enter a valid email address');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    // TODO: Implementare integrazione sicura (vedi opzioni sopra)
+    // Per ora: solo demo mode
+    console.log('📧 Newsletter signup (demo mode):', email);
+    
+    setTimeout(() => {
+      toast.success('Newsletter subscription successful! (Demo mode - da implementare)');
+      trackEvent('newsletter_signup', { source: variant, mode: 'demo' });
+      setEmail('');
+      setIsSubmitting(false);
+    }, 1000);
+  };
+
+  if (variant === 'inline') {
+    return (
+      <div className={`bg-[#F5F5F0]/5 border border-[#F5F5F0]/10 rounded-lg p-8 ${className}`}>
+        <div className="flex items-center gap-3 mb-4">
+          <Mail size={24} className="text-[#B5DAD9]" />
+          <h3 className="font-['Cormorant_Garamond'] text-2xl italic text-[#F5F5F0]">
+            Stay Updated
+          </h3>
+        </div>
+        <p className="font-['Manrope'] text-sm text-[#F5F5F0]/70 mb-6 leading-relaxed">
+          Subscribe to receive news about upcoming residencies, artist calls, and events.
+        </p>
+        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="your@email.com"
+            className="flex-1 px-4 py-3 bg-[#6A746C]/30 border border-[#F5F5F0]/20 rounded text-[#F5F5F0] placeholder:text-[#F5F5F0]/40 font-['Manrope'] text-sm focus:outline-none focus:border-[#B5DAD9]/60 transition-colors"
+            disabled={isSubmitting}
+            required
+          />
+          <button
+            type="submit"
+            className="px-6 py-3 bg-[#B5DAD9] text-[#6A746C] rounded font-['Manrope'] text-xs font-medium uppercase tracking-[0.15em] hover:bg-[#B5DAD9]/90 transition-all whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? 'Subscribing...' : 'Subscribe'}
+          </button>
+        </form>
+      </div>
+    );
+  }
+
+  // Footer variant (default)
+  return (
+    <form 
+      onSubmit={handleSubmit} 
+      className={`w-full flex flex-col sm:flex-row gap-3 sm:gap-2 ${className}`}
+    >
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Your email"
+        className="flex-1 px-4 py-3 bg-transparent border border-[#F5F5F0]/20 rounded-full text-[#F5F5F0] placeholder:text-[#F5F5F0]/40 font-['Manrope'] text-sm focus:outline-none focus:border-[#B5DAD9]/60 transition-colors"
+        disabled={isSubmitting}
+        required
+      />
+      <button
+        type="submit"
+        className="px-6 py-3 bg-[#B5DAD9]/10 border border-[#B5DAD9]/30 rounded-full text-[#B5DAD9] font-['Manrope'] text-xs uppercase tracking-[0.15em] hover:bg-[#B5DAD9]/20 hover:border-[#B5DAD9]/50 transition-all whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
+        disabled={isSubmitting}
+      >
+        {isSubmitting ? 'Subscribing...' : 'Subscribe'}
+      </button>
+    </form>
+  );
+}

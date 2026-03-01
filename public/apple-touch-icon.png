@@ -1,0 +1,13 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Sfondo verde -->
+  <rect width="180" height="180" rx="20" fill="#6A746C"/>
+  
+  <!-- Logo rotondo bianco centrato -->
+  <circle cx="90" cy="90" r="65" fill="#F5F5F0"/>
+  
+  <!-- Dettaglio interno -->
+  <circle cx="90" cy="90" r="35" fill="#6A746C"/>
+  
+  <!-- Elemento decorativo centrale -->
+  <circle cx="90" cy="90" r="15" fill="#B5DAD9"/>
+</svg>

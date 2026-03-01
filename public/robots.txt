@@ -1,0 +1,11 @@
+# VOLAVAN - Robots.txt
+# Allow all search engines to index the site
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://volavan.it/sitemap.xml
+
+# Disallow admin/debug pages (if any in future)
+Disallow: /debug

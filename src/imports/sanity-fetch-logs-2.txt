@@ -1,0 +1,119 @@
+[Hydrated]
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:19005 🔍 All programs received: []
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:19005 🔍 Number of programs: 0
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:18428 🔄 Fetching home page content (lang: en)...
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:18568 🔄 Fetching all programs from Sanity (lang: en)...
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:18681 🔍 Fetching journal content from Sanity (lang: en)...
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:18681 🔄 Calling Sanity API for journal content...
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:18681 📋 Query: *[_type in ["journal", "videoPost"] && (!defined(language) || language == $lang)] | order(publishedAt desc) {
+    _id,
+    _type,
+    title,
+    "slug": slug.current,
+    excerpt,
+    publishedAt,
+    coverImage,
+    videoUrl,
+    videoId,
+    thumbnail,
+    startTime,
+    endTime,
+    author-> {
+      name,
+      "slug": slug.current
+    },
+    categories
+  }
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:18445 🔄 Fetching settings from Sanity...
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:18433 ✅ Successfully fetched home page content
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:19005 🔍 All programs received: []
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:19005 🔍 Number of programs: 0
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:18449 ✅ Successfully fetched settings: {defaultSeo: {…}, logo: {…}, mediaKitPassword: '123456'}
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:19005 🔍 All programs received: []
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:19005 🔍 Number of programs: 0
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:18607 ✅ Fetched 5 programs with editions
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:18609 🔍 Program "+-SON": editions: 2, heroImage: true
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:18609 🔍 Program "CA TRÙ": editions: 1, heroImage: true
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:18609 🔍 Program "CONTEMPORANEO": editions: 1, heroImage: false
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:18609 🔍 Program "CREATIVE ETHOLOGY": editions: 1, heroImage: true
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:18609 🔍 Program "WELCOME VIOLENCE": editions: 1, heroImage: true
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:19005 🔍 All programs received: (5) [{…}, {…}, {…}, {…}, {…}]
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:19005 🔍 Number of programs: 5
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:19005 🔍 Checking program: +-SON Editions: 2
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:19007 🔍 Program: +-SON Edition: 2026 Calculated Status: upcoming Dates: {startDate: '2026-06-20', endDate: '2026-07-11', callDates: {…}}
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:19005 🔍 Checking program: CA TRÙ Editions: 1
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:19007 🔍 Program: CA TRÙ Edition: 2026 Calculated Status: upcoming Dates: {startDate: '2026-12-01', endDate: '2026-12-11', callDates: {…}}
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:19005 🔍 Checking program: CONTEMPORANEO Editions: 1
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:19007 🔍 Program: CONTEMPORANEO Edition: 2025 Calculated Status: null Dates: {startDate: '2025-08-11', endDate: '2025-08-17', callDates: {…}}
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:19005 🔍 Checking program: CREATIVE ETHOLOGY Editions: 1
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:19007 🔍 Program: CREATIVE ETHOLOGY Edition: 2026 Calculated Status: null Dates: {startDate: null, endDate: null, callDates: null}
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:19005 🔍 Checking program: WELCOME VIOLENCE Editions: 1
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:19007 🔍 Program: WELCOME VIOLENCE Edition: 2027 Calculated Status: null Dates: {startDate: null, endDate: null, callDates: null}
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:18686 ✅ Successfully fetched journal content: 7
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:18694 📚 Content data: (7) [{…}, {…}, {…}, {…}, {…}, {…}, {…}]
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:18694 📝 Journal content received: (7) [{…}, {…}, {…}, {…}, {…}, {…}, {…}]
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:18694 📊 Number of items: 7
+0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:18694 🎯 First item: {_id: 'dc9f98db-8eae-4e60-b3d6-ad6f8ea0a73b', _type: 'journal', author: {…}, categories: null, coverImage: null, …}
+www-widgetapi.js:210 Failed to execute 'postMessage' on 'DOMWindow': The target origin provided ('https://www.youtube.com') does not match the recipient window's origin ('https://www.volavan.com').
+(anonymous) @ www-widgetapi.js:210
+Fb @ www-widgetapi.js:206
+(anonymous) @ www-widgetapi.js:205
+setInterval
+Bb @ www-widgetapi.js:207
+X @ www-widgetapi.js:197
+v @ 0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:19047
+window.onYouTubeIframeAPIReady @ 0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:19033
+(anonymous) @ www-widgetapi.js:232
+(anonymous) @ www-widgetapi.js:232
+PendingScript
+(anonymous) @ iframe_api:3
+(anonymous) @ iframe_api:3
+PendingScript
+(anonymous) @ 0951e7fc3bff42ac6e4b6cf539b3cc42401b31dc.js:19032
+fp @ sites-runtime.ed340f7bffa7e99869e4202e80427255dbdc8bff3e9b8cbc6cc79c5d908c29e6.js:8
+Ja @ sites-runtime.ed340f7bffa7e99869e4202e80427255dbdc8bff3e9b8cbc6cc79c5d908c29e6.js:8
+(anonymous) @ sites-runtime.ed340f7bffa7e99869e4202e80427255dbdc8bff3e9b8cbc6cc79c5d908c29e6.js:8
+yy @ sites-runtime.ed340f7bffa7e99869e4202e80427255dbdc8bff3e9b8cbc6cc79c5d908c29e6.js:1
+dy @ sites-runtime.ed340f7bffa7e99869e4202e80427255dbdc8bff3e9b8cbc6cc79c5d908c29e6.js:1Understand this warning
+js?id=G-2KXXYREL2P:521 
+    ____                   _        _____
+   / ___| ___   ___   __ _| | ___  |_   _|_ _  __ _
+  | |  _ / _ \ / _ \ / _` | |/ _ \   | |/ _` |/ _` |
+  | |_| | (_) | (_) | (_| | |  __/   | | (_| | (_| |
+   \____|\___/ \___/ \__, |_|\___|   |_|\__,_|\__, |
+                     |___/                    |___/
+
+js?id=G-2KXXYREL2P:521 Processing commands (2)
+js?id=G-2KXXYREL2P:521 Processing data layer push: {event: "gtm.init_consent", gtm.uniqueEventId: 1}
+js?id=G-2KXXYREL2P:521 Processing data layer push: {event: "gtm.init", gtm.uniqueEventId: 2}
+js?id=G-2KXXYREL2P:521 Tag fired: {function: "__ogt_1p_data_v2", priority: 14, vtp_isAutoEnabled: true, vtp_autoPhoneEnabled: true, vtp_autoCollectExclusionSelectors: ["list", ["map", "exclusionSelector", ""]], vtp_isEnabled: true, vtp_autoAddressEnabled: true, vtp_autoEmailEnabled: true, vtp_isAutoCollectPiiEnabledFlag: true, tag_id: 4}
+js?id=G-2KXXYREL2P:521 Tag fired: {function: "__ccd_ga_first", priority: 13, vtp_instanceDestinationId: "G-2KXXYREL2P", tag_id: 19}
+js?id=G-2KXXYREL2P:521 Tag fired: {function: "__set_product_settings", priority: 12, vtp_instanceDestinationId: "G-2KXXYREL2P", vtp_foreignTldMacroResult: ["macro", 1], vtp_isChinaVipRegionMacroResult: ["macro", 2], tag_id: 18}
+js?id=G-2KXXYREL2P:521 Tag fired: {function: "__ccd_ga_regscope", priority: 11, vtp_settingsTable: ["list", ["map", "redactFieldGroup", "DEVICE_AND_GEO", "disallowAllRegions", false, "disallowedRegions", ""], ["map", "redactFieldGroup", "GOOGLE_SIGNALS", "disallowAllRegions", true, "disallowedRegions", ""]], vtp_instanceDestinationId: "G-2KXXYREL2P", tag_id: 17}
+js?id=G-2KXXYREL2P:521 Tag fired: {function: "__ccd_em_download", priority: 10, vtp_includeParams: true, vtp_instanceDestinationId: "G-2KXXYREL2P", tag_id: 16}
+js?id=G-2KXXYREL2P:521 Tag fired: {function: "__ccd_em_form", priority: 9, vtp_includeParams: true, vtp_instanceDestinationId: "G-2KXXYREL2P", tag_id: 15}
+js?id=G-2KXXYREL2P:521 Tag fired: {function: "__ccd_em_outbound_click", priority: 8, vtp_includeParams: true, vtp_instanceDestinationId: "G-2KXXYREL2P", tag_id: 14}
+js?id=G-2KXXYREL2P:521 Tag fired: {function: "__ccd_em_page_view", priority: 7, vtp_historyEvents: true, vtp_includeParams: true, vtp_instanceDestinationId: "G-2KXXYREL2P", tag_id: 13}
+js?id=G-2KXXYREL2P:521 Tag fired: {function: "__ccd_em_scroll", priority: 6, vtp_includeParams: true, vtp_instanceDestinationId: "G-2KXXYREL2P", tag_id: 12}
+js?id=G-2KXXYREL2P:521 Tag fired: {function: "__ccd_em_site_search", priority: 5, vtp_searchQueryParams: "q,s,search,query,keyword", vtp_includeParams: true, vtp_instanceDestinationId: "G-2KXXYREL2P", tag_id: 11}
+js?id=G-2KXXYREL2P:521 Tag fired: {function: "__ccd_em_video", priority: 4, vtp_includeParams: true, vtp_instanceDestinationId: "G-2KXXYREL2P", tag_id: 10}
+js?id=G-2KXXYREL2P:521 Tag fired: {function: "__ccd_conversion_marking", priority: 3, vtp_conversionRules: ["list", ["map", "matchingRules", "{"type":5,"args":[{"stringValue":"purchase"},{"contextValue":{"namespaceType":1,"keyParts":["eventName"]}}]}"], ["map", "matchingRules", "{"type":5,"args":[{"stringValue":"ads_conversion_Formulario_1"},{"contextValue":{"namespaceType":1,"keyParts":["eventName"]}}]}"], ["map", "matchingRules", "{"type":5,"args":[{"stringValue":"Contemporaneo_applied"},{"contextValue":{"namespaceType":1,"keyParts":["eventName"]}}]}"]], vtp_instanceDestinationId: "G-2KXXYREL2P", tag_id: 9}
+js?id=G-2KXXYREL2P:521 Tag fired: {function: "__ccd_auto_redact", priority: 2, vtp_redactEmail: true, vtp_instanceDestinationId: "G-2KXXYREL2P", tag_id: 8}
+js?id=G-2KXXYREL2P:521 Tag fired: {function: "__ccd_ga_ads_link", priority: 1, vtp_instanceDestinationId: "G-2KXXYREL2P", tag_id: 7}
+js?id=G-2KXXYREL2P:521 Tag fired: {function: "__ccd_ga_last", priority: 0, vtp_instanceDestinationId: "G-2KXXYREL2P", tag_id: 6}
+js?id=G-2KXXYREL2P:521 Processing GTAG command: ["event", "page_view", {page_path: "/", page_location: "https://www.volavan.com/"}]
+js?id=G-2KXXYREL2P:521 Processing GTAG command: ["js", Sun Mar 01 2026 10:44:03 GMT+0700 (Indochina Time)]
+js?id=G-2KXXYREL2P:521 Tag fired: {function: "__gct", vtp_trackingId: "G-2KXXYREL2P", vtp_sessionDuration: 0, tag_id: 1}
+js?id=G-2KXXYREL2P:521 Processing commands (1)
+js?id=G-2KXXYREL2P:521 Processing GTAG command: ["config", "G-2KXXYREL2P", {send_page_view: false, cookie_flags: "SameSite=None;Secure", allow_enhanced_conversions: false}]
+js?id=G-2KXXYREL2P:521 GTAG Command: "config", target: "G-2KXXYREL2P", configuration: {send_page_view: false, cookie_flags: "SameSite=None;Secure", allow_enhanced_conversions: false}
+js?id=G-2KXXYREL2P:521 Event processing aborted during validation.
+js?id=G-2KXXYREL2P:521 Processing commands (1)
+js?id=G-2KXXYREL2P:521 Processing data layer push: {event: "gtm.load"}
+js?id=G-2KXXYREL2P:521 Processing commands (0)
+js?id=G-2KXXYREL2P:521 Processing commands (1)
+js?id=G-2KXXYREL2P:521 Processing data layer push: {event: "gtm.dom"}
+js?id=G-2KXXYREL2P:521 Processing commands (1)
+js?id=G-2KXXYREL2P:521 Processing data layer push: {event: "gtm.video", gtm.element: [object HTMLIFrameElement], gtm.elementClasses: "absolute inset-0 z-0", gtm.elementId: "youtube-player", gtm.elementTarget: "", gtm.triggers: "8", gtm.elementUrl: "https://www.youtube.com/embed/Bx2g8jRQlns?autoplay=1&mute=1&start=29&controls=0&showinfo=0&rel=0&modestbranding=1&disablekb=1&fs=0&iv_load_policy=3&playsinline=1&enablejsapi=1&cc_load_policy=1&cc_lang_pref=en&origin=https%3A%2F%2Fwww.volavan.com&widgetid=1&forigin=https%3A%2F%2Fwww.volavan.com%2F&aoriginsup=1&vf=6", gtm.videoProvider: "youtube", gtm.videoStatus: "start", gtm.videoUrl: "https://www.youtube.com/watch?t=29&v=Bx2g8jRQlns", gtm.videoTitle: "We are Volavan", gtm.videoDuration: 1261, gtm.videoCurrentTime: 29, gtm.videoElapsedTime: 0, gtm.videoPercent: 2, gtm.videoVisible: true}
+js?id=G-2KXXYREL2P:521 Processing GTAG command: ["event", "video_start", {video_current_time: 29, video_duration: 1261, video_percent: 2, video_provider: "youtube", video_title: "We are Volavan", video_url: "https://www.youtube.com/watch?t=29&v=Bx2g8jRQlns", visible: true, send_to: "G-2KXXYREL2P"}]
+js?id=G-2KXXYREL2P:521 Event processing aborted during validation.
