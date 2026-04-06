@@ -18,13 +18,6 @@ export default function Residencies() {
   const { page: pageContent, isLoading: pageLoading, isError: pageError } = useResidenciesPage();
   const { settings, isLoading: settingsLoading, isError: settingsError } = useSettings();
 
-  // Debug: Log programs data
-  programs.forEach(program => {
-      editions: program.editions?.length,
-      heroImage: !!program.heroImage,
-      firstEdition: program.editions?.[0],
-    });
-  });
 
   const loading = programsLoading || pageLoading || settingsLoading;
   const error = programsError || pageError || settingsError;

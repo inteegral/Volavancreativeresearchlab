@@ -38,10 +38,6 @@ export default function Home() {
         // Calculate dynamic status for each edition
         return program.editions.some(edition => {
           const calculatedStatus = calculateResidencyStatus(edition);
-            startDate: edition.startDate,
-            endDate: edition.endDate,
-            callDates: edition.callDates
-          });
           return calculatedStatus === 'upcoming' || calculatedStatus === 'open_call' || calculatedStatus === 'open_call_soon';
         });
       })

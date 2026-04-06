@@ -852,12 +852,7 @@ export const sanityService = {
         QUERIES.residenciesPage,
         { lang }
       );
-        supertitle: data?.supertitle,
-        title: data?.title,
-        introText: data?.introText?.substring(0, 50) + '...',
-        callToAction: data?.callToAction
-      });
-      
+
       // Fallback to English if no data in requested language
       if (!data && lang !== 'en') {
         const fallbackData = await sanityClient.fetch<SanityArtResidencies>(
