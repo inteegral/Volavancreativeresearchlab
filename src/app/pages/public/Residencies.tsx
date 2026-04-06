@@ -19,9 +19,7 @@ export default function Residencies() {
   const { settings, isLoading: settingsLoading, isError: settingsError } = useSettings();
 
   // Debug: Log programs data
-  console.log('🔍 Residencies Page - Programs:', programs);
   programs.forEach(program => {
-    console.log('🔍 Program:', program.name, {
       editions: program.editions?.length,
       heroImage: !!program.heroImage,
       firstEdition: program.editions?.[0],

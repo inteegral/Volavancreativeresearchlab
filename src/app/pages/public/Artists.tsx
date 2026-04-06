@@ -21,7 +21,6 @@ export default function Artists() {
     if (!residency.artists || residency.artists.length === 0) return;
     
     // Debug: log residency title
-    console.log('Residency title:', residency.title);
     
     residency.artists.forEach(item => {
       if (!item || !item.artist) return;

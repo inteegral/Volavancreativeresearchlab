@@ -800,18 +800,13 @@ export const sanityService = {
    */
   async getHome(lang: string = 'en'): Promise<SanityHome | null> {
     try {
-      console.log(`🔄 Fetching home page content (lang: ${lang})...`);
       const data = await sanityClient.fetch<SanityHome>(
         QUERIES.home,
         { lang }
       );
-      console.log('✅ Successfully fetched home page content');
       return data || null;
     } catch (error) {
       console.error('❌ Error fetching home page from Sanity:', error);
-      console.error('Error details:', {
-        message: error instanceof Error ? error.message : 'Unknown error',
-      });
       return null;
     }
   },
@@ -821,17 +816,12 @@ export const sanityService = {
    */
   async getSettings(): Promise<{ mediaKitPassword: string; logo?: SanityImage; defaultSeo?: { ogImage?: { asset?: { url?: string } } } } | null> {
     try {
-      console.log('🔄 Fetching settings from Sanity...');
       const data = await sanityClient.fetch<{ mediaKitPassword: string; logo?: SanityImage; defaultSeo?: { ogImage?: { asset?: { url?: string } } } }>(
         QUERIES.settings
       );
-      console.log('✅ Successfully fetched settings:', data);
       return data || null;
     } catch (error) {
       console.error('❌ Error fetching settings from Sanity:', error);
-      console.error('Error details:', {
-        message: error instanceof Error ? error.message : 'Unknown error',
-      });
       return null;
     }
   },
@@ -841,19 +831,13 @@ export const sanityService = {
    */
   async getAbout(lang: string = 'en'): Promise<SanityAbout | null> {
     try {
-      console.log(`🔄 Fetching about page content (lang: ${lang})...`);
       const data = await sanityClient.fetch<SanityAbout>(
         QUERIES.about,
         { lang }
       );
-      console.log('✅ Successfully fetched about page content:', data);
-      console.log('📝 Mission field:', data?.mission);
       return data || null;
     } catch (error) {
       console.error('❌ Error fetching about page from Sanity:', error);
-      console.error('Error details:', {
-        message: error instanceof Error ? error.message : 'Unknown error',
-      });
       return null;
     }
   },
@@ -863,16 +847,11 @@ export const sanityService = {
    */
   async getArtResidenciesPage(lang: string = 'en'): Promise<SanityArtResidencies | null> {
     try {
-      console.log(`🔄 Fetching art residencies page content (lang: ${lang})...`);
-      console.log(`📋 Query:`, QUERIES.residenciesPage);
-      console.log(`📋 Params:`, { lang });
       
       const data = await sanityClient.fetch<SanityArtResidencies>(
         QUERIES.residenciesPage,
         { lang }
       );
-      console.log('✅ Successfully fetched art residencies page content:', data);
-      console.log('📝 Data fields:', {
         supertitle: data?.supertitle,
         title: data?.title,
         introText: data?.introText?.substring(0, 50) + '...',
@@ -881,21 +860,16 @@ export const sanityService = {
       
       // Fallback to English if no data in requested language
       if (!data && lang !== 'en') {
-        console.log(`⚠️ No art residencies page content found for lang: ${lang}, falling back to English...`);
         const fallbackData = await sanityClient.fetch<SanityArtResidencies>(
           QUERIES.residenciesPage,
           { lang: 'en' }
         );
-        console.log('✅ Fallback data fetched:', fallbackData);
         return fallbackData || null;
       }
       
       return data || null;
     } catch (error) {
       console.error('❌ Error fetching art residencies page from Sanity:', error);
-      console.error('Error details:', {
-        message: error instanceof Error ? error.message : 'Unknown error',
-      });
       return null;
     }
   },
@@ -906,14 +880,9 @@ export const sanityService = {
   async getAllResidencies(): Promise<SanityResidency[]> {
     try {
       const residencies = await sanityClient.fetch<SanityResidency[]>(QUERIES.allResidencies);
-      console.log('✅ Successfully fetched residencies:', residencies?.length || 0);
       return residencies || [];
     } catch (error) {
       console.error('❌ Error fetching residencies from Sanity:', error);
-      console.error('Error details:', {
-        message: error instanceof Error ? error.message : 'Unknown error',
-        stack: error instanceof Error ? error.stack : undefined,
-      });
       return [];
     }
   },
@@ -926,13 +895,9 @@ export const sanityService = {
       const residency = await sanityClient.fetch<SanityResidency>(
         QUERIES.residencyBySlug(slug)
       );
-      console.log(`✅ Successfully fetched residency "${slug}"`);
       return residency || null;
     } catch (error) {
       console.error(`❌ Error fetching residency "${slug}" from Sanity:`, error);
-      console.error('Error details:', {
-        message: error instanceof Error ? error.message : 'Unknown error',
-      });
       return null;
     }
   },
@@ -942,18 +907,12 @@ export const sanityService = {
    */
   async getAllSelectedArtists(): Promise<SanityResidency[]> {
     try {
-      console.log('🔄 Fetching artists from Sanity...');
       const residencies = await sanityClient.fetch<SanityResidency[]>(
         QUERIES.allArtists
       );
-      console.log('✅ Successfully fetched artists from', residencies?.length || 0, 'residencies');
       return residencies || [];
     } catch (error) {
       console.error('❌ Error fetching artists from Sanity:', error);
-      console.error('Error details:', {
-        message: error instanceof Error ? error.message : 'Unknown error',
-        stack: error instanceof Error ? error.stack : undefined,
-      });
       return [];
     }
   },
@@ -966,13 +925,9 @@ export const sanityService = {
       const artist = await sanityClient.fetch<SanityArtist>(
         QUERIES.artistBySlug(slug)
       );
-      console.log(`✅ Successfully fetched artist "${slug}"`);
       return artist || null;
     } catch (error) {
       console.error(`❌ Error fetching artist "${slug}" from Sanity:`, error);
-      console.error('Error details:', {
-        message: error instanceof Error ? error.message : 'Unknown error',
-      });
       return null;
     }
   },
@@ -981,7 +936,6 @@ export const sanityService = {
    * Get all artistic programs
    */
   getAllPrograms: async (lang: string = 'en'): Promise<SanityProgram[]> => {
-    console.log(`🔄 Fetching all programs from Sanity (lang: ${lang})...`);
     
     // Single GROQ query with select() to handle both EN and ES
     const programs = await sanityClient.fetch<any[]>(
@@ -1024,16 +978,13 @@ export const sanityService = {
     );
     
     if (!programs || programs.length === 0) {
-      console.log(`⚠️ No programs found for lang: ${lang}`);
       return [];
     }
     
-    console.log(`✅ Fetched ${programs.length} programs with editions`);
     
     // Add heroImage from latest edition
     const processedPrograms = programs.map(program => {
       const heroImage = program.editions?.find((e: any) => e.coverImage)?.coverImage;
-      console.log(`🔍 Program "${program.name}": editions: ${program.editions?.length || 0}, heroImage: ${!!heroImage}`);
       
       return {
         ...program,
@@ -1048,12 +999,10 @@ export const sanityService = {
    * Get single program by slug with all editions
    */
   getProgramBySlug: async (slug: string, lang: string = 'en'): Promise<SanityProgram | null> => {
-    console.log(`🔄 Fetching program by slug: ${slug} (lang: ${lang})`);
     const result = await sanityClient.fetch<SanityProgram>(
       QUERIES.programBySlug(slug),
       { lang }
     );
-    console.log('✅ Successfully fetched program:', result?.name || 'Not found');
     return result;
   },
 
@@ -1062,24 +1011,16 @@ export const sanityService = {
    */
   async getAllJournalPosts(lang: string = 'en'): Promise<SanityJournalPost[]> {
     try {
-      console.log(`🔄 Calling Sanity API for journal posts (lang: ${lang})...`);
-      console.log('📋 Query:', QUERIES.allJournalPosts);
       const posts = await sanityClient.fetch<SanityJournalPost[]>(
         QUERIES.allJournalPosts,
         { lang }
       );
-      console.log('✅ Successfully fetched journal posts:', posts?.length || 0);
       if (posts && posts.length > 0) {
-        console.log('📚 Posts data:', posts);
       } else {
-        console.warn('⚠️ No journal posts found in Sanity');
       }
       return posts || [];
     } catch (error) {
       console.error('❌ Error fetching journal posts from Sanity:', error);
-      console.error('Error details:', {
-        message: error instanceof Error ? error.message : 'Unknown error',
-      });
       return [];
     }
   },
@@ -1093,13 +1034,9 @@ export const sanityService = {
         QUERIES.journalPostBySlug(slug),
         { lang }
       );
-      console.log(`✅ Successfully fetched journal post "${slug}" (lang: ${lang})`);
       return post || null;
     } catch (error) {
       console.error(`❌ Error fetching journal post "${slug}" from Sanity:`, error);
-      console.error('Error details:', {
-        message: error instanceof Error ? error.message : 'Unknown error',
-      });
       return null;
     }
   },
@@ -1109,24 +1046,16 @@ export const sanityService = {
    */
   async getAllVideoPosts(lang: string = 'en'): Promise<SanityVideoPost[]> {
     try {
-      console.log(`🔄 Calling Sanity API for video posts (lang: ${lang})...`);
-      console.log('📋 Query:', QUERIES.allVideoPosts);
       const posts = await sanityClient.fetch<SanityVideoPost[]>(
         QUERIES.allVideoPosts,
         { lang }
       );
-      console.log('✅ Successfully fetched video posts:', posts?.length || 0);
       if (posts && posts.length > 0) {
-        console.log('🎥 Posts data:', posts);
       } else {
-        console.warn('⚠️ No video posts found in Sanity');
       }
       return posts || [];
     } catch (error) {
       console.error('❌ Error fetching video posts from Sanity:', error);
-      console.error('Error details:', {
-        message: error instanceof Error ? error.message : 'Unknown error',
-      });
       return [];
     }
   },
@@ -1136,40 +1065,27 @@ export const sanityService = {
    */
   async getAllJournalContent(lang: string = 'en'): Promise<SanityJournalContent[]> {
     try {
-      console.log(`🔍 Fetching journal content from Sanity (lang: ${lang})...`);
-      console.log('🔄 Calling Sanity API for journal content...');
-      console.log('📋 Query:', QUERIES.allJournalContent);
       const content = await sanityClient.fetch<SanityJournalContent[]>(
         QUERIES.allJournalContent,
         { lang }
       );
-      console.log('✅ Successfully fetched journal content:', content?.length || 0);
       
       // Fallback to English if no content in requested language
       if ((!content || content.length === 0) && lang !== 'en') {
-        console.log(`⚠️ No journal content found for lang: ${lang}, falling back to English...`);
         const fallbackContent = await sanityClient.fetch<SanityJournalContent[]>(
           QUERIES.allJournalContent,
           { lang: 'en' }
         );
-        console.log('✅ Fallback content fetched:', fallbackContent?.length || 0);
         return fallbackContent || [];
       }
       
       if (content && content.length > 0) {
-        console.log('📚 Content data:', content);
       }
-      console.log('📝 Journal content received:', content);
-      console.log('📊 Number of items:', content?.length || 0);
       if (content && content.length > 0) {
-        console.log('🎯 First item:', content[0]);
       }
       return content || [];
     } catch (error) {
       console.error('❌ Error fetching journal content from Sanity:', error);
-      console.error('Error details:', {
-        message: error instanceof Error ? error.message : 'Unknown error',
-      });
       return [];
     }
   },

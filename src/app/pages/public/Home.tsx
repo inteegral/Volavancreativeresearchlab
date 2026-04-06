@@ -29,19 +29,15 @@ export default function Home() {
 
   // Derived state with memoization
   const upcomingResidencies = useMemo(() => {
-    console.log('🔍 All programs received:', programs);
-    console.log('🔍 Number of programs:', programs.length);
     
     return programs
       .filter(program => {
-        console.log('🔍 Checking program:', program.name, 'Editions:', program.editions?.length);
         
         if (!program.editions || program.editions.length === 0) return false;
         
         // Calculate dynamic status for each edition
         return program.editions.some(edition => {
           const calculatedStatus = calculateResidencyStatus(edition);
-          console.log('🔍 Program:', program.name, 'Edition:', edition.year, 'Calculated Status:', calculatedStatus, 'Dates:', {
             startDate: edition.startDate,
             endDate: edition.endDate,
             callDates: edition.callDates
@@ -67,7 +63,6 @@ export default function Home() {
         playerRef.current = null;
         isPlayerReady.current = false;
       } catch (e) {
-        console.log('Player cleanup on language change error:', e);
       }
     }
     isInitialized.current = false;
@@ -111,7 +106,6 @@ export default function Home() {
         try {
           playerRef.current.destroy();
         } catch (e) {
-          console.log('Player cleanup error:', e);
         }
       }
     };
@@ -158,7 +152,6 @@ export default function Home() {
               event.target.playVideo();
               isPlayerReady.current = true;
             } catch (e) {
-              console.log('Error in onReady:', e);
             }
           },
           onStateChange: (event: any) => {
@@ -171,16 +164,13 @@ export default function Home() {
                 setIsEnded(true);
               }
             } catch (e) {
-              console.log('Error in onStateChange:', e);
             }
           },
           onError: (event: any) => {
-            console.log('YouTube player error:', event.data);
           }
         }
       });
     } catch (e) {
-      console.log('Player init error:', e);
     }
   };
 
@@ -194,7 +184,6 @@ export default function Home() {
         }
         setIsMuted(!isMuted);
       } catch (e) {
-        console.log('Error toggling mute:', e);
       }
     }
   };
@@ -206,7 +195,6 @@ export default function Home() {
         playerRef.current.playVideo();
         setIsEnded(false);
       } catch (e) {
-        console.log('Error replaying video:', e);
       }
     }
   };

@@ -64,7 +64,6 @@ export function VideoPlayer({
         try {
           playerRef.current.destroy();
         } catch (e) {
-          console.log('Player cleanup error:', e);
         }
       }
     };
@@ -140,7 +139,6 @@ export function VideoPlayer({
         },
       });
     } catch (e) {
-      console.log('Player init error:', e);
     }
   };
 

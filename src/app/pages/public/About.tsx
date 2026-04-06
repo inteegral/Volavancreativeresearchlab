@@ -20,7 +20,6 @@ export default function About() {
 
   // Derived state with memoization
   const upcomingResidencies = useMemo(() => {
-    console.log('🔍 About Page - All programs:', programs);
     
     return programs
       .filter(program => {
@@ -29,7 +28,6 @@ export default function About() {
         // Calculate dynamic status for each edition (same as Home)
         return program.editions.some(edition => {
           const calculatedStatus = calculateResidencyStatus(edition);
-          console.log(`🔍 Program "${program.name}" - Edition status:`, calculatedStatus, edition);
           return calculatedStatus === 'upcoming' || calculatedStatus === 'open_call' || calculatedStatus === 'open_call_soon';
         });
       })
@@ -54,16 +52,12 @@ export default function About() {
   const missionText = aboutData?.mission || '';
   
   // Debug: log the mission text to see what we're getting
-  console.log('📄 Mission text from Sanity:', missionText);
-  console.log('📄 Mission text length:', missionText.length);
   
   const paragraphs = missionText
     .split(/\n+/) // Split on one or more newlines
     .map(p => p.trim())
     .filter(p => p.length > 0);
   
-  console.log('📄 Number of paragraphs:', paragraphs.length);
-  console.log('📄 Paragraphs:', paragraphs);
 
   return (
     <div className="min-h-screen flex flex-col px-6 pt-32 pb-20">

@@ -556,10 +556,6 @@ export default function SocialMediaKit() {
   const handlePasswordSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    console.log('🔑 Password submit attempt');
-    console.log('📦 Settings from Sanity:', settings);
-    console.log('🔒 Expected password:', settings?.mediaKitPassword);
-    console.log('✏️ User input:', passwordInput);
     
     if (!settings?.mediaKitPassword) {
       console.error('❌ No password configured in Sanity settings');
@@ -568,14 +564,11 @@ export default function SocialMediaKit() {
     }
 
     if (passwordInput === settings.mediaKitPassword) {
-      console.log('✅ Password correct!');
       setIsAuthenticated(true);
       sessionStorage.setItem('mediaKitAuth', 'true');
       setPasswordError(false);
     } else {
       console.error('❌ Password incorrect');
-      console.log('Expected:', settings.mediaKitPassword);
-      console.log('Received:', passwordInput);
       setPasswordError(true);
       setPasswordInput("");
     }

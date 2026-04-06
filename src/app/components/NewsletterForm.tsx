@@ -35,7 +35,6 @@ export function NewsletterForm({ className = '', variant = 'footer' }: Newslette
 
     // TODO: Implementare integrazione sicura (vedi opzioni sopra)
     // Per ora: solo demo mode
-    console.log('📧 Newsletter signup (demo mode):', email);
     
     setTimeout(() => {
       toast.success('Newsletter subscription successful! (Demo mode - da implementare)');

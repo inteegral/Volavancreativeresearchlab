@@ -14,13 +14,10 @@ export default function DebugSanity() {
     async function fetchData() {
       try {
         setLoading(true);
-        console.log(`Fetching Sanity data for language: ${language}...`);
         
         const programsData = await sanityService.getAllPrograms(language);
         const residenciesData = await sanityService.getAllResidencies(language);
         
-        console.log('Programs:', programsData);
-        console.log('Residencies:', residenciesData);
         
         setPrograms(programsData || []);
         setResidencies(residenciesData || []);
