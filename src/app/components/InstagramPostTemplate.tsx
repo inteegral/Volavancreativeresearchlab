@@ -360,7 +360,7 @@ export function InstagramPostTemplate({ post, slideIndex }: InstagramPostTemplat
 
   return (
     <div className="relative group">
-      <div className="relative overflow-hidden rounded-sm border border-[#F5F5F0]/10">
+      <div className="relative overflow-hidden rounded-sm border border-volavan-cream/10">
         <canvas 
           ref={canvasRef}
           className="w-full h-auto"
@@ -368,10 +368,10 @@ export function InstagramPostTemplate({ post, slideIndex }: InstagramPostTemplat
         />
         
         {/* Download overlay */}
-        <div className="absolute inset-0 bg-[#6A746C]/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+        <div className="absolute inset-0 bg-volavan-earth/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
           <button
             onClick={handleDownload}
-            className="px-6 py-3 bg-[#B5DAD9] text-[#6A746C] rounded-sm font-['Manrope'] text-sm uppercase tracking-wider hover:bg-[#F5F5F0] transition-colors flex items-center gap-2"
+            className="px-6 py-3 bg-volavan-aqua text-volavan-earth rounded-sm font-['Manrope'] text-sm uppercase tracking-wider hover:bg-volavan-cream transition-colors flex items-center gap-2"
           >
             <Download size={18} />
             Download
@@ -381,7 +381,7 @@ export function InstagramPostTemplate({ post, slideIndex }: InstagramPostTemplat
       
       {/* Slide info */}
       {slideIndex !== undefined && (
-        <div className="mt-2 text-center text-xs text-[#F5F5F0]/60 font-['Manrope'] uppercase tracking-wider">
+        <div className="mt-2 text-center text-xs text-volavan-cream/60 font-['Manrope'] uppercase tracking-wider">
           Slide {slideIndex + 1} of {post.content.slides?.length}
         </div>
       )}

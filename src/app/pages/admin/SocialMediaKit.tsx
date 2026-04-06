@@ -470,8 +470,8 @@ function TemplatePreview({
   // Don't show dropdown for Brand category
   if (format.category === "Brand" || format.category === "Press Kit") {
     return (
-      <div className="w-full h-full flex items-center justify-center bg-[#6A746C]/5">
-        <div className="scale-[2] text-[#6A746C]/20">{format.icon}</div>
+      <div className="w-full h-full flex items-center justify-center bg-volavan-earth/5">
+        <div className="scale-[2] text-volavan-earth/20">{format.icon}</div>
       </div>
     );
   }
@@ -483,7 +483,7 @@ function TemplatePreview({
         <div className="relative">
           <button
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            className="bg-white/90 backdrop-blur-sm border border-[#6A746C]/20 rounded-sm px-3 py-1.5 text-xs font-['Manrope'] text-[#6A746C] hover:bg-white transition-colors flex items-center gap-2"
+            className="bg-white/90 backdrop-blur-sm border border-volavan-earth/20 rounded-sm px-3 py-1.5 text-xs font-['Manrope'] text-volavan-earth hover:bg-white transition-colors flex items-center gap-2"
           >
             {program ? program.name.substring(0, 15) + (program.name.length > 15 ? '...' : '') : 'Select Program'}
             <ChevronDown size={14} />
@@ -495,7 +495,7 @@ function TemplatePreview({
                 className="fixed inset-0 z-10" 
                 onClick={() => setIsDropdownOpen(false)}
               />
-              <div className="absolute top-full right-0 mt-1 bg-white border border-[#6A746C]/20 rounded-sm shadow-lg overflow-hidden z-20 min-w-[200px] max-h-[300px] overflow-y-auto">
+              <div className="absolute top-full right-0 mt-1 bg-white border border-volavan-earth/20 rounded-sm shadow-lg overflow-hidden z-20 min-w-[200px] max-h-[300px] overflow-y-auto">
                 {programs.map((p) => (
                   <button
                     key={p._id}
@@ -503,7 +503,7 @@ function TemplatePreview({
                       onSelectProgram(p._id);
                       setIsDropdownOpen(false);
                     }}
-                    className="w-full text-left px-3 py-2 text-xs font-['Manrope'] text-[#6A746C] hover:bg-[#B5DAD9]/10 transition-colors border-b border-[#6A746C]/5 last:border-0"
+                    className="w-full text-left px-3 py-2 text-xs font-['Manrope'] text-volavan-earth hover:bg-volavan-aqua/10 transition-colors border-b border-volavan-earth/5 last:border-0"
                   >
                     {p.name}
                   </button>
@@ -577,12 +577,12 @@ export default function SocialMediaKit() {
   // Show loading state
   if (isLoading) {
     return (
-      <div className="w-full min-h-screen bg-[#F5F5F0] flex items-center justify-center">
+      <div className="w-full min-h-screen bg-volavan-cream flex items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 bg-[#6A746C] rounded-sm flex items-center justify-center mx-auto mb-4 animate-pulse">
-            <span className="text-[#F5F5F0] font-['Cormorant_Garamond'] text-2xl italic">V</span>
+          <div className="w-16 h-16 bg-volavan-earth rounded-sm flex items-center justify-center mx-auto mb-4 animate-pulse">
+            <span className="text-volavan-cream font-['Cormorant_Garamond'] text-2xl italic">V</span>
           </div>
-          <p className="font-['Manrope'] text-sm text-[#6A746C]/60">Loading...</p>
+          <p className="font-['Manrope'] text-sm text-volavan-earth/60">Loading...</p>
         </div>
       </div>
     );
@@ -591,7 +591,7 @@ export default function SocialMediaKit() {
   // Show login form if not authenticated
   if (!isAuthenticated) {
     return (
-      <div className="w-full min-h-screen bg-gradient-to-br from-[#F5F5F0] via-[#F5F5F0] to-[#B5DAD9]/10 flex items-center justify-center px-6">
+      <div className="w-full min-h-screen bg-gradient-to-br from-volavan-cream via-volavan-cream to-volavan-aqua/10 flex items-center justify-center px-6">
         <SEOHead 
           title="Social Media Kit - Login"
           description="Access VOLAVAN brand assets and social media templates."
@@ -603,16 +603,16 @@ export default function SocialMediaKit() {
           animate={{ opacity: 1, y: 0 }}
           className="w-full max-w-md"
         >
-          <div className="bg-white/80 backdrop-blur-xl border border-[#6A746C]/10 rounded-lg p-10 shadow-[0_8px_30px_rgb(0,0,0,0.06)]">
+          <div className="bg-white/80 backdrop-blur-xl border border-volavan-earth/10 rounded-lg p-10 shadow-[0_8px_30px_rgb(0,0,0,0.06)]">
             {/* Logo */}
             <div className="flex justify-center mb-10">
               <motion.div 
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ delay: 0.1 }}
-                className="w-20 h-20 bg-gradient-to-br from-[#6A746C] to-[#6A746C]/80 rounded-lg flex items-center justify-center shadow-lg"
+                className="w-20 h-20 bg-gradient-to-br from-volavan-earth to-volavan-earth/80 rounded-lg flex items-center justify-center shadow-lg"
               >
-                <span className="text-[#F5F5F0] font-['Cormorant_Garamond'] text-3xl italic">V</span>
+                <span className="text-volavan-cream font-['Cormorant_Garamond'] text-3xl italic">V</span>
               </motion.div>
             </div>
 
@@ -622,10 +622,10 @@ export default function SocialMediaKit() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
             >
-              <h1 className="font-['Cormorant_Garamond'] text-4xl italic text-[#6A746C] text-center mb-3 leading-tight">
+              <h1 className="font-['Cormorant_Garamond'] text-4xl italic text-volavan-earth text-center mb-3 leading-tight">
                 Social Media Kit
               </h1>
-              <p className="font-['Manrope'] text-sm text-[#6A746C]/50 text-center mb-10 tracking-wide">
+              <p className="font-['Manrope'] text-sm text-volavan-earth/50 text-center mb-10 tracking-wide">
                 Enter password to access brand assets
               </p>
             </motion.div>
@@ -643,7 +643,7 @@ export default function SocialMediaKit() {
                   Password
                 </label>
                 <div className="relative">
-                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-[#6A746C]/30" size={18} />
+                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-volavan-earth/30" size={18} />
                   <input
                     type="password"
                     id="password"
@@ -655,12 +655,12 @@ export default function SocialMediaKit() {
                     placeholder="Enter password"
                     className={`
                       w-full pl-12 pr-4 py-4 
-                      bg-[#F5F5F0]/50 border rounded-lg
-                      font-['Manrope'] text-sm text-[#6A746C]
-                      placeholder:text-[#6A746C]/30
-                      focus:outline-none focus:ring-2 focus:ring-[#B5DAD9]/50 focus:border-[#B5DAD9]
+                      bg-volavan-cream/50 border rounded-lg
+                      font-['Manrope'] text-sm text-volavan-earth
+                      placeholder:text-volavan-earth/30
+                      focus:outline-none focus:ring-2 focus:ring-volavan-aqua/50 focus:border-volavan-aqua
                       transition-all duration-300
-                      ${passwordError ? 'border-red-300 bg-red-50/30' : 'border-[#6A746C]/10'}
+                      ${passwordError ? 'border-red-300 bg-red-50/30' : 'border-volavan-earth/10'}
                     `}
                     autoFocus
                   />
@@ -678,14 +678,14 @@ export default function SocialMediaKit() {
 
               <button
                 type="submit"
-                className="w-full px-6 py-4 bg-gradient-to-r from-[#6A746C] to-[#6A746C]/90 text-[#F5F5F0] rounded-lg font-['Manrope'] text-sm uppercase tracking-[0.2em] hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
+                className="w-full px-6 py-4 bg-gradient-to-r from-volavan-earth to-volavan-earth/90 text-volavan-cream rounded-lg font-['Manrope'] text-sm uppercase tracking-[0.2em] hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
               >
                 Access Media Kit
               </button>
             </motion.form>
 
-            <p className="mt-8 text-center font-['Manrope'] text-xs text-[#6A746C]/30 tracking-wide">
-              Contact <span className="text-[#6A746C]/60">ola@volavan.com</span> if you need access
+            <p className="mt-8 text-center font-['Manrope'] text-xs text-volavan-earth/30 tracking-wide">
+              Contact <span className="text-volavan-earth/60">ola@volavan.com</span> if you need access
             </p>
           </div>
         </motion.div>
@@ -1203,7 +1203,7 @@ export default function SocialMediaKit() {
   };
 
   return (
-    <div className="w-full min-h-screen bg-gradient-to-br from-[#F5F5F0] via-[#F5F5F0] to-[#B5DAD9]/5 text-[#6A746C] px-6 py-32 md:py-40">
+    <div className="w-full min-h-screen bg-gradient-to-br from-volavan-cream via-volavan-cream to-volavan-aqua/5 text-volavan-earth px-6 py-32 md:py-40">
       <SEOHead 
         title="Social Media Kit"
         description="Download VOLAVAN brand assets and social media templates with real residency content."
@@ -1220,10 +1220,10 @@ export default function SocialMediaKit() {
         >
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
-              <h1 className="font-['Cormorant_Garamond'] text-6xl md:text-8xl italic text-[#6A746C] leading-[0.9] tracking-tight">
+              <h1 className="font-['Cormorant_Garamond'] text-6xl md:text-8xl italic text-volavan-earth leading-[0.9] tracking-tight">
                 Social Media Kit
               </h1>
-              <p className="font-['Manrope'] text-base md:text-lg text-[#6A746C]/50 max-w-3xl leading-relaxed mt-4">
+              <p className="font-['Manrope'] text-base md:text-lg text-volavan-earth/50 max-w-3xl leading-relaxed mt-4">
                 Generate optimized social media graphics with real residency data from Sanity. 
                 Select a program for each format and download ready-to-use images.
               </p>
@@ -1231,7 +1231,7 @@ export default function SocialMediaKit() {
             
             <Link 
               to="/admin/social-campaign"
-              className="shrink-0 px-6 py-4 bg-gradient-to-r from-[#B5DAD9] to-[#B5DAD9]/80 text-[#6A746C] rounded-xl font-['Manrope'] text-xs uppercase tracking-[0.2em] hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center gap-3"
+              className="shrink-0 px-6 py-4 bg-gradient-to-r from-volavan-aqua to-volavan-aqua/80 text-volavan-earth rounded-xl font-['Manrope'] text-xs uppercase tracking-[0.2em] hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center gap-3"
             >
               <Calendar size={16} />
               30-Day Campaign
@@ -1244,15 +1244,15 @@ export default function SocialMediaKit() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="mb-20 p-10 md:p-12 bg-white/60 backdrop-blur-sm border border-[#6A746C]/5 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
+          className="mb-20 p-10 md:p-12 bg-white/60 backdrop-blur-sm border border-volavan-earth/5 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
         >
           <div className="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-4">
-            <h2 className="font-['Cormorant_Garamond'] text-4xl md:text-5xl italic text-[#6A746C]">
+            <h2 className="font-['Cormorant_Garamond'] text-4xl md:text-5xl italic text-volavan-earth">
               Brand Colors
             </h2>
             <button
               onClick={downloadColorPalette}
-              className="px-6 py-3 bg-gradient-to-r from-[#6A746C] to-[#6A746C]/90 text-[#F5F5F0] rounded-xl font-['Manrope'] text-xs uppercase tracking-[0.2em] hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center gap-3"
+              className="px-6 py-3 bg-gradient-to-r from-volavan-earth to-volavan-earth/90 text-volavan-cream rounded-xl font-['Manrope'] text-xs uppercase tracking-[0.2em] hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center gap-3"
             >
               <Download size={16} />
               Download Palette
@@ -1268,30 +1268,30 @@ export default function SocialMediaKit() {
                 className="space-y-5 group"
               >
                 <div 
-                  className="w-full h-40 rounded-xl border border-[#6A746C]/10 shadow-sm group-hover:shadow-md transition-all duration-300"
+                  className="w-full h-40 rounded-xl border border-volavan-earth/10 shadow-sm group-hover:shadow-md transition-all duration-300"
                   style={{ backgroundColor: color.hex }}
                 />
                 <div className="space-y-3">
-                  <p className="font-['Manrope'] text-sm font-semibold text-[#6A746C] tracking-wide">
+                  <p className="font-['Manrope'] text-sm font-semibold text-volavan-earth tracking-wide">
                     {color.name}
                   </p>
                   <div className="flex items-center gap-3">
-                    <code className="font-mono text-xs text-[#6A746C]/70 bg-[#6A746C]/5 px-3 py-2 rounded-lg border border-[#6A746C]/10">
+                    <code className="font-mono text-xs text-volavan-earth/70 bg-volavan-earth/5 px-3 py-2 rounded-lg border border-volavan-earth/10">
                       {color.hex}
                     </code>
                     <button
                       onClick={() => copyToClipboard(color.hex, color.hex)}
-                      className="p-2 hover:bg-[#B5DAD9]/10 rounded-lg transition-all duration-200 active:scale-95"
+                      className="p-2 hover:bg-volavan-aqua/10 rounded-lg transition-all duration-200 active:scale-95"
                       title="Copy HEX"
                     >
                       {copiedColor === color.hex ? (
-                        <Check size={16} className="text-[#B5DAD9]" />
+                        <Check size={16} className="text-volavan-aqua" />
                       ) : (
-                        <Copy size={16} className="text-[#6A746C]/40" />
+                        <Copy size={16} className="text-volavan-earth/40" />
                       )}
                     </button>
                   </div>
-                  <code className="font-mono text-xs text-[#6A746C]/30 block tracking-wide">
+                  <code className="font-mono text-xs text-volavan-earth/30 block tracking-wide">
                     RGB: {color.rgb}
                   </code>
                 </div>
@@ -1314,8 +1314,8 @@ export default function SocialMediaKit() {
               className={`
                 px-5 py-2.5 rounded-xl font-['Manrope'] text-xs uppercase tracking-[0.2em] transition-all duration-300
                 ${selectedCategory === category 
-                  ? 'bg-gradient-to-r from-[#6A746C] to-[#6A746C]/90 text-[#F5F5F0] shadow-md scale-105' 
-                  : 'bg-white/80 text-[#6A746C]/50 border border-[#6A746C]/10 hover:border-[#B5DAD9]/50 hover:bg-white hover:scale-[1.02]'
+                  ? 'bg-gradient-to-r from-volavan-earth to-volavan-earth/90 text-volavan-cream shadow-md scale-105' 
+                  : 'bg-white/80 text-volavan-earth/50 border border-volavan-earth/10 hover:border-volavan-aqua/50 hover:bg-white hover:scale-[1.02]'
                 }
               `}
             >
@@ -1329,9 +1329,9 @@ export default function SocialMediaKit() {
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-              className="w-12 h-12 border-2 border-[#6A746C]/20 border-t-[#B5DAD9] rounded-full mx-auto mb-4"
+              className="w-12 h-12 border-2 border-volavan-earth/20 border-t-volavan-aqua rounded-full mx-auto mb-4"
             />
-            <p className="font-['Manrope'] text-sm text-[#6A746C]/40 tracking-wide">
+            <p className="font-['Manrope'] text-sm text-volavan-earth/40 tracking-wide">
               Loading programs from Sanity...
             </p>
           </div>
@@ -1351,11 +1351,11 @@ export default function SocialMediaKit() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.05 * index }}
-                className="group bg-white/80 backdrop-blur-sm border border-[#6A746C]/5 rounded-2xl overflow-hidden hover:border-[#B5DAD9]/30 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-500"
+                className="group bg-white/80 backdrop-blur-sm border border-volavan-earth/5 rounded-2xl overflow-hidden hover:border-volavan-aqua/30 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-500"
               >
                 {/* Preview Box */}
                 <div 
-                  className="w-full bg-gradient-to-br from-[#6A746C]/5 to-[#B5DAD9]/5 border-b border-[#6A746C]/5 overflow-hidden relative"
+                  className="w-full bg-gradient-to-br from-volavan-earth/5 to-volavan-aqua/5 border-b border-volavan-earth/5 overflow-hidden relative"
                   style={{
                     aspectRatio: format.ratio !== "N/A" ? format.ratio : "16/9",
                     minHeight: format.ratio === "N/A" ? "240px" : undefined
@@ -1374,25 +1374,25 @@ export default function SocialMediaKit() {
 
                 {/* Info */}
                 <div className="p-8 space-y-4">
-                  <div className="flex items-center gap-2.5 text-[#6A746C]/30">
+                  <div className="flex items-center gap-2.5 text-volavan-earth/30">
                     {format.icon}
                     <span className="font-['Manrope'] text-[10px] uppercase tracking-[0.2em] font-medium">
                       {format.category}
                     </span>
                   </div>
                   
-                  <h3 className="font-['Cormorant_Garamond'] text-2xl italic text-[#6A746C] leading-tight">
+                  <h3 className="font-['Cormorant_Garamond'] text-2xl italic text-volavan-earth leading-tight">
                     {format.name}
                   </h3>
                   
-                  <p className="font-mono text-xs text-[#6A746C]/40 tracking-wide">
+                  <p className="font-mono text-xs text-volavan-earth/40 tracking-wide">
                     {format.dimensions}
                   </p>
 
                   {/* Download Button */}
                   <button
                     onClick={() => downloadFormat(format)}
-                    className="w-full mt-6 px-5 py-3.5 bg-gradient-to-r from-[#6A746C] to-[#6A746C]/90 text-[#F5F5F0] rounded-xl font-['Manrope'] text-xs uppercase tracking-[0.2em] hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-3"
+                    className="w-full mt-6 px-5 py-3.5 bg-gradient-to-r from-volavan-earth to-volavan-earth/90 text-volavan-cream rounded-xl font-['Manrope'] text-xs uppercase tracking-[0.2em] hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-3"
                   >
                     <Download size={16} />
                     Download
@@ -1408,27 +1408,27 @@ export default function SocialMediaKit() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="mt-24 p-10 md:p-12 bg-white/60 backdrop-blur-sm border border-[#6A746C]/5 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
+          className="mt-24 p-10 md:p-12 bg-white/60 backdrop-blur-sm border border-volavan-earth/5 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
         >
-          <h2 className="font-['Cormorant_Garamond'] text-4xl md:text-5xl italic text-[#6A746C] mb-8">
+          <h2 className="font-['Cormorant_Garamond'] text-4xl md:text-5xl italic text-volavan-earth mb-8">
             Usage Guidelines
           </h2>
-          <div className="space-y-6 font-['Manrope'] text-sm md:text-base text-[#6A746C]/60 leading-relaxed">
+          <div className="space-y-6 font-['Manrope'] text-sm md:text-base text-volavan-earth/60 leading-relaxed">
             <p>
-              <strong className="text-[#6A746C] font-semibold">Content Generation:</strong> Each template uses real residency data 
+              <strong className="text-volavan-earth font-semibold">Content Generation:</strong> Each template uses real residency data 
               from Sanity CMS including program names, taglines, hero images, and dates. Select different programs 
               to see how they look across formats.
             </p>
             <p>
-              <strong className="text-[#6A746C] font-semibold">Typography:</strong> Primary font is Cormorant Garamond (italic for headlines), 
+              <strong className="text-volavan-earth font-semibold">Typography:</strong> Primary font is Cormorant Garamond (italic for headlines), 
               secondary font is Manrope (for body text and UI elements).
             </p>
             <p>
-              <strong className="text-[#6A746C] font-semibold">Color Application:</strong> Use #6A746C as the primary color, #B5DAD9 for 
+              <strong className="text-volavan-earth font-semibold">Color Application:</strong> Use #6A746C as the primary color, #B5DAD9 for 
               accents and calls-to-action, and #F5F5F0 for backgrounds and light elements.
             </p>
             <p>
-              <strong className="text-[#6A746C] font-semibold">Downloads:</strong> All images are generated in PNG format at optimal 
+              <strong className="text-volavan-earth font-semibold">Downloads:</strong> All images are generated in PNG format at optimal 
               resolution for each platform. Images include overlay gradients for text readability.
             </p>
           </div>

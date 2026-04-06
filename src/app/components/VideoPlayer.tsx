@@ -214,16 +214,16 @@ export function VideoPlayer({
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={handlePlayWithSound}
-              className="group flex flex-col items-center gap-4 px-8 py-6 bg-[#B5DAD9]/95 hover:bg-[#B5DAD9] rounded-sm border border-[#F5F5F0]/20 transition-all"
+              className="group flex flex-col items-center gap-4 px-8 py-6 bg-volavan-aqua/95 hover:bg-volavan-aqua rounded-sm border border-volavan-cream/20 transition-all"
             >
-              <div className="w-16 h-16 rounded-full bg-[#6A746C] flex items-center justify-center group-hover:scale-110 transition-transform">
-                <Play size={28} className="text-[#F5F5F0] ml-1" fill="currentColor" />
+              <div className="w-16 h-16 rounded-full bg-volavan-earth flex items-center justify-center group-hover:scale-110 transition-transform">
+                <Play size={28} className="text-volavan-cream ml-1" fill="currentColor" />
               </div>
               <div className="text-center">
-                <div className="font-['Cormorant_Garamond'] text-2xl italic text-[#6A746C] mb-1">
+                <div className="font-['Cormorant_Garamond'] text-2xl italic text-volavan-earth mb-1">
                   Play with Sound
                 </div>
-                <div className="font-['Manrope'] text-xs uppercase tracking-wider text-[#6A746C]/70">
+                <div className="font-['Manrope'] text-xs uppercase tracking-wider text-volavan-earth/70">
                   Click to start
                 </div>
               </div>
@@ -239,7 +239,7 @@ export function VideoPlayer({
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={toggleMute}
-          className="w-11 h-11 rounded-full bg-[#6A746C]/80 backdrop-blur-sm border border-[#F5F5F0]/20 flex items-center justify-center text-[#F5F5F0] hover:bg-[#6A746C] hover:border-[#B5DAD9]/40 transition-all"
+          className="w-11 h-11 rounded-full bg-volavan-earth/80 backdrop-blur-sm border border-volavan-cream/20 flex items-center justify-center text-volavan-cream hover:bg-volavan-earth hover:border-volavan-aqua/40 transition-all"
           aria-label={isMuted ? "Unmute" : "Mute"}
         >
           {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
@@ -253,7 +253,7 @@ export function VideoPlayer({
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={replayVideo}
-            className="w-11 h-11 rounded-full bg-[#B5DAD9]/90 backdrop-blur-sm border border-[#F5F5F0]/20 flex items-center justify-center text-[#6A746C] hover:bg-[#B5DAD9] transition-all"
+            className="w-11 h-11 rounded-full bg-volavan-aqua/90 backdrop-blur-sm border border-volavan-cream/20 flex items-center justify-center text-volavan-earth hover:bg-volavan-aqua transition-all"
             aria-label="Replay"
           >
             <Play size={18} fill="currentColor" />

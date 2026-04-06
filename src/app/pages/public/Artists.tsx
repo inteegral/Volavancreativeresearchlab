@@ -63,7 +63,7 @@ export default function Artists() {
   });
 
   return (
-    <div className="min-h-screen bg-[#6A746C] text-[#F5F5F0] pt-24 md:pt-32 pb-16 md:pb-20 px-4 md:px-6 lg:px-12 max-w-7xl mx-auto">
+    <div className="min-h-screen bg-volavan-earth text-volavan-cream pt-24 md:pt-32 pb-16 md:pb-20 px-4 md:px-6 lg:px-12 max-w-7xl mx-auto">
       <SEOHead 
         title="Artisti"
         description="Scopri gli artisti che hanno partecipato alle residenze artistiche di VOLAVAN. Una comunità multidisciplinare di creatori da tutto il mondo."
@@ -75,7 +75,7 @@ export default function Artists() {
         <motion.span 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="block font-['Manrope'] text-xs md:text-sm uppercase tracking-[0.25em] text-[#B5DAD9] mb-4 md:mb-6"
+          className="block font-['Manrope'] text-xs md:text-sm uppercase tracking-[0.25em] text-volavan-aqua mb-4 md:mb-6"
         >
           The Community
         </motion.span>
@@ -83,7 +83,7 @@ export default function Artists() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="font-['Cormorant_Garamond'] text-4xl md:text-6xl lg:text-8xl italic leading-[0.9] text-[#F5F5F0] max-w-4xl"
+          className="font-['Cormorant_Garamond'] text-4xl md:text-6xl lg:text-8xl italic leading-[0.9] text-volavan-cream max-w-4xl"
         >
           Artists
         </motion.h1>
@@ -92,7 +92,7 @@ export default function Artists() {
       {/* Loading State */}
       {loading ? (
         <div className="w-full py-32 flex items-center justify-center">
-          <div className="w-8 h-8 border-2 border-[#B5DAD9]/30 border-t-[#B5DAD9] rounded-full animate-spin" />
+          <div className="w-8 h-8 border-2 border-volavan-aqua/30 border-t-volavan-aqua rounded-full animate-spin" />
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4">
@@ -102,9 +102,9 @@ export default function Artists() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 + (index * 0.05) }}
-              className={`group relative h-[350px] sm:h-[380px] md:h-[400px] overflow-hidden bg-[#6A746C] transition-colors duration-500 ${
+              className={`group relative h-[350px] sm:h-[380px] md:h-[400px] overflow-hidden bg-volavan-earth transition-colors duration-500 ${
                 item.type === 'artist' 
-                  ? 'border border-[#F5F5F0]/10 hover:border-[#B5DAD9]/50' 
+                  ? 'border border-volavan-cream/10 hover:border-volavan-aqua/50' 
                   : ''
               }`}
               onMouseEnter={() => setHoveredId(item.type === 'artist' ? item.data._id : null)}
@@ -121,7 +121,7 @@ export default function Artists() {
                           {item.data.residencyTitles.slice(0, 2).map((title, i) => (
                             <span 
                               key={i} 
-                              className="px-2 py-0.5 bg-[#B5DAD9]/20 border border-[#B5DAD9]/40 rounded-full font-['Manrope'] text-[8px] md:text-[9px] uppercase tracking-[0.15em] text-[#B5DAD9]"
+                              className="px-2 py-0.5 bg-volavan-aqua/20 border border-volavan-aqua/40 rounded-full font-['Manrope'] text-[8px] md:text-[9px] uppercase tracking-[0.15em] text-volavan-aqua"
                             >
                               {title}
                             </span>
@@ -129,20 +129,20 @@ export default function Artists() {
                         </div>
                       )}
                     </div>
-                    <ArrowUpRight className="text-[#F5F5F0] opacity-0 group-hover:opacity-100 transition-opacity duration-300" size={16} />
+                    <ArrowUpRight className="text-volavan-cream opacity-0 group-hover:opacity-100 transition-opacity duration-300" size={16} />
                   </div>
 
                   {/* Footer of Card */}
                   <div className="space-y-1.5 md:space-y-2 mix-blend-difference z-20">
-                    <h2 className="font-['Cormorant_Garamond'] text-2xl md:text-3xl italic text-[#F5F5F0] leading-none group-hover:translate-x-2 transition-transform duration-500">
+                    <h2 className="font-['Cormorant_Garamond'] text-2xl md:text-3xl italic text-volavan-cream leading-none group-hover:translate-x-2 transition-transform duration-500">
                       {item.data.name}
                     </h2>
-                    <div className="flex items-center gap-2 font-['Manrope'] text-[10px] md:text-xs uppercase tracking-[0.15em] text-[#B5DAD9] opacity-80 group-hover:translate-x-2 transition-transform duration-500 delay-75">
+                    <div className="flex items-center gap-2 font-['Manrope'] text-[10px] md:text-xs uppercase tracking-[0.15em] text-volavan-aqua opacity-80 group-hover:translate-x-2 transition-transform duration-500 delay-75">
                       {item.data.disciplines?.[0] && (
                         <span>{item.data.disciplines[0]}</span>
                       )}
                       {item.data.disciplines?.[0] && item.data.nationality && (
-                        <span className="text-[#F5F5F0]/40">·</span>
+                        <span className="text-volavan-cream/40">·</span>
                       )}
                       {item.data.nationality && (
                         <span>{item.data.nationality}</span>
@@ -151,7 +151,7 @@ export default function Artists() {
                   </div>
 
                   {/* Hover Image Background */}
-                  <div className="absolute inset-0 z-10 opacity-30 group-hover:opacity-70 transition-opacity duration-700 ease-out bg-[#5E6860]">
+                  <div className="absolute inset-0 z-10 opacity-30 group-hover:opacity-70 transition-opacity duration-700 ease-out bg-volavan-earth-dark">
                     {item.data.photo ? (
                       <img 
                         src={getImageUrl(item.data.photo, 600, 600)} 
@@ -160,12 +160,12 @@ export default function Artists() {
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
-                        <span className="font-['Cormorant_Garamond'] text-8xl italic text-[#F5F5F0]/20">
+                        <span className="font-['Cormorant_Garamond'] text-8xl italic text-volavan-cream/20">
                           {item.data.name.charAt(0)}
                         </span>
                       </div>
                     )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#6A746C]/90 via-transparent to-[#6A746C]/10 mix-blend-multiply" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-volavan-earth/90 via-transparent to-volavan-earth/10 mix-blend-multiply" />
                   </div>
                 </Link>
               ) : (
@@ -184,28 +184,28 @@ export default function Artists() {
                           className="w-full h-full object-cover blur-sm grayscale-[0.3]"
                         />
                       ) : (
-                        <div className="w-full h-full bg-[#5E6860]" />
+                        <div className="w-full h-full bg-volavan-earth-dark" />
                       );
                     })()}
                   </div>
 
                   {/* Content Overlay - Static */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#6A746C] via-[#6A746C]/90 to-[#6A746C]/70 p-6 md:p-8 flex flex-col justify-between">
+                  <div className="absolute inset-0 bg-gradient-to-t from-volavan-earth via-volavan-earth/90 to-volavan-earth/70 p-6 md:p-8 flex flex-col justify-between">
                     <div className="flex-1 flex items-center">
-                      <h2 className="font-['Cormorant_Garamond'] text-2xl md:text-3xl lg:text-4xl italic text-[#F5F5F0] leading-tight group-hover:translate-y-[-4px] transition-transform duration-300">
+                      <h2 className="font-['Cormorant_Garamond'] text-2xl md:text-3xl lg:text-4xl italic text-volavan-cream leading-tight group-hover:translate-y-[-4px] transition-transform duration-300">
                         {item.data.title}
                       </h2>
                     </div>
                     
                     <div className="flex items-center justify-between group-hover:translate-y-[-4px] transition-transform duration-300">
                       {item.data.publishedAt && (
-                        <div className="font-['Manrope'] text-[10px] md:text-xs uppercase tracking-[0.15em] text-[#B5DAD9]">\n                          {new Date(item.data.publishedAt).toLocaleDateString('en-US', { 
+                        <div className="font-['Manrope'] text-[10px] md:text-xs uppercase tracking-[0.15em] text-volavan-aqua">\n                          {new Date(item.data.publishedAt).toLocaleDateString('en-US', { 
                             month: 'short', 
                             year: 'numeric' 
                           })}
                         </div>
                       )}
-                      <span className="font-['Manrope'] text-[10px] md:text-xs uppercase tracking-[0.15em] text-[#F5F5F0] opacity-80 hover:opacity-100">
+                      <span className="font-['Manrope'] text-[10px] md:text-xs uppercase tracking-[0.15em] text-volavan-cream opacity-80 hover:opacity-100">
                         Read More →
                       </span>
                     </div>
@@ -218,7 +218,7 @@ export default function Artists() {
       )}
 
       {!loading && allArtists.length === 0 && (
-        <div className="w-full py-32 flex flex-col items-center justify-center text-[#F5F5F0]/40">
+        <div className="w-full py-32 flex flex-col items-center justify-center text-volavan-cream/40">
           <p className="font-['Manrope'] text-sm uppercase tracking-[0.2em]">No artists found</p>
         </div>
       )}

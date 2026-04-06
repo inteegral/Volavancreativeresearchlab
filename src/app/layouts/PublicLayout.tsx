@@ -41,9 +41,9 @@ export function PublicLayout() {
   const isActive = (path: string) => location.pathname.startsWith(path);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#6A746C] text-[#F5F5F0]">
+    <div className="min-h-screen flex flex-col bg-volavan-earth text-volavan-cream">
       {/* Header - Minimalist & Fixed */}
-      <header className="fixed top-0 left-0 right-0 z-50 text-[#F5F5F0] bg-gradient-to-b from-[#6A746C]/50 to-transparent backdrop-blur-[2px]">
+      <header className="fixed top-0 left-0 right-0 z-50 text-volavan-cream bg-gradient-to-b from-volavan-earth/50 to-transparent backdrop-blur-[2px]">
         <div className="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
           {/* Logo */}
           <Link 
@@ -75,15 +75,15 @@ export function PublicLayout() {
               <div className="w-8 h-8 flex flex-col items-center justify-center gap-1.5">
                 <motion.span
                   animate={isMenuOpen ? { rotate: 45, y: 5 } : { rotate: 0, y: 0 }}
-                  className="w-full h-[1px] bg-[#F5F5F0] block transition-colors"
+                  className="w-full h-[1px] bg-volavan-cream block transition-colors"
                 />
                 <motion.span
                   animate={isMenuOpen ? { opacity: 0 } : { opacity: 1 }}
-                  className="w-full h-[1px] bg-[#F5F5F0] block transition-colors"
+                  className="w-full h-[1px] bg-volavan-cream block transition-colors"
                 />
                 <motion.span
                   animate={isMenuOpen ? { rotate: -45, y: -5 } : { rotate: 0, y: 0 }}
-                  className="w-full h-[1px] bg-[#F5F5F0] block transition-colors"
+                  className="w-full h-[1px] bg-volavan-cream block transition-colors"
                 />
               </div>
             </button>
@@ -99,7 +99,7 @@ export function PublicLayout() {
             animate={{ y: 0 }}
             exit={{ y: "-100%" }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }} // Bezier for smooth "award winning" feel
-            className="fixed inset-0 z-40 bg-[#6A746C] flex flex-col justify-center"
+            className="fixed inset-0 z-40 bg-volavan-earth flex flex-col justify-center"
           >
             <div className="max-w-7xl mx-auto px-6 w-full h-full flex flex-col md:flex-row md:items-center">
               
@@ -117,7 +117,7 @@ export function PublicLayout() {
                     <Link
                       to={link.path}
                       className={`block font-['Cormorant_Garamond'] text-5xl md:text-7xl lg:text-8xl italic tracking-tight transition-all duration-300 hover:ml-4 ${
-                        isActive(link.path) ? "text-[#B5DAD9]" : "text-[#F5F5F0] hover:text-[#B5DAD9]"
+                        isActive(link.path) ? "text-volavan-aqua" : "text-volavan-cream hover:text-volavan-aqua"
                       }`}
                       onClick={() => setIsMenuOpen(false)}
                     >
@@ -133,16 +133,16 @@ export function PublicLayout() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ delay: 0.6, duration: 0.5 }}
-                className="md:w-1/3 mt-12 md:mt-0 flex flex-col gap-8 md:border-l md:border-[#F5F5F0]/10 md:pl-12 py-8 md:py-0"
+                className="md:w-1/3 mt-12 md:mt-0 flex flex-col gap-8 md:border-l md:border-volavan-cream/10 md:pl-12 py-8 md:py-0"
               >
                 <div className="flex flex-col items-start gap-4">
-                  <a href="https://www.facebook.com/volavan.coop" target="_blank" rel="noopener noreferrer" className="text-[#F5F5F0]/40 hover:text-[#B5DAD9] transition-all duration-300 transform hover:scale-110" aria-label="Facebook">
+                  <a href="https://www.facebook.com/volavan.coop" target="_blank" rel="noopener noreferrer" className="text-volavan-cream/40 hover:text-volavan-aqua transition-all duration-300 transform hover:scale-110" aria-label="Facebook">
                     <Facebook size={22} strokeWidth={1} />
                   </a>
-                  <a href="https://www.instagram.com/volavan.rural/" target="_blank" rel="noopener noreferrer" className="text-[#F5F5F0]/40 hover:text-[#B5DAD9] transition-all duration-300 transform hover:scale-110" aria-label="Instagram">
+                  <a href="https://www.instagram.com/volavan.rural/" target="_blank" rel="noopener noreferrer" className="text-volavan-cream/40 hover:text-volavan-aqua transition-all duration-300 transform hover:scale-110" aria-label="Instagram">
                     <Instagram size={22} strokeWidth={1} />
                   </a>
-                  <a href="https://www.youtube.com/@wearevolavan" target="_blank" rel="noopener noreferrer" className="text-[#F5F5F0]/40 hover:text-[#B5DAD9] transition-all duration-300 transform hover:scale-110" aria-label="YouTube">
+                  <a href="https://www.youtube.com/@wearevolavan" target="_blank" rel="noopener noreferrer" className="text-volavan-cream/40 hover:text-volavan-aqua transition-all duration-300 transform hover:scale-110" aria-label="YouTube">
                     <Youtube size={22} strokeWidth={1} />
                   </a>
                 </div>
@@ -158,12 +158,12 @@ export function PublicLayout() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-[#6A746C] text-[#F5F5F0] py-20 px-6 md:px-6 border-t border-[#F5F5F0]/10 mt-auto">
+      <footer className="bg-volavan-earth text-volavan-cream py-20 px-6 md:px-6 border-t border-volavan-cream/10 mt-auto">
         <div className="max-w-3xl mx-auto flex flex-col items-center text-center gap-10">
           
           {/* Newsletter Section */}
-          <div className="w-full max-w-md flex flex-col items-center gap-6 pb-8 border-b border-[#F5F5F0]/10">
-            <p className="font-['Cormorant_Garamond'] text-xl md:text-2xl italic text-[#F5F5F0]/80">
+          <div className="w-full max-w-md flex flex-col items-center gap-6 pb-8 border-b border-volavan-cream/10">
+            <p className="font-['Cormorant_Garamond'] text-xl md:text-2xl italic text-volavan-cream/80">
               Stay Connected
             </p>
             <NewsletterForm />
@@ -181,7 +181,7 @@ export function PublicLayout() {
               <Link 
                 key={link.path}
                 to={link.path}
-                className="font-['Manrope'] text-xs uppercase tracking-[0.15em] text-[#F5F5F0]/70 hover:text-[#B5DAD9] hover:opacity-100 transition-all"
+                className="font-['Manrope'] text-xs uppercase tracking-[0.15em] text-volavan-cream/70 hover:text-volavan-aqua hover:opacity-100 transition-all"
               >
                 {link.name}
               </Link>
@@ -189,31 +189,31 @@ export function PublicLayout() {
           </nav>
 
           {/* Contact Details */}
-          <div className="flex flex-col gap-3 font-['Manrope'] text-xs leading-relaxed tracking-wide text-[#F5F5F0]/40 uppercase">
+          <div className="flex flex-col gap-3 font-['Manrope'] text-xs leading-relaxed tracking-wide text-volavan-cream/40 uppercase">
             <p className="normal-case">Volavan cooperativa cultural CRL • Fermil • Portugal</p>
             
           </div>
 
           {/* Socials */}
           <div className="flex gap-6 opacity-40">
-            <a href="https://www.facebook.com/volavan.coop" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-[#B5DAD9] hover:opacity-100 transition-all duration-300 transform hover:scale-110">
+            <a href="https://www.facebook.com/volavan.coop" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-volavan-aqua hover:opacity-100 transition-all duration-300 transform hover:scale-110">
               <Facebook size={22} strokeWidth={1} />
             </a>
-            <a href="https://www.instagram.com/volavan.rural/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-[#B5DAD9] hover:opacity-100 transition-all duration-300 transform hover:scale-110">
+            <a href="https://www.instagram.com/volavan.rural/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-volavan-aqua hover:opacity-100 transition-all duration-300 transform hover:scale-110">
               <Instagram size={22} strokeWidth={1} />
             </a>
-            <a href="https://www.youtube.com/@wearevolavan" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="hover:text-[#B5DAD9] hover:opacity-100 transition-all duration-300 transform hover:scale-110">
+            <a href="https://www.youtube.com/@wearevolavan" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="hover:text-volavan-aqua hover:opacity-100 transition-all duration-300 transform hover:scale-110">
               <Youtube size={22} strokeWidth={1} />
             </a>
           </div>
 
           {/* Bottom Bar */}
-          <div className="pt-8 w-full border-t border-[#F5F5F0]/5 flex flex-col md:flex-row justify-center items-center gap-6 text-xs tracking-widest text-[#F5F5F0]/30 font-['Manrope'] uppercase mt-4">
+          <div className="pt-8 w-full border-t border-volavan-cream/5 flex flex-col md:flex-row justify-center items-center gap-6 text-xs tracking-widest text-volavan-cream/30 font-['Manrope'] uppercase mt-4">
             <span>© {new Date().getFullYear()} Volavan</span>
             <div className="flex gap-6">
-              <Link to="/privacy" className="hover:text-[#F5F5F0] transition-colors">Privacy</Link>
-              <Link to="/terms" className="hover:text-[#F5F5F0] transition-colors">Terms</Link>
-              <Link to="/admin/social-media-kit" className="hover:text-[#F5F5F0] transition-colors">Media Kit</Link>
+              <Link to="/privacy" className="hover:text-volavan-cream transition-colors">Privacy</Link>
+              <Link to="/terms" className="hover:text-volavan-cream transition-colors">Terms</Link>
+              <Link to="/admin/social-media-kit" className="hover:text-volavan-cream transition-colors">Media Kit</Link>
             </div>
           </div>
 

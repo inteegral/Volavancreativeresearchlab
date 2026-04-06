@@ -13,36 +13,36 @@ const components: PortableTextComponents = {
   block: {
     // Headings
     h1: ({ children }) => (
-      <h1 className="font-['Cormorant_Garamond'] text-5xl md:text-6xl italic text-[#F5F5F0] mb-8">
+      <h1 className="font-['Cormorant_Garamond'] text-5xl md:text-6xl italic text-volavan-cream mb-8">
         {children}
       </h1>
     ),
     h2: ({ children }) => (
-      <h2 className="font-['Cormorant_Garamond'] text-4xl md:text-5xl italic text-[#F5F5F0] mb-6 mt-12">
+      <h2 className="font-['Cormorant_Garamond'] text-4xl md:text-5xl italic text-volavan-cream mb-6 mt-12">
         {children}
       </h2>
     ),
     h3: ({ children }) => (
-      <h3 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl italic text-[#F5F5F0] mb-4 mt-10">
+      <h3 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl italic text-volavan-cream mb-4 mt-10">
         {children}
       </h3>
     ),
     h4: ({ children }) => (
-      <h4 className="font-['Manrope'] text-xl font-medium text-[#F5F5F0] mb-4 mt-8 uppercase tracking-wider">
+      <h4 className="font-['Manrope'] text-xl font-medium text-volavan-cream mb-4 mt-8 uppercase tracking-wider">
         {children}
       </h4>
     ),
     
     // Paragraphs
     normal: ({ children }) => (
-      <p className="font-['Manrope'] text-lg md:text-xl leading-relaxed text-[#F5F5F0]/80 mb-0 indent-8 first:indent-0">
+      <p className="font-['Manrope'] text-lg md:text-xl leading-relaxed text-volavan-cream/80 mb-0 indent-8 first:indent-0">
         {children}
       </p>
     ),
     
     // Blockquote
     blockquote: ({ children }) => (
-      <blockquote className="border-l-4 border-[#B5DAD9]/40 pl-6 my-8 italic text-[#F5F5F0]/70 font-['Cormorant_Garamond'] text-xl">
+      <blockquote className="border-l-4 border-volavan-aqua/40 pl-6 my-8 italic text-volavan-cream/70 font-['Cormorant_Garamond'] text-xl">
         {children}
       </blockquote>
     ),
@@ -51,14 +51,14 @@ const components: PortableTextComponents = {
   list: {
     // Bullet list
     bullet: ({ children }) => (
-      <ul className="list-disc list-outside ml-6 mb-6 space-y-3 text-[#F5F5F0]/80 font-['Manrope']">
+      <ul className="list-disc list-outside ml-6 mb-6 space-y-3 text-volavan-cream/80 font-['Manrope']">
         {children}
       </ul>
     ),
     
     // Numbered list
     number: ({ children }) => (
-      <ol className="list-decimal list-outside ml-6 mb-6 space-y-3 text-[#F5F5F0]/80 font-['Manrope']">
+      <ol className="list-decimal list-outside ml-6 mb-6 space-y-3 text-volavan-cream/80 font-['Manrope']">
         {children}
       </ol>
     ),
@@ -80,14 +80,14 @@ const components: PortableTextComponents = {
   marks: {
     // Strong/Bold
     strong: ({ children }) => (
-      <strong className="font-semibold text-[#F5F5F0]">
+      <strong className="font-semibold text-volavan-cream">
         {children}
       </strong>
     ),
     
     // Emphasis/Italic
     em: ({ children }) => (
-      <em className="italic text-[#B5DAD9]">
+      <em className="italic text-volavan-aqua">
         {children}
       </em>
     ),
@@ -102,7 +102,7 @@ const components: PortableTextComponents = {
           href={value?.href}
           target={target}
           rel={rel}
-          className="text-[#B5DAD9] hover:text-[#F5F5F0] underline decoration-[#B5DAD9]/40 hover:decoration-[#F5F5F0] transition-colors"
+          className="text-volavan-aqua hover:text-volavan-cream underline decoration-volavan-aqua/40 hover:decoration-volavan-cream transition-colors"
         >
           {children}
         </a>
@@ -111,7 +111,7 @@ const components: PortableTextComponents = {
     
     // Code
     code: ({ children }) => (
-      <code className="bg-[#F5F5F0]/10 px-2 py-1 rounded text-sm font-mono text-[#B5DAD9]">
+      <code className="bg-volavan-cream/10 px-2 py-1 rounded text-sm font-mono text-volavan-aqua">
         {children}
       </code>
     ),

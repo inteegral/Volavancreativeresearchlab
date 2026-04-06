@@ -42,12 +42,12 @@ export function LanguageSwitcher() {
       {/* Trigger Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-2 rounded-sm border border-[#F5F5F0]/20 hover:border-[#B5DAD9]/50 hover:bg-[#B5DAD9]/5 transition-all group"
+        className="flex items-center gap-2 px-3 py-2 rounded-sm border border-volavan-cream/20 hover:border-volavan-aqua/50 hover:bg-volavan-aqua/5 transition-all group"
         aria-label="Select language"
         aria-expanded={isOpen}
       >
-        <Globe size={16} className="text-[#F5F5F0]/60 group-hover:text-[#B5DAD9] transition-colors" />
-        <span className="font-['Manrope'] text-xs uppercase tracking-wider text-[#F5F5F0]/80 group-hover:text-[#B5DAD9] transition-colors">
+        <Globe size={16} className="text-volavan-cream/60 group-hover:text-volavan-aqua transition-colors" />
+        <span className="font-['Manrope'] text-xs uppercase tracking-wider text-volavan-cream/80 group-hover:text-volavan-aqua transition-colors">
           {currentLanguage.code}
         </span>
       </button>
@@ -60,22 +60,22 @@ export function LanguageSwitcher() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="absolute top-full right-0 mt-2 min-w-[180px] bg-[#5E6860] border border-[#F5F5F0]/20 rounded-sm shadow-xl overflow-hidden z-50"
+            className="absolute top-full right-0 mt-2 min-w-[180px] bg-volavan-earth-dark border border-volavan-cream/20 rounded-sm shadow-xl overflow-hidden z-50"
           >
             {languages.map((lang) => (
               <button
                 key={lang.code}
                 onClick={() => handleLanguageChange(lang.code)}
-                className="w-full flex items-center justify-between gap-3 px-4 py-3 hover:bg-[#B5DAD9]/10 transition-colors group text-left"
+                className="w-full flex items-center justify-between gap-3 px-4 py-3 hover:bg-volavan-aqua/10 transition-colors group text-left"
               >
                 <div className="flex items-center gap-3">
                   <span className="text-lg">{lang.flag}</span>
-                  <span className="font-['Manrope'] text-sm text-[#F5F5F0] group-hover:text-[#B5DAD9] transition-colors">
+                  <span className="font-['Manrope'] text-sm text-volavan-cream group-hover:text-volavan-aqua transition-colors">
                     {lang.name}
                   </span>
                 </div>
                 {language === lang.code && (
-                  <Check size={16} className="text-[#B5DAD9]" />
+                  <Check size={16} className="text-volavan-aqua" />
                 )}
               </button>
             ))}

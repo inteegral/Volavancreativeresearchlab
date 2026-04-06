@@ -46,14 +46,14 @@ export function NewsletterForm({ className = '', variant = 'footer' }: Newslette
 
   if (variant === 'inline') {
     return (
-      <div className={`bg-[#F5F5F0]/5 border border-[#F5F5F0]/10 rounded-lg p-8 ${className}`}>
+      <div className={`bg-volavan-cream/5 border border-volavan-cream/10 rounded-lg p-8 ${className}`}>
         <div className="flex items-center gap-3 mb-4">
-          <Mail size={24} className="text-[#B5DAD9]" />
-          <h3 className="font-['Cormorant_Garamond'] text-2xl italic text-[#F5F5F0]">
+          <Mail size={24} className="text-volavan-aqua" />
+          <h3 className="font-['Cormorant_Garamond'] text-2xl italic text-volavan-cream">
             Stay Updated
           </h3>
         </div>
-        <p className="font-['Manrope'] text-sm text-[#F5F5F0]/70 mb-6 leading-relaxed">
+        <p className="font-['Manrope'] text-sm text-volavan-cream/70 mb-6 leading-relaxed">
           Subscribe to receive news about upcoming residencies, artist calls, and events.
         </p>
         <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
@@ -62,13 +62,13 @@ export function NewsletterForm({ className = '', variant = 'footer' }: Newslette
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="your@email.com"
-            className="flex-1 px-4 py-3 bg-[#6A746C]/30 border border-[#F5F5F0]/20 rounded text-[#F5F5F0] placeholder:text-[#F5F5F0]/40 font-['Manrope'] text-sm focus:outline-none focus:border-[#B5DAD9]/60 transition-colors"
+            className="flex-1 px-4 py-3 bg-volavan-earth/30 border border-volavan-cream/20 rounded text-volavan-cream placeholder:text-volavan-cream/40 font-['Manrope'] text-sm focus:outline-none focus:border-volavan-aqua/60 transition-colors"
             disabled={isSubmitting}
             required
           />
           <button
             type="submit"
-            className="px-6 py-3 bg-[#B5DAD9] text-[#6A746C] rounded font-['Manrope'] text-xs font-medium uppercase tracking-[0.15em] hover:bg-[#B5DAD9]/90 transition-all whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-6 py-3 bg-volavan-aqua text-volavan-earth rounded font-['Manrope'] text-xs font-medium uppercase tracking-[0.15em] hover:bg-volavan-aqua/90 transition-all whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={isSubmitting}
           >
             {isSubmitting ? 'Subscribing...' : 'Subscribe'}
@@ -89,13 +89,13 @@ export function NewsletterForm({ className = '', variant = 'footer' }: Newslette
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Your email"
-        className="flex-1 px-4 py-3 bg-transparent border border-[#F5F5F0]/20 rounded-full text-[#F5F5F0] placeholder:text-[#F5F5F0]/40 font-['Manrope'] text-sm focus:outline-none focus:border-[#B5DAD9]/60 transition-colors"
+        className="flex-1 px-4 py-3 bg-transparent border border-volavan-cream/20 rounded-full text-volavan-cream placeholder:text-volavan-cream/40 font-['Manrope'] text-sm focus:outline-none focus:border-volavan-aqua/60 transition-colors"
         disabled={isSubmitting}
         required
       />
       <button
         type="submit"
-        className="px-6 py-3 bg-[#B5DAD9]/10 border border-[#B5DAD9]/30 rounded-full text-[#B5DAD9] font-['Manrope'] text-xs uppercase tracking-[0.15em] hover:bg-[#B5DAD9]/20 hover:border-[#B5DAD9]/50 transition-all whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
+        className="px-6 py-3 bg-volavan-aqua/10 border border-volavan-aqua/30 rounded-full text-volavan-aqua font-['Manrope'] text-xs uppercase tracking-[0.15em] hover:bg-volavan-aqua/20 hover:border-volavan-aqua/50 transition-all whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
         disabled={isSubmitting}
       >
         {isSubmitting ? 'Subscribing...' : 'Subscribe'}

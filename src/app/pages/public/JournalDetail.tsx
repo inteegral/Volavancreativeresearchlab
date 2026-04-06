@@ -31,19 +31,19 @@ export default function JournalDetail() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#6A746C] flex items-center justify-center">
-        <div className="w-12 h-12 border-2 border-[#B5DAD9]/30 border-t-[#B5DAD9] rounded-full animate-spin" />
+      <div className="min-h-screen bg-volavan-earth flex items-center justify-center">
+        <div className="w-12 h-12 border-2 border-volavan-aqua/30 border-t-volavan-aqua rounded-full animate-spin" />
       </div>
     );
   }
 
   if (!post) {
     return (
-      <div className="min-h-screen bg-[#6A746C] flex flex-col items-center justify-center gap-6 text-[#F5F5F0]">
+      <div className="min-h-screen bg-volavan-earth flex flex-col items-center justify-center gap-6 text-volavan-cream">
         <h2 className="font-['Cormorant_Garamond'] text-4xl italic">Post not found</h2>
         <Link 
           to="/journal" 
-          className="text-[#B5DAD9] hover:text-[#F5F5F0] transition-colors font-['Manrope'] text-xs uppercase tracking-[0.25em] border-b border-[#B5DAD9]/30 pb-1"
+          className="text-volavan-aqua hover:text-volavan-cream transition-colors font-['Manrope'] text-xs uppercase tracking-[0.25em] border-b border-volavan-aqua/30 pb-1"
         >
           Return to Journal
         </Link>
@@ -52,7 +52,7 @@ export default function JournalDetail() {
   }
 
   return (
-    <div className="min-h-screen bg-[#6A746C] text-[#F5F5F0] pt-32 pb-24 px-6 2xl:max-w-[1800px] 2xl:mx-auto">
+    <div className="min-h-screen bg-volavan-earth text-volavan-cream pt-32 pb-24 px-6 2xl:max-w-[1800px] 2xl:mx-auto">
       <SEOHead
         title={post.title}
         description={post.excerpt || post.title}
@@ -91,7 +91,7 @@ export default function JournalDetail() {
       >
         <Link 
           to="/journal" 
-          className="group inline-flex items-center gap-3 font-['Manrope'] text-sm uppercase tracking-[0.2em] text-[#F5F5F0]/60 hover:text-[#B5DAD9] transition-colors"
+          className="group inline-flex items-center gap-3 font-['Manrope'] text-sm uppercase tracking-[0.2em] text-volavan-cream/60 hover:text-volavan-aqua transition-colors"
         >
           <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
           Back to Journal
@@ -108,14 +108,14 @@ export default function JournalDetail() {
           className="text-center mb-16"
         >
           {/* Meta Info */}
-          <div className="flex items-center justify-center gap-6 mb-8 text-[#B5DAD9]/80 text-xs uppercase tracking-[0.2em] font-['Manrope']">
+          <div className="flex items-center justify-center gap-6 mb-8 text-volavan-aqua/80 text-xs uppercase tracking-[0.2em] font-['Manrope']">
             <span className="flex items-center gap-2">
               <Calendar size={14} />
               {formatDate(post.publishedAt)}
             </span>
             {post.author && (
               <>
-                <span className="text-[#F5F5F0]/30">•</span>
+                <span className="text-volavan-cream/30">•</span>
                 <span className="flex items-center gap-2">
                   <User size={14} />
                   {post.author.name}
@@ -125,7 +125,7 @@ export default function JournalDetail() {
           </div>
 
           {/* Title */}
-          <h1 className="font-['Cormorant_Garamond'] text-4xl md:text-7xl italic text-[#F5F5F0] mb-8 leading-tight">
+          <h1 className="font-['Cormorant_Garamond'] text-4xl md:text-7xl italic text-volavan-cream mb-8 leading-tight">
             {post.title}
           </h1>
 
@@ -135,7 +135,7 @@ export default function JournalDetail() {
               {post.categories.map((cat, i) => (
                 <span 
                   key={i}
-                  className="px-3 py-1 bg-[#B5DAD9]/10 border border-[#B5DAD9]/30 rounded-full font-['Manrope'] text-[10px] uppercase tracking-wider text-[#B5DAD9]"
+                  className="px-3 py-1 bg-volavan-aqua/10 border border-volavan-aqua/30 rounded-full font-['Manrope'] text-[10px] uppercase tracking-wider text-volavan-aqua"
                 >
                   {cat}
                 </span>
@@ -145,7 +145,7 @@ export default function JournalDetail() {
 
           {/* Excerpt */}
           {post.excerpt && (
-            <p className="font-['Manrope'] text-xl text-[#F5F5F0]/80 font-light leading-relaxed max-w-3xl mx-auto italic">
+            <p className="font-['Manrope'] text-xl text-volavan-cream/80 font-light leading-relaxed max-w-3xl mx-auto italic">
               {post.excerpt}
             </p>
           )}
@@ -157,7 +157,7 @@ export default function JournalDetail() {
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2, duration: 0.8 }}
-            className="w-full aspect-[21/9] overflow-hidden mb-16 bg-[#5E6860] border border-[#F5F5F0]/10"
+            className="w-full aspect-[21/9] overflow-hidden mb-16 bg-volavan-earth-dark border border-volavan-cream/10"
           >
             <img 
               src={getImageUrl(post.coverImage, 1600, 900)} 
@@ -180,7 +180,7 @@ export default function JournalDetail() {
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2, duration: 0.8 }}
-              className="w-full aspect-video overflow-hidden mb-16 bg-[#000000] border border-[#F5F5F0]/10"
+              className="w-full aspect-video overflow-hidden mb-16 bg-[#000000] border border-volavan-cream/10"
             >
               <VideoPlayer
                 videoId={videoId}
@@ -212,11 +212,11 @@ export default function JournalDetail() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
-            className="max-w-3xl mx-auto border-t border-[#F5F5F0]/10 pt-12 mb-20"
+            className="max-w-3xl mx-auto border-t border-volavan-cream/10 pt-12 mb-20"
           >
             <div className="flex gap-6 items-start">
               {post.author.photo && (
-                <div className="w-20 h-20 rounded-full overflow-hidden bg-[#5E6860] shrink-0">
+                <div className="w-20 h-20 rounded-full overflow-hidden bg-volavan-earth-dark shrink-0">
                   <img 
                     src={getImageUrl(post.author.photo, 160, 160)} 
                     alt={post.author.name}
@@ -225,7 +225,7 @@ export default function JournalDetail() {
                 </div>
               )}
               <div>
-                <h3 className="font-['Cormorant_Garamond'] text-2xl italic text-[#F5F5F0] mb-3">
+                <h3 className="font-['Cormorant_Garamond'] text-2xl italic text-volavan-cream mb-3">
                   About {post.author.name}
                 </h3>
                 <PortableTextRenderer value={post.author.bio} />
@@ -240,26 +240,26 @@ export default function JournalDetail() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.6 }}
-            className="max-w-3xl mx-auto border-t border-[#F5F5F0]/10 pt-12"
+            className="max-w-3xl mx-auto border-t border-volavan-cream/10 pt-12"
           >
-            <h3 className="font-['Cormorant_Garamond'] text-3xl italic text-[#F5F5F0] mb-6">
+            <h3 className="font-['Cormorant_Garamond'] text-3xl italic text-volavan-cream mb-6">
               Related Residency
             </h3>
             <Link 
               to={`/residencies/${post.relatedResidency.slug}`}
-              className="group flex items-center gap-4 p-6 border border-[#F5F5F0]/20 rounded-sm hover:border-[#B5DAD9]/50 hover:bg-[#B5DAD9]/5 transition-all"
+              className="group flex items-center gap-4 p-6 border border-volavan-cream/20 rounded-sm hover:border-volavan-aqua/50 hover:bg-volavan-aqua/5 transition-all"
             >
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-2">
-                  <span className="font-['Manrope'] text-xs uppercase tracking-wider text-[#B5DAD9]">
+                  <span className="font-['Manrope'] text-xs uppercase tracking-wider text-volavan-aqua">
                     {post.relatedResidency.year}
                   </span>
                 </div>
-                <h4 className="font-['Cormorant_Garamond'] text-2xl italic text-[#F5F5F0] group-hover:text-[#B5DAD9] transition-colors">
+                <h4 className="font-['Cormorant_Garamond'] text-2xl italic text-volavan-cream group-hover:text-volavan-aqua transition-colors">
                   {post.relatedResidency.title}
                 </h4>
               </div>
-              <ArrowLeft size={20} className="text-[#F5F5F0]/40 group-hover:text-[#B5DAD9] rotate-180 transition-colors" />
+              <ArrowLeft size={20} className="text-volavan-cream/40 group-hover:text-volavan-aqua rotate-180 transition-colors" />
             </Link>
           </motion.div>
         )}

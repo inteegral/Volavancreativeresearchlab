@@ -82,19 +82,19 @@ export default function ResidencyDetail() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#6A746C]">
-        <div className="w-12 h-12 border-2 border-[#B5DAD9]/30 border-t-[#B5DAD9] rounded-full animate-spin" />
+      <div className="min-h-screen flex items-center justify-center bg-volavan-earth">
+        <div className="w-12 h-12 border-2 border-volavan-aqua/30 border-t-volavan-aqua rounded-full animate-spin" />
       </div>
     );
   }
 
   if (!residency) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center gap-6 text-[#F5F5F0] bg-[#6A746C]">
+      <div className="min-h-screen flex flex-col items-center justify-center gap-6 text-volavan-cream bg-volavan-earth">
         <h2 className="font-['Cormorant_Garamond'] text-4xl italic">Residency not found</h2>
         <Link 
           to="/residencies" 
-          className="text-[#B5DAD9] hover:text-[#F5F5F0] transition-colors font-['Manrope'] text-xs uppercase tracking-[0.25em] border-b border-[#B5DAD9]/30 pb-1"
+          className="text-volavan-aqua hover:text-volavan-cream transition-colors font-['Manrope'] text-xs uppercase tracking-[0.25em] border-b border-volavan-aqua/30 pb-1"
         >
           Return to Residencies
         </Link>
@@ -114,8 +114,8 @@ export default function ResidencyDetail() {
       return {
         label: 'Happening Now',
         color: '#B5DAD9',
-        bgColor: 'bg-[#B5DAD9]/15',
-        borderColor: 'border-[#B5DAD9]/40',
+        bgColor: 'bg-volavan-aqua/15',
+        borderColor: 'border-volavan-aqua/40',
       };
     }
     
@@ -123,8 +123,8 @@ export default function ResidencyDetail() {
       return {
         label: 'Upcoming',
         color: '#F5F5F0',
-        bgColor: 'bg-[#F5F5F0]/10',
-        borderColor: 'border-[#F5F5F0]/30',
+        bgColor: 'bg-volavan-cream/10',
+        borderColor: 'border-volavan-cream/30',
       };
     }
     
@@ -132,8 +132,8 @@ export default function ResidencyDetail() {
       return {
         label: 'Open Call Soon',
         color: '#B5DAD9',
-        bgColor: 'bg-[#B5DAD9]/10',
-        borderColor: 'border-[#B5DAD9]/30',
+        bgColor: 'bg-volavan-aqua/10',
+        borderColor: 'border-volavan-aqua/30',
       };
     }
     
@@ -142,8 +142,8 @@ export default function ResidencyDetail() {
       return {
         label: `Edition ${residency.year}`,
         color: '#F5F5F0',
-        bgColor: 'bg-[#F5F5F0]/5',
-        borderColor: 'border-[#F5F5F0]/20',
+        bgColor: 'bg-volavan-cream/5',
+        borderColor: 'border-volavan-cream/20',
       };
     }
     
@@ -157,11 +157,11 @@ export default function ResidencyDetail() {
   const program = residency.program;
   if (!program) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center gap-6 text-[#F5F5F0] bg-[#6A746C]">
+      <div className="min-h-screen flex flex-col items-center justify-center gap-6 text-volavan-cream bg-volavan-earth">
         <h2 className="font-['Cormorant_Garamond'] text-4xl italic">Program data not found</h2>
         <Link 
           to="/residencies" 
-          className="text-[#B5DAD9] hover:text-[#F5F5F0] transition-colors font-['Manrope'] text-xs uppercase tracking-[0.25em] border-b border-[#B5DAD9]/30 pb-1"
+          className="text-volavan-aqua hover:text-volavan-cream transition-colors font-['Manrope'] text-xs uppercase tracking-[0.25em] border-b border-volavan-aqua/30 pb-1"
         >
           Return to Residencies
         </Link>
@@ -181,7 +181,7 @@ export default function ResidencyDetail() {
   const isCaTru = slug?.toLowerCase().includes('ca-tru');
 
   return (
-    <div className="w-full bg-[#6A746C] text-[#F5F5F0] -mt-24">
+    <div className="w-full bg-volavan-earth text-volavan-cream -mt-24">
       
       <SEOHead 
         title={residency.seo?.title || `${program.name} ${residency.year}`}
@@ -204,8 +204,8 @@ export default function ResidencyDetail() {
         
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-[#6A746C]/70 z-10 mix-blend-multiply" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#6A746C] via-transparent to-[#6A746C]/30 z-10" />
+          <div className="absolute inset-0 bg-volavan-earth/70 z-10 mix-blend-multiply" />
+          <div className="absolute inset-0 bg-gradient-to-t from-volavan-earth via-transparent to-volavan-earth/30 z-10" />
           {heroImage ? (
             <img 
               src={getImageUrl(heroImage, 1920, 1080)} 
@@ -213,7 +213,7 @@ export default function ResidencyDetail() {
               className="w-full h-full object-cover opacity-20"
             />
           ) : (
-            <div className="w-full h-full bg-[#5E6860]" />
+            <div className="w-full h-full bg-volavan-earth-dark" />
           )}
         </div>
 
@@ -240,21 +240,21 @@ export default function ResidencyDetail() {
 
             {/* Main Title - MASSIVE and centered */}
             <div className="w-full flex flex-col items-center gap-6 py-8">
-              <h1 className="font-['Cormorant_Garamond'] text-[20vw] md:text-[16vw] lg:text-[13.5vw] xl:text-[12vw] italic text-[#F5F5F0] leading-[0.9] tracking-tight max-w-[95vw]">
+              <h1 className="font-['Cormorant_Garamond'] text-[20vw] md:text-[16vw] lg:text-[13.5vw] xl:text-[12vw] italic text-volavan-cream leading-[0.9] tracking-tight max-w-[95vw]">
                 {program.name}
               </h1>
 
               {/* Tagline - Right under title */}
               {program.tagline && (
-                <p className="font-['Manrope'] text-base md:text-lg lg:text-xl text-[#F5F5F0]/70 max-w-3xl leading-relaxed tracking-wide px-4">
+                <p className="font-['Manrope'] text-base md:text-lg lg:text-xl text-volavan-cream/70 max-w-3xl leading-relaxed tracking-wide px-4">
                   {program.tagline}
                 </p>
               )}
 
               {/* Dates + Location - Unified block under tagline */}
-              <div className="flex flex-col items-center gap-4 mt-6 pt-6 border-t border-[#F5F5F0]/10 w-full max-w-3xl">
+              <div className="flex flex-col items-center gap-4 mt-6 pt-6 border-t border-volavan-cream/10 w-full max-w-3xl">
                 {/* Dates and Location */}
-                <div className="flex flex-col md:flex-row gap-4 md:gap-8 items-center text-[#F5F5F0]/70 text-center">
+                <div className="flex flex-col md:flex-row gap-4 md:gap-8 items-center text-volavan-cream/70 text-center">
                   <span className="font-['Manrope'] text-xs uppercase tracking-[0.2em] flex items-center gap-2">
                     <Calendar size={14} className="opacity-50" />
                     {(() => {
@@ -268,7 +268,7 @@ export default function ResidencyDetail() {
                       return `${startStr} — ${endStr}`;
                     })()}
                   </span>
-                  <span className="hidden md:inline w-px h-3 bg-[#F5F5F0]/20"></span>
+                  <span className="hidden md:inline w-px h-3 bg-volavan-cream/20"></span>
                   <span className="font-['Manrope'] text-xs uppercase tracking-[0.2em] flex items-center gap-2">
                     <MapPin size={14} className="opacity-50" />
                     {program.location}, {program.country}
@@ -281,7 +281,7 @@ export default function ResidencyDetail() {
             {program.disciplines && program.disciplines.length > 0 && (
               <div className="flex flex-wrap justify-center gap-3 md:gap-6">
                 {program.disciplines.slice(0, 3).map((discipline, i) => (
-                  <span key={i} className="font-['Manrope'] text-[10px] md:text-xs uppercase tracking-[0.2em] md:tracking-[0.25em] text-[#F5F5F0]/50 whitespace-nowrap">
+                  <span key={i} className="font-['Manrope'] text-[10px] md:text-xs uppercase tracking-[0.2em] md:tracking-[0.25em] text-volavan-cream/50 whitespace-nowrap">
                     {discipline}
                   </span>
                 ))}
@@ -301,12 +301,12 @@ export default function ResidencyDetail() {
                   <div className="pt-4">
                     <Link
                       to={`/residencies/${currentEdition.slug}`}
-                      className="group inline-flex items-center gap-2 px-5 py-2 bg-[#B5DAD9]/10 hover:bg-[#B5DAD9]/20 border border-[#B5DAD9]/30 hover:border-[#B5DAD9]/60 rounded-full transition-all duration-300"
+                      className="group inline-flex items-center gap-2 px-5 py-2 bg-volavan-aqua/10 hover:bg-volavan-aqua/20 border border-volavan-aqua/30 hover:border-volavan-aqua/60 rounded-full transition-all duration-300"
                     >
-                      <span className="font-['Manrope'] text-xs uppercase tracking-[0.2em] text-[#B5DAD9]">
+                      <span className="font-['Manrope'] text-xs uppercase tracking-[0.2em] text-volavan-aqua">
                         View Current Edition
                       </span>
-                      <ArrowUpRight size={14} className="text-[#B5DAD9] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                      <ArrowUpRight size={14} className="text-volavan-aqua group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </Link>
                   </div>
                 );
@@ -319,10 +319,10 @@ export default function ResidencyDetail() {
           {/* INFO BLOCK - At bottom of hero, clean horizontal bar - Only Apply Button if open */}
           {isOpenCall && (
             <div className="absolute bottom-16 left-0 right-0 w-full max-w-5xl mx-auto px-6">
-              <div className="border-t border-b border-[#F5F5F0]/10 py-5 flex justify-center items-center">
+              <div className="border-t border-b border-volavan-cream/10 py-5 flex justify-center items-center">
                 <Link 
                   to="/candidature"
-                  className="group flex items-center gap-2 text-[#B5DAD9] hover:text-[#F5F5F0] transition-colors"
+                  className="group flex items-center gap-2 text-volavan-aqua hover:text-volavan-cream transition-colors"
                 >
                   <span className="font-['Manrope'] text-[10px] uppercase tracking-[0.2em]">Apply Now</span>
                   <ArrowUpRight size={13} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
@@ -343,7 +343,7 @@ export default function ResidencyDetail() {
               element.scrollIntoView({ behavior: 'smooth' });
             }
           }}
-          className="absolute bottom-6 z-20 flex flex-col items-center gap-2 text-[#F5F5F0]/40 hover:text-[#B5DAD9] transition-colors cursor-pointer"
+          className="absolute bottom-6 z-20 flex flex-col items-center gap-2 text-volavan-cream/40 hover:text-volavan-aqua transition-colors cursor-pointer"
         >
           <span className="text-[8px] uppercase tracking-[0.2em] font-['Manrope']">Scroll</span>
           <motion.div
@@ -365,7 +365,7 @@ export default function ResidencyDetail() {
               <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
               <span className="font-['Manrope'] text-[10px] uppercase tracking-[0.2em]">All Residencies</span>
             </Link>
-            <div className="w-px h-24 bg-gradient-to-b from-[#F5F5F0] to-transparent" />
+            <div className="w-px h-24 bg-gradient-to-b from-volavan-cream to-transparent" />
           </div>
         </div>
 
@@ -402,7 +402,7 @@ export default function ResidencyDetail() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className="font-['Cormorant_Garamond'] text-4xl md:text-5xl italic text-[#F5F5F0] mb-8 pt-12 md:pt-16">
+              <h2 className="font-['Cormorant_Garamond'] text-4xl md:text-5xl italic text-volavan-cream mb-8 pt-12 md:pt-16">
                 Concept
               </h2>
               <PortableTextRenderer value={program.concept} />
@@ -416,21 +416,21 @@ export default function ResidencyDetail() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className={`${!isPastEdition && program.concept ? 'border-t border-[#F5F5F0]/10 pt-16' : ''}`}
+              className={`${!isPastEdition && program.concept ? 'border-t border-volavan-cream/10 pt-16' : ''}`}
             >
-              <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl italic text-[#B5DAD9] mb-8">
+              <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl italic text-volavan-aqua mb-8">
                 What We Offer
               </h2>
               <PortableTextRenderer value={program.whatWeOffer} />
               
               {program.feeAmount !== null && program.feeAmount !== undefined && (
-                <div className="mt-8 p-6 bg-[#F5F5F0]/5 border border-[#F5F5F0]/10 rounded-sm">
+                <div className="mt-8 p-6 bg-volavan-cream/5 border border-volavan-cream/10 rounded-sm">
                   <div className="flex items-baseline gap-4">
-                    <span className="font-['Cormorant_Garamond'] text-3xl italic text-[#B5DAD9]">
+                    <span className="font-['Cormorant_Garamond'] text-3xl italic text-volavan-aqua">
                       €{program.feeAmount}
                     </span>
                     {program.feeIncludes && (
-                      <span className="font-['Manrope'] text-sm text-[#F5F5F0]/60">
+                      <span className="font-['Manrope'] text-sm text-volavan-cream/60">
                         {program.feeIncludes}
                       </span>
                     )}
@@ -445,7 +445,7 @@ export default function ResidencyDetail() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
               {residency.gallery.map((image, i) => (
                 <div key={i} className="aspect-square overflow-hidden group/gal relative">
-                  <div className="absolute inset-0 bg-[#6A746C]/20 group-hover/gal:bg-transparent z-10 transition-colors duration-500" />
+                  <div className="absolute inset-0 bg-volavan-earth/20 group-hover/gal:bg-transparent z-10 transition-colors duration-500" />
                   <img 
                     src={getImageUrl(image, 400, 400)} 
                     alt={image.caption || `Gallery image ${i + 1}`}
@@ -463,9 +463,9 @@ export default function ResidencyDetail() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="border-t border-[#F5F5F0]/10 pt-16"
+              className="border-t border-volavan-cream/10 pt-16"
             >
-              <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl italic text-[#F5F5F0] mb-8">
+              <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl italic text-volavan-cream mb-8">
                 How It Works
               </h2>
               <PortableTextRenderer value={program.structure} />
@@ -479,9 +479,9 @@ export default function ResidencyDetail() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="border-t border-[#F5F5F0]/10 pt-16"
+              className="border-t border-volavan-cream/10 pt-16"
             >
-              <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl italic text-[#B5DAD9] mb-12">
+              <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl italic text-volavan-aqua mb-12">
                 {isPastEdition ? 'Selected Artists' : 'Meet the Artists'}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -495,7 +495,7 @@ export default function ResidencyDetail() {
                       to={`/artists/${artist.slug}`}
                       className="group flex flex-col gap-4 transition-opacity"
                     >
-                      <div className="aspect-square overflow-hidden rounded-sm bg-[#6A746C]/20 relative">
+                      <div className="aspect-square overflow-hidden rounded-sm bg-volavan-earth/20 relative">
                         {artist.photo ? (
                           <img 
                             src={getImageUrl(artist.photo, 600, 600)} 
@@ -504,24 +504,24 @@ export default function ResidencyDetail() {
                           />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center">
-                            <span className="font-['Cormorant_Garamond'] text-6xl italic text-[#F5F5F0]/30">
+                            <span className="font-['Cormorant_Garamond'] text-6xl italic text-volavan-cream/30">
                               {artist.name?.charAt(0) || '?'}
                             </span>
                           </div>
                         )}
                       </div>
                       <div className="flex flex-col gap-2">
-                        <h3 className="font-['Cormorant_Garamond'] text-2xl italic text-[#F5F5F0]">
+                        <h3 className="font-['Cormorant_Garamond'] text-2xl italic text-volavan-cream">
                           {artist.name}
                         </h3>
                         <div className="flex flex-col gap-1">
                           {artist.nationality && (
-                            <p className="font-['Manrope'] text-xs uppercase tracking-[0.2em] text-[#F5F5F0]/50">
+                            <p className="font-['Manrope'] text-xs uppercase tracking-[0.2em] text-volavan-cream/50">
                               {artist.nationality}
                             </p>
                           )}
                           {artist.disciplines && artist.disciplines.length > 0 && (
-                            <p className="font-['Manrope'] text-[10px] uppercase tracking-[0.15em] text-[#B5DAD9]/50">
+                            <p className="font-['Manrope'] text-[10px] uppercase tracking-[0.15em] text-volavan-aqua/50">
                               {artist.disciplines.join(', ')}
                             </p>
                           )}
@@ -541,22 +541,22 @@ export default function ResidencyDetail() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="border-t border-[#F5F5F0]/10 pt-16"
+              className="border-t border-volavan-cream/10 pt-16"
             >
-              <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl italic text-[#B5DAD9] mb-8">
+              <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl italic text-volavan-aqua mb-8">
                 Application Requirements
               </h2>
               {program.applicationIntro && (
-                <p className="font-['Manrope'] text-base text-[#F5F5F0]/70 mb-8 leading-relaxed whitespace-pre-line">
+                <p className="font-['Manrope'] text-base text-volavan-cream/70 mb-8 leading-relaxed whitespace-pre-line">
                   {program.applicationIntro}
                 </p>
               )}
               <PortableTextRenderer value={program.requirements} />
               
               {callCloseDate && (
-                <div className="mt-8 p-6 bg-[#B5DAD9]/5 border border-[#B5DAD9]/20 rounded-sm">
-                  <p className="font-['Manrope'] text-sm text-[#F5F5F0]/70">
-                    <span className="text-[#B5DAD9]">Deadline: </span>
+                <div className="mt-8 p-6 bg-volavan-aqua/5 border border-volavan-aqua/20 rounded-sm">
+                  <p className="font-['Manrope'] text-sm text-volavan-cream/70">
+                    <span className="text-volavan-aqua">Deadline: </span>
                     {formatDate(callCloseDate)}
                   </p>
                 </div>
@@ -565,7 +565,7 @@ export default function ResidencyDetail() {
               <div className="mt-12 flex justify-center">
                 <Link 
                   to="/candidature"
-                  className="group inline-flex items-center gap-3 px-8 py-4 bg-[#B5DAD9] hover:bg-[#F5F5F0] text-[#6A746C] rounded-sm transition-all duration-300 font-['Manrope'] text-sm uppercase tracking-[0.2em]"
+                  className="group inline-flex items-center gap-3 px-8 py-4 bg-volavan-aqua hover:bg-volavan-cream text-volavan-earth rounded-sm transition-all duration-300 font-['Manrope'] text-sm uppercase tracking-[0.2em]"
                 >
                   Apply Now
                   <ArrowUpRight size={16} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
@@ -581,9 +581,9 @@ export default function ResidencyDetail() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="border-t border-[#F5F5F0]/10 pt-16"
+              className="border-t border-volavan-cream/10 pt-16"
             >
-              <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl italic text-[#F5F5F0] mb-8">
+              <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl italic text-volavan-cream mb-8">
                 Other Editions
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -607,17 +607,17 @@ export default function ResidencyDetail() {
                       )}
                       <div className="flex flex-col gap-1">
                         <div className="flex items-center justify-between">
-                          <span className="font-['Cormorant_Garamond'] text-xl italic text-[#F5F5F0]">
+                          <span className="font-['Cormorant_Garamond'] text-xl italic text-volavan-cream">
                             {edition.year}
                           </span>
                           {edition.artistsCount && (
-                            <span className="font-['Manrope'] text-xs text-[#F5F5F0]/50">
+                            <span className="font-['Manrope'] text-xs text-volavan-cream/50">
                               {edition.artistsCount} {edition.artistsCount === 1 ? 'artist' : 'artists'}
                             </span>
                           )}
                         </div>
                         {edition.startDate && edition.endDate && (
-                          <span className="font-['Manrope'] text-xs text-[#B5DAD9]/70">
+                          <span className="font-['Manrope'] text-xs text-volavan-aqua/70">
                             {new Date(edition.startDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })} — {new Date(edition.endDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
                           </span>
                         )}
@@ -633,7 +633,7 @@ export default function ResidencyDetail() {
       </section>
 
       {/* FINAL CTA SECTION - Always visible at the end */}
-      <section className="w-full bg-[#6A746C] py-24 md:py-32">
+      <section className="w-full bg-volavan-earth py-24 md:py-32">
         <div className="max-w-4xl mx-auto px-6 flex flex-col items-center justify-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -654,7 +654,7 @@ export default function ResidencyDetail() {
                       location: 'residency_detail_bottom'
                     });
                   }}
-                  className="group w-full max-w-md px-12 py-6 bg-[#B5DAD9] hover:bg-[#F5F5F0] text-[#6A746C] rounded-sm transition-all duration-300 flex items-center justify-center gap-4"
+                  className="group w-full max-w-md px-12 py-6 bg-volavan-aqua hover:bg-volavan-cream text-volavan-earth rounded-sm transition-all duration-300 flex items-center justify-center gap-4"
                 >
                   <span className="font-['Manrope'] text-base md:text-lg uppercase tracking-[0.25em] font-semibold">
                     {t.residencies.applyNow}
@@ -662,8 +662,8 @@ export default function ResidencyDetail() {
                   <ArrowUpRight size={20} className="transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
                 </Link>
                 {callCloseDate && (
-                  <p className="font-['Manrope'] text-sm text-[#F5F5F0]/60 text-center">
-                    <span className="text-[#B5DAD9]">Deadline: </span>
+                  <p className="font-['Manrope'] text-sm text-volavan-cream/60 text-center">
+                    <span className="text-volavan-aqua">Deadline: </span>
                     {formatDate(callCloseDate)}
                   </p>
                 )}
@@ -671,12 +671,12 @@ export default function ResidencyDetail() {
             ) : (
               <>
                 {/* No Open Call */}
-                <div className="w-full max-w-md px-12 py-6 bg-[#F5F5F0]/5 border-2 border-[#F5F5F0]/20 text-[#F5F5F0]/50 rounded-sm flex items-center justify-center cursor-not-allowed">
+                <div className="w-full max-w-md px-12 py-6 bg-volavan-cream/5 border-2 border-volavan-cream/20 text-volavan-cream/50 rounded-sm flex items-center justify-center cursor-not-allowed">
                   <span className="font-['Manrope'] text-base md:text-lg uppercase tracking-[0.25em] font-semibold text-center">
                     {t.residencies.noOpenCall}
                   </span>
                 </div>
-                <p className="font-['Manrope'] text-sm text-[#F5F5F0]/40 text-center max-w-md">
+                <p className="font-['Manrope'] text-sm text-volavan-cream/40 text-center max-w-md">
                   Stay tuned for future opportunities
                 </p>
               </>

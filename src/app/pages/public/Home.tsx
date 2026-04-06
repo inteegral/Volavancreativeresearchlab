@@ -220,7 +220,7 @@ export default function Home() {
         </div>
 
         {/* Video Player */}
-        <div className="w-full aspect-video bg-[#6A746C] rounded-sm overflow-hidden relative shadow-lg group">
+        <div className="w-full aspect-video bg-volavan-earth rounded-sm overflow-hidden relative shadow-lg group">
           <div 
             id="youtube-player"
             className="absolute inset-0 z-0"
@@ -228,12 +228,12 @@ export default function Home() {
           />
           
           {/* Grain/Texture Overlay */}
-          <div className="absolute inset-0 bg-[#6A746C]/10 mix-blend-multiply pointer-events-none z-10" />
+          <div className="absolute inset-0 bg-volavan-earth/10 mix-blend-multiply pointer-events-none z-10" />
 
           {/* Audio Control */}
           <button
             onClick={toggleMute}
-            className="absolute bottom-3 right-3 z-20 w-8 h-8 flex items-center justify-center rounded-full bg-[#6A746C]/50 hover:bg-[#6A746C]/80 text-[#F5F5F0] transition-all backdrop-blur-sm border border-[#F5F5F0]/10 cursor-pointer"
+            className="absolute bottom-3 right-3 z-20 w-8 h-8 flex items-center justify-center rounded-full bg-volavan-earth/50 hover:bg-volavan-earth/80 text-volavan-cream transition-all backdrop-blur-sm border border-volavan-cream/10 cursor-pointer"
             aria-label={isMuted ? "Unmute" : "Mute"}
           >
             {isMuted ? <VolumeX size={14} /> : <Volume2 size={14} />}
@@ -246,7 +246,7 @@ export default function Home() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3 }}
               onClick={replayVideo}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-16 h-16 flex items-center justify-center rounded-full bg-[#B5DAD9]/90 hover:bg-[#B5DAD9] text-[#6A746C] transition-all backdrop-blur-sm border border-[#F5F5F0]/20 cursor-pointer shadow-lg"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-16 h-16 flex items-center justify-center rounded-full bg-volavan-aqua/90 hover:bg-volavan-aqua text-volavan-earth transition-all backdrop-blur-sm border border-volavan-cream/20 cursor-pointer shadow-lg"
               aria-label="Replay"
             >
               <Play size={24} fill="currentColor" />
@@ -258,21 +258,21 @@ export default function Home() {
         <div className="space-y-8 w-full mt-4 max-w-4xl mx-auto">
           {/* Intro Text - Large Cormorant Italic */}
           {homeData?.introText && (
-            <p className="font-['Cormorant_Garamond'] text-2xl md:text-4xl leading-tight text-[#F5F5F0] italic text-right hyphens-auto whitespace-pre-line">
+            <p className="font-['Cormorant_Garamond'] text-2xl md:text-4xl leading-tight text-volavan-cream italic text-right hyphens-auto whitespace-pre-line">
               {homeData.introText}
             </p>
           )}
 
           {/* Feature Text - Medium Cormorant Regular (smaller, different color) */}
           {homeData?.featureText && (
-            <p className="font-['Cormorant_Garamond'] text-lg md:text-2xl leading-relaxed text-[#B5DAD9] text-right hyphens-auto whitespace-pre-line">
+            <p className="font-['Cormorant_Garamond'] text-lg md:text-2xl leading-relaxed text-volavan-aqua text-right hyphens-auto whitespace-pre-line">
               {homeData.featureText}
             </p>
           )}
 
           {/* Closing Text - Large Cormorant Italic (same as intro) */}
           {homeData?.closingText && (
-            <p className="font-['Cormorant_Garamond'] text-2xl md:text-4xl leading-tight text-[#F5F5F0] italic text-right hyphens-auto whitespace-pre-line">
+            <p className="font-['Cormorant_Garamond'] text-2xl md:text-4xl leading-tight text-volavan-cream italic text-right hyphens-auto whitespace-pre-line">
               {homeData.closingText}
             </p>
           )}
@@ -280,7 +280,7 @@ export default function Home() {
 
         {/* Separator Line */}
         <div className="w-full max-w-md mx-auto my-[50px]">
-          <div className="h-px bg-[#F5F5F0]/20"></div>
+          <div className="h-px bg-volavan-cream/20"></div>
         </div>
 
         {/* Upcoming Residencies Section */}
@@ -293,7 +293,7 @@ export default function Home() {
           >
             {/* Section Title */}
             <div className="text-center space-y-4">
-              <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-5xl text-[#F5F5F0] italic">
+              <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-5xl text-volavan-cream italic">
                 Upcoming Residencies
               </h2>
               
@@ -308,7 +308,7 @@ export default function Home() {
                 </>
               ) : upcomingResidencies.length === 0 ? (
                 <div className="col-span-2 text-center">
-                  <p className="font-['Manrope'] text-sm md:text-lg leading-relaxed text-[#F5F5F0]/60 max-w-lg mx-auto">
+                  <p className="font-['Manrope'] text-sm md:text-lg leading-relaxed text-volavan-cream/60 max-w-lg mx-auto">
                     No upcoming residencies at the moment.
                   </p>
                 </div>
@@ -326,7 +326,7 @@ export default function Home() {
                     <Link
                       key={program._id}
                       to={`/residencies/${latestEdition.slug}`}
-                      className="group relative overflow-hidden rounded-sm border border-[#F5F5F0]/10 hover:border-[#F5F5F0]/30 transition-all duration-500"
+                      className="group relative overflow-hidden rounded-sm border border-volavan-cream/10 hover:border-volavan-cream/30 transition-all duration-500"
                     >
                       {/* Image */}
                       <div className="aspect-[4/3] overflow-hidden relative">
@@ -340,25 +340,25 @@ export default function Home() {
                         />
                         
                         {/* Gradient overlay towards bottom */}
-                        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#6A746C]/60 pointer-events-none"></div>
+                        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-volavan-earth/60 pointer-events-none"></div>
                       </div>
 
                       {/* Content */}
-                      <div className="p-6 space-y-3 bg-[#6A746C]/50 backdrop-blur-sm">
-                        <h3 className="font-['Manrope'] text-xl uppercase tracking-[0.2em] text-[#F5F5F0] text-left">
+                      <div className="p-6 space-y-3 bg-volavan-earth/50 backdrop-blur-sm">
+                        <h3 className="font-['Manrope'] text-xl uppercase tracking-[0.2em] text-volavan-cream text-left">
                           {program.name}
                         </h3>
                         
                         {/* Tagline */}
                         {program.tagline && (
-                          <p className="font-['Cormorant_Garamond'] text-lg italic text-[#B5DAD9] text-left">
+                          <p className="font-['Cormorant_Garamond'] text-lg italic text-volavan-aqua text-left">
                             {program.tagline}
                           </p>
                         )}
                         
                         {/* Dates from latest edition */}
                         {latestEdition.startDate && latestEdition.endDate && (
-                          <div className="flex items-center gap-2 text-xs text-[#B5DAD9] font-['Manrope'] uppercase tracking-wide">
+                          <div className="flex items-center gap-2 text-xs text-volavan-aqua font-['Manrope'] uppercase tracking-wide">
                             <span>{new Date(latestEdition.startDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
                             <span>—</span>
                             <span>{new Date(latestEdition.endDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
@@ -367,7 +367,7 @@ export default function Home() {
 
                         {/* Location */}
                         {program.location && program.country && (
-                          <p className="font-['Manrope'] text-sm text-[#F5F5F0]/70 text-left">
+                          <p className="font-['Manrope'] text-sm text-volavan-cream/70 text-left">
                             {program.location}, {program.country}
                           </p>
                         )}
@@ -382,12 +382,12 @@ export default function Home() {
             <div className="flex justify-center mt-12">
               <Link
                 to="/residencies"
-                className="group flex items-center justify-center gap-4 px-8 py-4 rounded-full border border-[#F5F5F0]/30 hover:border-[#F5F5F0]/80 hover:bg-[#F5F5F0]/5 transition-all duration-500"
+                className="group flex items-center justify-center gap-4 px-8 py-4 rounded-full border border-volavan-cream/30 hover:border-volavan-cream/80 hover:bg-volavan-cream/5 transition-all duration-500"
               >
-                <span className="font-['Manrope'] text-xs uppercase tracking-[0.25em] text-[#F5F5F0] opacity-90 group-hover:opacity-100 transition-opacity">
+                <span className="font-['Manrope'] text-xs uppercase tracking-[0.25em] text-volavan-cream opacity-90 group-hover:opacity-100 transition-opacity">
                   View All Residencies
                 </span>
-                <ArrowUpRight size={16} className="text-[#F5F5F0] opacity-80 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-500" />
+                <ArrowUpRight size={16} className="text-volavan-cream opacity-80 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-500" />
               </Link>
             </div>
           </motion.div>
@@ -396,9 +396,9 @@ export default function Home() {
 
       {/* Visual Break - Organic Divider */}
       <div className="w-full max-w-2xl mx-auto my-[30px] flex items-center justify-center gap-8 px-6">
-        <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#F5F5F0]/20 to-transparent"></div>
-        <div className="w-2 h-2 rounded-full bg-[#B5DAD9]/40"></div>
-        <div className="flex-1 h-px bg-gradient-to-l from-transparent via-[#F5F5F0]/20 to-transparent"></div>
+        <div className="flex-1 h-px bg-gradient-to-r from-transparent via-volavan-cream/20 to-transparent"></div>
+        <div className="w-2 h-2 rounded-full bg-volavan-aqua/40"></div>
+        <div className="flex-1 h-px bg-gradient-to-l from-transparent via-volavan-cream/20 to-transparent"></div>
       </div>
 
       {/* Journal Section */}
@@ -412,10 +412,10 @@ export default function Home() {
           >
               {/* Section Title */}
               <div className="text-center space-y-4">
-                <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-5xl text-[#F5F5F0] italic">
+                <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-5xl text-volavan-cream italic">
                   {homeData?.journalSectionTitle || 'Latest from the Journal'}
                 </h2>
-                <p className="font-['Manrope'] text-xs md:text-sm text-[#F5F5F0]/60 max-w-lg mx-auto">
+                <p className="font-['Manrope'] text-xs md:text-sm text-volavan-cream/60 max-w-lg mx-auto">
                   {homeData?.journalSectionSubtitle || 'Reflections, documentation, and insights from our residencies'}
                 </p>
               </div>
@@ -444,7 +444,7 @@ export default function Home() {
                       return (
                         <Link
                           to={`/journal/${journalPosts[0].slug}`}
-                          className="group md:col-span-2 relative overflow-hidden rounded-sm border border-[#F5F5F0]/10 hover:border-[#F5F5F0]/30 transition-all duration-500"
+                          className="group md:col-span-2 relative overflow-hidden rounded-sm border border-volavan-cream/10 hover:border-volavan-cream/30 transition-all duration-500"
                         >
                           {/* Image */}
                           <div className="aspect-[16/9] overflow-hidden">
@@ -467,10 +467,10 @@ export default function Home() {
                           </div>
 
                           {/* Content */}
-                          <div className="p-8 space-y-4 bg-[#6A746C]/30 backdrop-blur-sm">
+                          <div className="p-8 space-y-4 bg-volavan-earth/30 backdrop-blur-sm">
                             {/* Date */}
                             {journalPosts[0].publishedAt && (
-                              <time className="font-['Manrope'] text-xs uppercase tracking-wider text-[#B5DAD9]/80">
+                              <time className="font-['Manrope'] text-xs uppercase tracking-wider text-volavan-aqua/80">
                                 {new Date(journalPosts[0].publishedAt).toLocaleDateString('en-US', { 
                                   month: 'short', 
                                   day: 'numeric', 
@@ -480,20 +480,20 @@ export default function Home() {
                             )}
 
                             {/* Title */}
-                            <h3 className="font-['Cormorant_Garamond'] text-2xl md:text-3xl leading-tight text-[#F5F5F0] group-hover:text-[#B5DAD9] transition-colors">
+                            <h3 className="font-['Cormorant_Garamond'] text-2xl md:text-3xl leading-tight text-volavan-cream group-hover:text-volavan-aqua transition-colors">
                               {journalPosts[0].title}
                             </h3>
 
                             {/* Excerpt */}
                             {journalPosts[0].excerpt && (
-                              <p className="font-['Manrope'] text-sm md:text-base leading-relaxed text-[#F5F5F0]/70 line-clamp-3">
+                              <p className="font-['Manrope'] text-sm md:text-base leading-relaxed text-volavan-cream/70 line-clamp-3">
                                 {journalPosts[0].excerpt}
                               </p>
                             )}
 
                             {/* Type Badge */}
                             {isVideo && (
-                              <div className="inline-block px-2 py-1 rounded-sm bg-[#B5DAD9]/10 border border-[#B5DAD9]/20 text-[#B5DAD9] text-xs font-['Manrope'] uppercase tracking-wider">
+                              <div className="inline-block px-2 py-1 rounded-sm bg-volavan-aqua/10 border border-volavan-aqua/20 text-volavan-aqua text-xs font-['Manrope'] uppercase tracking-wider">
                                 Video
                               </div>
                             )}
@@ -515,7 +515,7 @@ export default function Home() {
                           <Link
                             key={post._id}
                             to={`/journal/${post.slug}`}
-                            className="group relative overflow-hidden rounded-sm border border-[#F5F5F0]/10 hover:border-[#F5F5F0]/30 transition-all duration-500 flex-1"
+                            className="group relative overflow-hidden rounded-sm border border-volavan-cream/10 hover:border-volavan-cream/30 transition-all duration-500 flex-1"
                           >
                             {/* Image */}
                             <div className="aspect-[4/3] overflow-hidden">
@@ -538,10 +538,10 @@ export default function Home() {
                             </div>
 
                             {/* Content */}
-                            <div className="p-5 space-y-2 bg-[#6A746C]/30 backdrop-blur-sm">
+                            <div className="p-5 space-y-2 bg-volavan-earth/30 backdrop-blur-sm">
                               {/* Date */}
                               {post.publishedAt && (
-                                <time className="font-['Manrope'] text-xs uppercase tracking-wider text-[#B5DAD9]/80">
+                                <time className="font-['Manrope'] text-xs uppercase tracking-wider text-volavan-aqua/80">
                                   {new Date(post.publishedAt).toLocaleDateString('en-US', { 
                                     month: 'short', 
                                     day: 'numeric', 
@@ -551,13 +551,13 @@ export default function Home() {
                               )}
 
                               {/* Title */}
-                              <h3 className="font-['Cormorant_Garamond'] text-lg md:text-xl leading-tight text-[#F5F5F0] group-hover:text-[#B5DAD9] transition-colors line-clamp-2">
+                              <h3 className="font-['Cormorant_Garamond'] text-lg md:text-xl leading-tight text-volavan-cream group-hover:text-volavan-aqua transition-colors line-clamp-2">
                                 {post.title}
                               </h3>
 
                               {/* Type Badge */}
                               {isVideo && (
-                                <div className="inline-block px-2 py-1 rounded-sm bg-[#B5DAD9]/10 border border-[#B5DAD9]/20 text-[#B5DAD9] text-xs font-['Manrope'] uppercase tracking-wider">
+                                <div className="inline-block px-2 py-1 rounded-sm bg-volavan-aqua/10 border border-volavan-aqua/20 text-volavan-aqua text-xs font-['Manrope'] uppercase tracking-wider">
                                   Video
                                 </div>
                               )}
@@ -574,12 +574,12 @@ export default function Home() {
               <div className="flex justify-center mt-12">
                 <Link
                   to="/journal"
-                  className="group flex items-center justify-center gap-4 px-8 py-4 rounded-full border border-[#F5F5F0]/30 hover:border-[#F5F5F0]/80 hover:bg-[#F5F5F0]/5 transition-all duration-500"
+                  className="group flex items-center justify-center gap-4 px-8 py-4 rounded-full border border-volavan-cream/30 hover:border-volavan-cream/80 hover:bg-volavan-cream/5 transition-all duration-500"
                 >
-                  <span className="font-['Manrope'] text-xs uppercase tracking-[0.25em] text-[#F5F5F0] opacity-90 group-hover:opacity-100 transition-opacity">
+                  <span className="font-['Manrope'] text-xs uppercase tracking-[0.25em] text-volavan-cream opacity-90 group-hover:opacity-100 transition-opacity">
                     Explore Journal
                   </span>
-                  <ArrowUpRight size={16} className="text-[#F5F5F0] opacity-80 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-500" />
+                  <ArrowUpRight size={16} className="text-volavan-cream opacity-80 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-500" />
                 </Link>
               </div>
             </motion.div>

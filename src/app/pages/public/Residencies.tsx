@@ -40,17 +40,17 @@ export default function Residencies() {
   // Show error state
   if (error) {
     return (
-      <div className="w-full min-h-screen bg-[#6A746C] text-[#F5F5F0] px-6 py-24 flex items-center justify-center">
+      <div className="w-full min-h-screen bg-volavan-earth text-volavan-cream px-6 py-24 flex items-center justify-center">
         <div className="text-center">
           <p className="text-red-400 mb-4">Error loading residencies</p>
-          <p className="text-sm text-[#F5F5F0]/60">{error}</p>
+          <p className="text-sm text-volavan-cream/60">{error}</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="w-full min-h-screen bg-[#6A746C] text-[#F5F5F0] px-6 py-24 md:py-32 max-w-7xl mx-auto">
+    <div className="w-full min-h-screen bg-volavan-earth text-volavan-cream px-6 py-24 md:py-32 max-w-7xl mx-auto">
       <SEOHead 
         title={pageContent?.seo?.title || "Art Residencies"}
         description={pageContent?.seo?.description || "Discover our artistic residency programs at VOLAVAN."}
@@ -67,7 +67,7 @@ export default function Residencies() {
               <motion.span 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="inline-block font-['Manrope'] text-sm uppercase tracking-[0.25em] text-[#B5DAD9]"
+                className="inline-block font-['Manrope'] text-sm uppercase tracking-[0.25em] text-volavan-aqua"
               >
                 {pageContent.supertitle}
               </motion.span>
@@ -77,7 +77,7 @@ export default function Residencies() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="font-['Cormorant_Garamond'] text-5xl md:text-8xl italic text-[#F5F5F0] leading-[0.9]"
+                className="font-['Cormorant_Garamond'] text-5xl md:text-8xl italic text-volavan-cream leading-[0.9]"
               >
                 {pageContent.title}
               </motion.h1>
@@ -87,7 +87,7 @@ export default function Residencies() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="font-['Cormorant_Garamond'] text-xl md:text-3xl text-[#F5F5F0] leading-relaxed text-right hyphens-auto whitespace-pre-line italic"
+                className="font-['Cormorant_Garamond'] text-xl md:text-3xl text-volavan-cream leading-relaxed text-right hyphens-auto whitespace-pre-line italic"
               >
                 {pageContent.introText}
               </motion.p>
@@ -97,7 +97,7 @@ export default function Residencies() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="font-['Cormorant_Garamond'] text-lg md:text-2xl text-[#B5DAD9] leading-relaxed text-right hyphens-auto"
+                className="font-['Cormorant_Garamond'] text-lg md:text-2xl text-volavan-aqua leading-relaxed text-right hyphens-auto"
               >
                 {pageContent.callToAction}
               </motion.p>
@@ -113,7 +113,7 @@ export default function Residencies() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="group inline-flex items-center gap-2 px-6 py-3 bg-[#B5DAD9]/10 border border-[#B5DAD9]/30 rounded-full text-[#B5DAD9] font-['Manrope'] text-xs uppercase tracking-[0.15em] hover:bg-[#B5DAD9]/20 hover:border-[#B5DAD9]/50 transition-all cursor-pointer"
+            className="group inline-flex items-center gap-2 px-6 py-3 bg-volavan-aqua/10 border border-volavan-aqua/30 rounded-full text-volavan-aqua font-['Manrope'] text-xs uppercase tracking-[0.15em] hover:bg-volavan-aqua/20 hover:border-volavan-aqua/50 transition-all cursor-pointer"
             aria-label="Scroll to programmes"
           >
             <span>Explore</span>
@@ -172,10 +172,10 @@ export default function Residencies() {
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.3 + index * 0.1 }}
-                            className="flex items-center gap-2.5 px-3 py-1.5 border border-[#B5DAD9]/40 rounded-sm h-fit"
+                            className="flex items-center gap-2.5 px-3 py-1.5 border border-volavan-aqua/40 rounded-sm h-fit"
                           >
-                            <div className="w-1.5 h-1.5 rounded-full bg-[#B5DAD9]" />
-                            <span className="font-['Manrope'] text-[10px] uppercase tracking-[0.15em] text-[#B5DAD9] font-light">
+                            <div className="w-1.5 h-1.5 rounded-full bg-volavan-aqua" />
+                            <span className="font-['Manrope'] text-[10px] uppercase tracking-[0.15em] text-volavan-aqua font-light">
                               Open Call
                             </span>
                           </motion.div>
@@ -186,10 +186,10 @@ export default function Residencies() {
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.4 + index * 0.1 }}
-                            className="flex items-center gap-2.5 px-3 py-1.5 border border-[#F5F5F0]/30 rounded-sm h-fit"
+                            className="flex items-center gap-2.5 px-3 py-1.5 border border-volavan-cream/30 rounded-sm h-fit"
                           >
-                            <div className="w-1.5 h-1.5 rounded-full bg-[#F5F5F0]" />
-                            <span className="font-['Manrope'] text-[10px] uppercase tracking-[0.15em] text-[#F5F5F0]/80 font-light">
+                            <div className="w-1.5 h-1.5 rounded-full bg-volavan-cream" />
+                            <span className="font-['Manrope'] text-[10px] uppercase tracking-[0.15em] text-volavan-cream/80 font-light">
                               In Progress
                             </span>
                           </motion.div>
@@ -197,8 +197,8 @@ export default function Residencies() {
                       </div>
 
                       {/* Card Image */}
-                      <div className="w-full aspect-square overflow-hidden bg-[#5E6860] relative border border-[#F5F5F0]/10 group-hover:border-[#B5DAD9]/50 transition-colors duration-500">
-                        <div className="absolute inset-0 bg-[#6A746C]/20 group-hover:bg-transparent transition-colors z-10 mix-blend-multiply" />
+                      <div className="w-full aspect-square overflow-hidden bg-volavan-earth-dark relative border border-volavan-cream/10 group-hover:border-volavan-aqua/50 transition-colors duration-500">
+                        <div className="absolute inset-0 bg-volavan-earth/20 group-hover:bg-transparent transition-colors z-10 mix-blend-multiply" />
                         {program.heroImage ? (
                           <img
                             src={getImageUrl(program.heroImage, 800, 800)}
@@ -206,14 +206,14 @@ export default function Residencies() {
                             className="w-full h-full object-cover transform scale-100 group-hover:scale-110 transition-transform duration-1000 ease-out filter grayscale group-hover:grayscale-0 opacity-80 group-hover:opacity-100"
                           />
                         ) : (
-                          <div className="w-full h-full bg-[#5E6860]" />
+                          <div className="w-full h-full bg-volavan-earth-dark" />
                         )}
                         
                         {/* Tagline Overlay */}
                         {program.tagline && (
                           <div className="absolute inset-0 z-20 flex items-end">
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#6A746C] via-[#6A746C]/55 to-transparent" />
-                            <p className="relative font-['Cormorant_Garamond'] text-lg md:text-xl text-[#F5F5F0] italic leading-tight p-6" style={{ textShadow: '0 2px 8px rgba(106, 116, 108, 0.8)' }}>
+                            <div className="absolute inset-0 bg-gradient-to-t from-volavan-earth via-volavan-earth/55 to-transparent" />
+                            <p className="relative font-['Cormorant_Garamond'] text-lg md:text-xl text-volavan-cream italic leading-tight p-6" style={{ textShadow: '0 2px 8px rgba(106, 116, 108, 0.8)' }}>
                               {program.tagline}
                             </p>
                           </div>
@@ -224,15 +224,15 @@ export default function Residencies() {
                       <div className="space-y-4">
                         {/* Title */}
                         <div className="flex justify-between items-end gap-4">
-                          <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-5xl italic text-[#F5F5F0] leading-[0.95] tracking-tight group-hover:text-[#B5DAD9] transition-colors duration-500 hyphens-auto">
+                          <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-5xl italic text-volavan-cream leading-[0.95] tracking-tight group-hover:text-volavan-aqua transition-colors duration-500 hyphens-auto">
                             {program.name}
                           </h2>
-                          <ArrowUpRight className="text-[#F5F5F0] opacity-0 group-hover:opacity-100 transition-opacity duration-300 mb-1 flex-shrink-0" size={20} />
+                          <ArrowUpRight className="text-volavan-cream opacity-0 group-hover:opacity-100 transition-opacity duration-300 mb-1 flex-shrink-0" size={20} />
                         </div>
                         
                         {/* Description Preview (if available) */}
                         {program.description && program.description[0] && (
-                          <p className="font-['Manrope'] text-sm text-[#F5F5F0]/60 line-clamp-2 leading-relaxed">
+                          <p className="font-['Manrope'] text-sm text-volavan-cream/60 line-clamp-2 leading-relaxed">
                             {program.description[0].children[0]?.text}
                           </p>
                         )}
@@ -250,7 +250,7 @@ export default function Residencies() {
           <motion.div 
             initial={{ opacity: 0 }} 
             animate={{ opacity: 1 }}
-            className="w-full py-32 flex flex-col items-center justify-center text-[#F5F5F0]/40"
+            className="w-full py-32 flex flex-col items-center justify-center text-volavan-cream/40"
           >
             <Filter size={32} className="mb-4 opacity-50" strokeWidth={1} />
             <p className="font-['Manrope'] text-sm uppercase tracking-[0.2em]">No programs found</p>
