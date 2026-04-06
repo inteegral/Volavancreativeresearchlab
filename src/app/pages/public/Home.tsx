@@ -11,7 +11,7 @@ import { getImageUrl, getYouTubeThumbnail } from "../../lib/sanity";
 import { useLanguage } from "../../contexts/LanguageContext";
 import { useHome, useAllPrograms, useJournalContent, useSettings } from "../../hooks/useSanity";
 import { calculateResidencyStatus } from "../../lib/sanity";
-import logoImage from "figma:asset/cf7144aebca76b64acb2a250bc18d06d1718b486.png";
+const logoImage = "/favicon.svg";
 
 export default function Home() {
   const { language } = useLanguage();
