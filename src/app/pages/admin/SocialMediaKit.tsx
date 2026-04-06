@@ -1,11 +1,12 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "motion/react";
-import { Download, Copy, Check, Instagram, Facebook, Linkedin, Mail, Newspaper, FileText, Image as ImageIcon, Palette, ChevronDown, Lock } from "lucide-react";
+import { Download, Copy, Check, Instagram, Facebook, Linkedin, Mail, Newspaper, FileText, Image as ImageIcon, Palette, ChevronDown, Lock, Calendar } from "lucide-react";
 import { SEOHead } from "../../components/SEOHead";
 import useSWR from "swr";
 import { sanityService, getImageUrl, getLogoUrl, type SanityImage } from "../../lib/sanity";
 import type { SanityProgram } from "../../lib/sanity";
 import { useLanguage } from "../../contexts/LanguageContext";
+import { Link } from "react-router";
 
 interface Format {
   id: string;
@@ -1224,13 +1225,25 @@ export default function SocialMediaKit() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-24 space-y-8"
         >
-          <h1 className="font-['Cormorant_Garamond'] text-6xl md:text-8xl italic text-[#6A746C] leading-[0.9] tracking-tight">
-            Social Media Kit
-          </h1>
-          <p className="font-['Manrope'] text-base md:text-lg text-[#6A746C]/50 max-w-3xl leading-relaxed">
-            Generate optimized social media graphics with real residency data from Sanity. 
-            Select a program for each format and download ready-to-use images.
-          </p>
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div>
+              <h1 className="font-['Cormorant_Garamond'] text-6xl md:text-8xl italic text-[#6A746C] leading-[0.9] tracking-tight">
+                Social Media Kit
+              </h1>
+              <p className="font-['Manrope'] text-base md:text-lg text-[#6A746C]/50 max-w-3xl leading-relaxed mt-4">
+                Generate optimized social media graphics with real residency data from Sanity. 
+                Select a program for each format and download ready-to-use images.
+              </p>
+            </div>
+            
+            <Link 
+              to="/admin/social-campaign"
+              className="shrink-0 px-6 py-4 bg-gradient-to-r from-[#B5DAD9] to-[#B5DAD9]/80 text-[#6A746C] rounded-xl font-['Manrope'] text-xs uppercase tracking-[0.2em] hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center gap-3"
+            >
+              <Calendar size={16} />
+              30-Day Campaign
+            </Link>
+          </div>
         </motion.div>
 
         {/* Brand Colors Section */}

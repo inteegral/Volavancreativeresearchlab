@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { Logo } from "../components/Logo";
 import { Instagram, Facebook, Youtube, Mail } from "lucide-react";
 import volavanLogo from "figma:asset/1af4cb91fb86b39602484d2b5e08345df59b2720.png";
+import footerLogo from "figma:asset/cf7144aebca76b64acb2a250bc18d06d1718b486.png";
 import { ScrollToTop } from "../components/ScrollToTop";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
 import { useLanguage } from "../contexts/LanguageContext";
@@ -169,7 +170,7 @@ export function PublicLayout() {
           </div>
 
           {/* Logo */}
-          <Logo className="h-[210.6px] w-auto text-[#B5DAD9] opacity-80" />
+          <img src={footerLogo} alt="VOLAVAN" className="h-[117.9px] w-auto mt-[100px]" />
 
           {/* Mission Statement */}
           

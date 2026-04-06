@@ -464,7 +464,7 @@ export default function Home() {
                               <img 
                                 src={thumbnailUrl}
                                 alt={journalPosts[0].title}
-                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 saturate-[0.7] contrast-[1.1] brightness-[0.9]"
                               />
                             ) : (
                               <SanityImage
@@ -473,7 +473,7 @@ export default function Home() {
                                 width={1000}
                                 height={600}
                                 sizes="(max-width: 768px) 100vw, 66vw"
-                                className="w-full h-full group-hover:scale-105 transition-transform duration-700"
+                                className="w-full h-full group-hover:scale-105 transition-transform duration-700 saturate-[0.7] contrast-[1.1] brightness-[0.9]"
                               />
                             )}
                           </div>
@@ -535,7 +535,7 @@ export default function Home() {
                                 <img 
                                   src={thumbnailUrl}
                                   alt={post.title}
-                                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 saturate-[0.7] contrast-[1.1] brightness-[0.9]"
                                 />
                               ) : (
                                 <SanityImage
@@ -544,7 +544,7 @@ export default function Home() {
                                   width={400}
                                   height={300}
                                   sizes="(max-width: 768px) 100vw, 33vw"
-                                  className="w-full h-full group-hover:scale-105 transition-transform duration-700"
+                                  className="w-full h-full group-hover:scale-105 transition-transform duration-700 saturate-[0.7] contrast-[1.1] brightness-[0.9]"
                                 />
                               )}
                             </div>

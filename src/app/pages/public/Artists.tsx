@@ -172,8 +172,8 @@ export default function Artists() {
               ) : (
                 <Link to={`/journal/${item.data.slug}`} className="block h-full w-full relative overflow-hidden">
                   
-                  {/* Static Image Background */}
-                  <div className="absolute inset-0">
+                  {/* Static Image Background - Very Faded */}
+                  <div className="absolute inset-0 opacity-20">
                     {(() => {
                       const imageSource = item.data._type === 'videoPost' ? item.data.thumbnail : item.data.coverImage;
                       const imageUrl = imageSource ? getImageUrl(imageSource, 600, 600) : null;
@@ -182,7 +182,7 @@ export default function Artists() {
                         <img 
                           src={imageUrl} 
                           alt={item.data.title}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover blur-sm grayscale-[0.3]"
                         />
                       ) : (
                         <div className="w-full h-full bg-[#5E6860]" />
@@ -191,7 +191,7 @@ export default function Artists() {
                   </div>
 
                   {/* Content Overlay - Static */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#6A746C] via-[#6A746C]/80 to-transparent p-6 md:p-8 flex flex-col justify-between">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#6A746C] via-[#6A746C]/90 to-[#6A746C]/70 p-6 md:p-8 flex flex-col justify-between">
                     <div className="flex-1 flex items-center">
                       <h2 className="font-['Cormorant_Garamond'] text-2xl md:text-3xl lg:text-4xl italic text-[#F5F5F0] leading-tight group-hover:translate-y-[-4px] transition-transform duration-300">
                         {item.data.title}

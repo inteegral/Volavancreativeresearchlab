@@ -20,6 +20,8 @@ export default function About() {
 
   // Derived state with memoization
   const upcomingResidencies = useMemo(() => {
+    console.log('🔍 About Page - All programs:', programs);
+    
     return programs
       .filter(program => {
         if (!program.editions || program.editions.length === 0) return false;
@@ -27,6 +29,7 @@ export default function About() {
         // Calculate dynamic status for each edition (same as Home)
         return program.editions.some(edition => {
           const calculatedStatus = calculateResidencyStatus(edition);
+          console.log(`🔍 Program "${program.name}" - Edition status:`, calculatedStatus, edition);
           return calculatedStatus === 'upcoming' || calculatedStatus === 'open_call' || calculatedStatus === 'open_call_soon';
         });
       })

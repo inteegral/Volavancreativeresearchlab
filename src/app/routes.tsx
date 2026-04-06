@@ -20,6 +20,7 @@ import Candidature from "./pages/public/Candidature";
 
 // Admin Pages
 import SocialMediaKit from "./pages/admin/SocialMediaKit";
+import SocialCampaign from "./pages/admin/SocialCampaign";
 
 // Debug
 import DebugSanity from "./pages/DebugSanity";
@@ -82,6 +83,7 @@ export const router = createBrowserRouter([
           { path: "candidature", Component: Candidature },
           { path: "debug-sanity", Component: DebugSanity },
           { path: "admin/social-media-kit", Component: SocialMediaKit },
+          { path: "admin/social-campaign", Component: SocialCampaign },
         ],
       },
       {
