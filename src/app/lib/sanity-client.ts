@@ -9,7 +9,6 @@ export const sanityClient = createClient({
   apiVersion: '2024-01-01',
   useCdn: false,
   withCredentials: false,
-  perspective: 'published',
 });
 
 const builder = createImageUrlBuilder(sanityClient);
