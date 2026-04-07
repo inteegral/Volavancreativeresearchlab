@@ -222,14 +222,6 @@ export function ResidencyContent({
               </p>
             )}
             <PortableTextRenderer value={program.requirements} />
-            {callCloseDate && (
-              <div className="mt-8 p-6 bg-volavan-aqua/5 border border-volavan-aqua/20 rounded-sm">
-                <p className="font-['Manrope'] text-sm text-volavan-cream/70">
-                  <span className="text-volavan-aqua">Deadline: </span>
-                  {formatDate(callCloseDate)}
-                </p>
-              </div>
-            )}
           </motion.div>
         )}
 
