@@ -37,7 +37,7 @@ export default function Residencies() {
       <div className="w-full min-h-screen bg-volavan-earth text-volavan-cream px-6 py-24 flex items-center justify-center">
         <div className="text-center">
           <p className="text-red-400 mb-4">Error loading residencies</p>
-          <p className="text-sm text-volavan-cream/60">{error}</p>
+          <p className="text-sm text-volavan-cream/60">{error instanceof Error ? error.message : String(error)}</p>
         </div>
       </div>
     );

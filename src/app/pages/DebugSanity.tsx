@@ -56,7 +56,7 @@ export default function DebugSanity() {
     return (
       <div className="min-h-screen bg-volavan-earth text-red-400 p-8">
         <h1 className="text-4xl mb-8">Error</h1>
-        <pre className="bg-black/20 p-4 rounded">{error}</pre>
+        <pre className="bg-black/20 p-4 rounded">{error instanceof Error ? error.message : String(error)}</pre>
       </div>
     );
   }
