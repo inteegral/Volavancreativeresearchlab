@@ -13,8 +13,8 @@ export default function About() {
   const { language } = useLanguage();
   
   // Fetch data with SWR
-  const { about: aboutData, isLoading: aboutLoading } = useAbout();
-  const { programs, isLoading: programsLoading } = useAllPrograms();
+  const { about: aboutData, isLoading: aboutLoading, isError: aboutError } = useAbout();
+  const { programs, isLoading: programsLoading, isError: programsError } = useAllPrograms();
   const { content: journalContent, isLoading: journalLoading } = useJournalContent();
   const { settings } = useSettings();
 
@@ -39,11 +39,22 @@ export default function About() {
   }, [journalContent]);
 
   const loading = aboutLoading || programsLoading || journalLoading;
+  const error = aboutError || programsError;
 
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="w-12 h-12 border-2 border-volavan-aqua/30 border-t-volavan-aqua rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-volavan-earth text-volavan-cream/40">
+        <p className="font-['Manrope'] text-xs uppercase tracking-[0.2em]">
+          Unable to load content — please try again later
+        </p>
       </div>
     );
   }

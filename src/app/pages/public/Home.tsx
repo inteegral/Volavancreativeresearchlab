@@ -7,12 +7,22 @@ import { UpcomingResidenciesSection } from "./home/UpcomingResidenciesSection";
 import { JournalSection } from "./home/JournalSection";
 
 export default function Home() {
-  const { home: homeData } = useHome();
-  const { programs, isLoading: programsLoading } = useAllPrograms();
+  const { home: homeData, isError: homeError } = useHome();
+  const { programs, isLoading: programsLoading, isError: programsError } = useAllPrograms();
   const { content: journalContent, isLoading: journalLoading } = useJournalContent();
   const { settings } = useSettings();
 
   const journalPosts = useMemo(() => journalContent.slice(0, 3), [journalContent]);
+
+  if (homeError || programsError) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-volavan-earth text-volavan-cream/40">
+        <p className="font-['Manrope'] text-xs uppercase tracking-[0.2em]">
+          Unable to load content — please try again later
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[calc(100vh-8rem)] px-6 py-12 text-center">

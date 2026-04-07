@@ -103,26 +103,7 @@ export const sanityService = {
   getAllPrograms: async (lang: string = 'en'): Promise<SanityProgram[]> => {
     try {
       const programs = await sanityClient.fetch<any[]>(
-        `*[_type == "residencyProgram" && (!defined(language) || language == $lang)] | order(name asc) {
-          _id,
-          name,
-          "slug": slug.current,
-          language,
-          tagline,
-          disciplines,
-          location,
-          country,
-          logo,
-          "editions": *[_type == "residency" && program._ref == ^._id] | order(year desc) {
-            _id,
-            year,
-            "slug": slug.current,
-            coverImage,
-            "startDate": residencyDates.start,
-            "endDate": residencyDates.end,
-            callDates
-          }
-        }`,
+        QUERIES.allProgramsWithEditions,
         { lang }
       );
 
@@ -138,12 +119,16 @@ export const sanityService = {
     }
   },
 
-  getProgramBySlug: async (slug: string, lang: string = 'en'): Promise<SanityProgram | null> => {
-    const result = await sanityClient.fetch<SanityProgram>(
-      (QUERIES as any).programBySlug?.(slug),
-      { lang }
-    );
-    return result;
+  getProgramBySlug: async (slug: string): Promise<SanityProgram | null> => {
+    try {
+      const result = await sanityClient.fetch<SanityProgram>(
+        QUERIES.programBySlug(slug)
+      );
+      return result || null;
+    } catch (error) {
+      console.error(`❌ Error fetching program "${slug}" from Sanity:`, error);
+      return null;
+    }
   },
 
   async getAllJournalPosts(lang: string = 'en'): Promise<SanityJournalPost[]> {

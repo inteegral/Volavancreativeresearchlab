@@ -95,6 +95,48 @@ export const QUERIES = {
     }
   }`,
 
+  allProgramsWithEditions: `*[_type == "residencyProgram" && (!defined(language) || language == $lang)] | order(name asc) {
+    _id,
+    name,
+    "slug": slug.current,
+    language,
+    tagline,
+    disciplines,
+    location,
+    country,
+    logo,
+    "editions": *[_type == "residency" && program._ref == ^._id] | order(year desc) {
+      _id,
+      year,
+      "slug": slug.current,
+      coverImage,
+      "startDate": residencyDates.start,
+      "endDate": residencyDates.end,
+      callDates
+    }
+  }`,
+
+  programBySlug: (slug: string) => `*[_type == "residencyProgram" && slug.current == "${slug}"][0] {
+    _id,
+    name,
+    "slug": slug.current,
+    language,
+    tagline,
+    disciplines,
+    location,
+    country,
+    logo,
+    "editions": *[_type == "residency" && program._ref == ^._id] | order(year desc) {
+      _id,
+      year,
+      "slug": slug.current,
+      coverImage,
+      "startDate": residencyDates.start,
+      "endDate": residencyDates.end,
+      callDates
+    }
+  }`,
+
   residencyBySlug: (slug: string) => `*[_type == "residency" && slug.current == "${slug}"][0] {
     year,
     status,
@@ -167,52 +209,6 @@ export const QUERIES = {
       _id,
       name,
       "slug": slug.current
-    }
-  }`,
-
-  residencyBySlugLegacy: (slug: string) => `*[_type == "residency" && slug.current == "${slug}" && defined(program) && program->type == "artistic"][0] {
-    _id,
-    title,
-    "slug": slug.current,
-    year,
-    status,
-    disciplines,
-    capacity,
-    location,
-    country,
-    "startDate": residencyDates.start,
-    "endDate": residencyDates.end,
-    "callOpen": callDates.open,
-    "callClose": callDates.close,
-    feeAmount,
-    feeIncludes,
-    description,
-    whatWeOffer,
-    requirements,
-    coverImage,
-    gallery,
-    program-> {
-      _id,
-      name,
-      "slug": slug.current,
-      description
-    },
-    "artists": artists[] {
-      "artist": artist-> {
-        _id,
-        name,
-        "slug": slug.current,
-        nationality,
-        disciplines,
-        instruments,
-        bio,
-        whyVolavan,
-        photo,
-        links[] {
-          label,
-          url
-        }
-      }
     }
   }`,
 
