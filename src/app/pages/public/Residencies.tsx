@@ -1,7 +1,7 @@
 import { useState, useMemo, useRef } from "react";
 import { Link } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
-import { ChevronDown, ArrowUpRight } from "lucide-react";
+import { ChevronDown, ArrowUpRight, Filter } from "lucide-react";
 import { VButton } from "../../components/ui/VButton";
 import { getImageUrl } from "../../lib/sanity";
 import { SEOHead } from "../../components/SEOHead";
