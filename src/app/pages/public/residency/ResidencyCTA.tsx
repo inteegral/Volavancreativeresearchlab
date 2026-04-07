@@ -16,7 +16,7 @@ export function ResidencyCTA({ residency, program, isOpenCall, callCloseDate }: 
   const { t } = useLanguage();
 
   return (
-    <section className="w-full bg-volavan-earth py-24 md:py-32">
+    <section className="w-full bg-volavan-earth py-16 md:py-20 border-t border-volavan-cream/10">
       <div className="max-w-4xl mx-auto px-6 flex flex-col items-center justify-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
