@@ -20,15 +20,12 @@ export default function About() {
 
   // Derived state with memoization
   const upcomingResidencies = useMemo(() => {
-    
     return programs
       .filter(program => {
         if (!program.editions || program.editions.length === 0) return false;
-        
-        // Calculate dynamic status for each edition (same as Home)
         return program.editions.some(edition => {
-          const calculatedStatus = calculateResidencyStatus(edition);
-          return calculatedStatus === 'upcoming' || calculatedStatus === 'open_call' || calculatedStatus === 'open_call_soon';
+          const status = calculateResidencyStatus(edition);
+          return status === 'upcoming' || status === 'open_call' || status === 'open_call_soon';
         });
       })
       .slice(0, 2);
@@ -141,8 +138,11 @@ export default function About() {
               </div>
             ) : (
               upcomingResidencies.map((program) => {
-                // Get the latest edition
-                const latestEdition = program.editions?.[0];
+                const activeEdition = program.editions?.find(e => {
+                  const s = calculateResidencyStatus(e);
+                  return s === 'open_call' || s === 'upcoming' || s === 'open_call_soon';
+                });
+                const latestEdition = activeEdition || program.editions?.[0];
                 if (!latestEdition) return null;
 
                 // Image: edition coverImage only (no fallback to program)

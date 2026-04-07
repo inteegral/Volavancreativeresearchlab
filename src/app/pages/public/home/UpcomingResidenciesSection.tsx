@@ -18,11 +18,11 @@ export function UpcomingResidenciesSection({ programs, programsLoading }: Upcomi
       .filter(program => {
         if (!program.editions || program.editions.length === 0) return false;
         return program.editions.some(edition => {
-          const calculatedStatus = calculateResidencyStatus(edition);
-          return calculatedStatus === 'upcoming' || calculatedStatus === 'open_call' || calculatedStatus === 'open_call_soon';
+          const status = calculateResidencyStatus(edition);
+          return status === 'upcoming' || status === 'open_call' || status === 'open_call_soon';
         });
       })
-      .slice(0, 2);
+      .slice(0, 3); // allow up to 3 so SYSTEMA 26 isn't cut off
   }, [programs]);
 
   return (
@@ -53,9 +53,15 @@ export function UpcomingResidenciesSection({ programs, programsLoading }: Upcomi
             </div>
           ) : (
             upcomingResidencies.map((program) => {
-              const latestEdition = program.editions?.[0];
+              // Pick the edition with an active/upcoming status, fallback to first
+              const activeEdition = program.editions?.find(e => {
+                const s = calculateResidencyStatus(e);
+                return s === 'open_call' || s === 'upcoming' || s === 'open_call_soon';
+              });
+              const latestEdition = activeEdition || program.editions?.[0];
               if (!latestEdition) return null;
 
+              const isOpenCall = calculateResidencyStatus(latestEdition) === 'open_call';
               const coverImage = latestEdition.coverImage;
 
               return (
@@ -73,7 +79,13 @@ export function UpcomingResidenciesSection({ programs, programsLoading }: Upcomi
                       sizes="(max-width: 768px) 100vw, 50vw"
                       className="w-full h-full group-hover:scale-105 transition-transform duration-700 saturate-[0.45] opacity-65"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-volavan-earth/60 pointer-events-none"></div>
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-volavan-earth/60 pointer-events-none" />
+                    {isOpenCall && (
+                      <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 bg-volavan-earth/70 backdrop-blur-sm border border-volavan-aqua/50 rounded-sm">
+                        <div className="w-1.5 h-1.5 rounded-full bg-volavan-aqua animate-pulse" />
+                        <span className="font-['Manrope'] text-[10px] uppercase tracking-[0.15em] text-volavan-aqua font-light">Open Call</span>
+                      </div>
+                    )}
                   </div>
 
                   <div className="p-6 space-y-3 bg-volavan-earth/50 backdrop-blur-sm">
