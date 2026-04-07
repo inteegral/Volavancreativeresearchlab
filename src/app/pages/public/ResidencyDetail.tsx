@@ -99,7 +99,7 @@ export default function ResidencyDetail() {
   const isCaTru = slug?.toLowerCase().includes('ca-tru') ?? false;
 
   return (
-    <div className="w-full bg-volavan-earth text-volavan-cream -mt-24">
+    <div className="w-full bg-volavan-earth text-volavan-cream -mt-24 overflow-x-hidden">
       <SEOHead
         title={residency.seo?.title || `${program.name} ${residency.year}`}
         description={residency.seo?.description || program.seo?.description}

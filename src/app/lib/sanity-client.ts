@@ -3,8 +3,28 @@ import { createImageUrlBuilder } from '@sanity/image-url';
 import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import type { SanityImage } from './sanity-types';
 
+const PROJECT_ID = '98dco624';
+const SANITY_HOST = `${PROJECT_ID}.api.sanity.io`;
+
+// In development, route all Sanity API requests through the Vite dev-server proxy
+// at /sanity-api so we avoid CORS preflight issues from localhost.
+if (import.meta.env.DEV) {
+  const _origFetch = window.fetch.bind(window);
+  (window as any).fetch = (input: RequestInfo | URL, init?: RequestInit) => {
+    const url = input instanceof Request ? input.url : String(input);
+    if (url.includes(SANITY_HOST)) {
+      const proxied = url.replace(`https://${SANITY_HOST}`, '/sanity-api');
+      if (input instanceof Request) {
+        return _origFetch(new Request(proxied, input), init);
+      }
+      return _origFetch(proxied, init);
+    }
+    return _origFetch(input, init);
+  };
+}
+
 export const sanityClient = createClient({
-  projectId: '98dco624',
+  projectId: PROJECT_ID,
   dataset: 'production',
   apiVersion: '2024-01-01',
   useCdn: false,

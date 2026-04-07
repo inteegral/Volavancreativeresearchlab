@@ -125,7 +125,7 @@ export function PortableTextRenderer({ value, className = '' }: PortableTextRend
   }
 
   return (
-    <div className={`space-y-1 ${className}`}>
+    <div className={`space-y-1 overflow-x-hidden break-words ${className}`}>
       <PortableText value={value} components={components} />
     </div>
   );

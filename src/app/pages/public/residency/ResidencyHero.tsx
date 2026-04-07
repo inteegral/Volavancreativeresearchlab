@@ -1,4 +1,3 @@
-import { Link } from "react-router";
 import { ArrowDown, Calendar, MapPin } from "lucide-react";
 import { VLink } from "../../../components/ui/VButton";
 import { motion } from "motion/react";
@@ -35,8 +34,33 @@ export function ResidencyHero({
   const startDate = residency.residencyDates?.start;
   const endDate = residency.residencyDates?.end;
 
+  // Find a current/upcoming edition to link to (for past editions)
+  const currentEdition = isPastEdition
+    ? program.otherEditions?.find((ed) => {
+        if (!ed) return false;
+        const s = getStatus(ed);
+        return s === 'open_call' || s === 'ongoing' || s === 'upcoming' || s === 'open_call_soon';
+      })
+    : null;
+
+  const formattedDates = (() => {
+    if (!startDate || !endDate) return null;
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    const sameYear = start.getFullYear() === end.getFullYear();
+    const startStr =
+      start.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) +
+      (!sameYear ? ` ${start.getFullYear()}` : '');
+    const endStr = end.toLocaleDateString('en-GB', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+    });
+    return `${startStr} — ${endStr}`;
+  })();
+
   return (
-    <section className="relative h-screen min-h-[800px] w-full flex flex-col items-center justify-center overflow-hidden">
+    <section className="relative w-full min-h-screen flex flex-col overflow-hidden">
 
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
@@ -53,112 +77,137 @@ export function ResidencyHero({
         )}
       </div>
 
-      {/* Hero Content */}
-      <div className="relative z-20 w-full max-w-7xl mx-auto px-6 flex flex-col items-center justify-center text-center h-full">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="flex flex-col items-center justify-center w-full space-y-12"
-        >
+      {/* ── LAYOUT: three-zone flex column ─────────────────────────── */}
+      <div className="relative z-20 flex flex-col w-full max-w-7xl mx-auto px-6 min-h-screen">
+
+        {/* ZONE 1 – top spacer + status badge (accounts for fixed header) */}
+        <div className="pt-32 flex justify-center">
           {statusBadge && (
-            <div className={`px-5 py-2 ${statusBadge.bgColor} ${statusBadge.borderColor} border rounded-full`}>
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className={`px-5 py-2 ${statusBadge.bgColor} ${statusBadge.borderColor} border rounded-full`}
+            >
               <span
                 className="font-['Manrope'] text-[10px] uppercase tracking-[0.25em] font-medium"
                 style={{ color: statusBadge.color }}
               >
                 {statusBadge.label}
               </span>
+            </motion.div>
+          )}
+        </div>
+
+        {/* ZONE 2 – program name + tagline, grows to fill available space */}
+        <div className="flex-grow flex flex-col items-center justify-center text-center gap-4 py-10">
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="font-['Cormorant_Garamond'] text-[17vw] md:text-[14vw] lg:text-[12vw] xl:text-[10vw] italic text-volavan-cream leading-[0.9] tracking-tight w-full overflow-hidden"
+          >
+            {program.name}
+          </motion.h1>
+
+          {program.tagline && (
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="font-['Manrope'] text-sm md:text-base text-volavan-cream/70 max-w-md md:max-w-xl leading-relaxed tracking-wide px-2"
+            >
+              {program.tagline}
+            </motion.p>
+          )}
+        </div>
+
+        {/* ZONE 3 – meta info + CTA, pinned to bottom with safe padding */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="flex flex-col items-center gap-5 pb-10"
+        >
+          {/* Dates + Location */}
+          {(formattedDates || (program.location && program.country)) && (
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-8 items-center text-volavan-cream/60 border-t border-volavan-cream/10 pt-6 w-full max-w-2xl justify-center">
+              {formattedDates && (
+                <span className="font-['Manrope'] text-[11px] uppercase tracking-[0.2em] flex items-center gap-2">
+                  <Calendar size={13} className="opacity-50 shrink-0" />
+                  {formattedDates}
+                </span>
+              )}
+              {formattedDates && program.location && (
+                <span className="hidden sm:inline w-px h-3 bg-volavan-cream/20" />
+              )}
+              {program.location && program.country && (
+                <span className="font-['Manrope'] text-[11px] uppercase tracking-[0.2em] flex items-center gap-2">
+                  <MapPin size={13} className="opacity-50 shrink-0" />
+                  {program.location}, {program.country}
+                </span>
+              )}
             </div>
           )}
 
-          <div className="w-full flex flex-col items-center gap-6 py-8">
-            <h1 className="font-['Cormorant_Garamond'] text-[20vw] md:text-[16vw] lg:text-[13.5vw] xl:text-[12vw] italic text-volavan-cream leading-[0.9] tracking-tight max-w-[95vw]">
-              {program.name}
-            </h1>
-
-            {program.tagline && (
-              <p className="font-['Manrope'] text-base md:text-lg lg:text-xl text-volavan-cream/70 max-w-3xl leading-relaxed tracking-wide px-4">
-                {program.tagline}
-              </p>
-            )}
-
-            <div className="flex flex-col items-center gap-4 mt-6 pt-6 border-t border-volavan-cream/10 w-full max-w-3xl">
-              <div className="flex flex-col md:flex-row gap-4 md:gap-8 items-center text-volavan-cream/70 text-center">
-                <span className="font-['Manrope'] text-xs uppercase tracking-[0.2em] flex items-center gap-2">
-                  <Calendar size={14} className="opacity-50" />
-                  {(() => {
-                    if (!startDate || !endDate) return null;
-                    const start = new Date(startDate);
-                    const end = new Date(endDate);
-                    const sameYear = start.getFullYear() === end.getFullYear();
-                    const startStr = start.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) + (!sameYear ? ` ${start.getFullYear()}` : '');
-                    const endStr = end.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
-                    return `${startStr} — ${endStr}`;
-                  })()}
-                </span>
-                <span className="hidden md:inline w-px h-3 bg-volavan-cream/20"></span>
-                <span className="font-['Manrope'] text-xs uppercase tracking-[0.2em] flex items-center gap-2">
-                  <MapPin size={14} className="opacity-50" />
-                  {program.location}, {program.country}
-                </span>
-              </div>
-            </div>
-          </div>
-
+          {/* Disciplines */}
           {program.disciplines && program.disciplines.length > 0 && (
-            <div className="flex flex-wrap justify-center gap-3 md:gap-6">
+            <div className="flex flex-wrap justify-center gap-2 md:gap-5 max-w-sm md:max-w-xl">
               {program.disciplines.slice(0, 3).map((discipline, i) => (
-                <span key={i} className="font-['Manrope'] text-[10px] md:text-xs uppercase tracking-[0.2em] md:tracking-[0.25em] text-volavan-cream/50 whitespace-nowrap">
+                <span
+                  key={i}
+                  className="font-['Manrope'] text-[10px] md:text-xs uppercase tracking-[0.2em] md:tracking-[0.25em] text-volavan-cream/40"
+                >
                   {discipline}
                 </span>
               ))}
             </div>
           )}
 
-          {isPastEdition && (() => {
-            const currentEdition = program.otherEditions?.find((ed) => {
-              if (!ed) return false;
-              const edStatus = getStatus(ed);
-              return edStatus === 'open_call' || edStatus === 'ongoing' || edStatus === 'upcoming' || edStatus === 'open_call_soon';
-            });
-            if (currentEdition && currentEdition.slug) {
-              return (
-                <div className="pt-4">
-                  <VLink to={`/residencies/${currentEdition.slug}`} variant="outline-aqua" size="sm">
-                    View Current Edition
-                  </VLink>
-                </div>
-              );
-            }
-            return null;
-          })()}
-        </motion.div>
-
-        {isOpenCall && (
-          <div className="absolute bottom-16 left-0 right-0 w-full max-w-5xl mx-auto px-6">
-            <div className="border-t border-b border-volavan-cream/10 py-5 flex justify-center items-center">
-              <VLink to={`/apply/${residency.slug || ''}`} variant="ghost" size="sm">Apply Now</VLink>
+          {/* CTA or past-edition link */}
+          {isOpenCall ? (
+            <div className="w-full max-w-2xl border-t border-b border-volavan-cream/10 py-5 flex justify-center">
+              <VLink
+                to={`/apply/${residency.slug || ''}`}
+                variant="ghost"
+                size="sm"
+              >
+                Apply Now
+              </VLink>
             </div>
-          </div>
-        )}
-      </div>
-
-      <motion.button
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
-        onClick={() => document.getElementById('content-start')?.scrollIntoView({ behavior: 'smooth' })}
-        className="absolute bottom-6 z-20 flex flex-col items-center gap-2 text-volavan-cream/40 hover:text-volavan-aqua transition-colors cursor-pointer"
-      >
-        <span className="text-[8px] uppercase tracking-[0.2em] font-['Manrope']">Scroll</span>
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-        >
-          <ArrowDown size={16} strokeWidth={1} />
+          ) : isPastEdition && currentEdition?.slug ? (
+            <div className="pt-2">
+              <VLink
+                to={`/residencies/${currentEdition.slug}`}
+                variant="outline-aqua"
+                size="sm"
+              >
+                View Current Edition
+              </VLink>
+            </div>
+          ) : (
+            /* Scroll indicator — only when no CTA competing for space */
+            <motion.button
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.5, duration: 1 }}
+              onClick={() =>
+                document.getElementById('content-start')?.scrollIntoView({ behavior: 'smooth' })
+              }
+              className="flex flex-col items-center gap-2 text-volavan-cream/40 hover:text-volavan-aqua transition-colors cursor-pointer"
+            >
+              <span className="text-[8px] uppercase tracking-[0.2em] font-['Manrope']">Scroll</span>
+              <motion.div
+                animate={{ y: [0, 6, 0] }}
+                transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+              >
+                <ArrowDown size={16} strokeWidth={1} />
+              </motion.div>
+            </motion.button>
+          )}
         </motion.div>
-      </motion.button>
+
+      </div>
     </section>
   );
 }

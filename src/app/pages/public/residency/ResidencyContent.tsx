@@ -28,7 +28,7 @@ export function ResidencyContent({
   const hasArtists = residency.artists && residency.artists.length > 0;
 
   return (
-    <section id="content-start" className="max-w-7xl mx-auto px-6 py-24 md:py-32 grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 relative">
+    <section id="content-start" className="max-w-7xl mx-auto px-6 py-24 md:py-32 grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 relative overflow-x-hidden">
 
       {/* Sticky Sidebar */}
       <div className="hidden lg:block lg:col-span-3 relative">

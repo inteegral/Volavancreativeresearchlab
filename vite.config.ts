@@ -25,7 +25,14 @@ export default defineConfig({
       '/sanity-api': {
         target: 'https://98dco624.api.sanity.io',
         changeOrigin: true,
+        secure: true,
         rewrite: (path) => path.replace(/^\/sanity-api/, ''),
+        configure: (proxy) => {
+          proxy.on('proxyReq', (proxyReq) => {
+            proxyReq.setHeader('Host', '98dco624.api.sanity.io');
+            proxyReq.setHeader('Origin', 'https://98dco624.api.sanity.io');
+          });
+        },
       },
     },
   },
