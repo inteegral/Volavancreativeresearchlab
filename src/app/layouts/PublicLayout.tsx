@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Logo } from "../components/Logo";
 import { Instagram, Facebook, Youtube, Mail } from "lucide-react";
-const volavanLogo = "/favicon.svg";
+const volavanLogo = "/logo-circular.svg";
 const footerLogo = "/favicon.svg";
 import { ScrollToTop } from "../components/ScrollToTop";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
@@ -55,7 +55,7 @@ export function PublicLayout() {
             <img 
               src={volavanLogo} 
               alt="Volavan" 
-              className="h-[99.84px] w-auto object-contain transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110 group-hover:brightness-110" 
+              className="h-14 w-auto object-contain transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110 group-hover:brightness-110" 
             />
           </Link>
 
