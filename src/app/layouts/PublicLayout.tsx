@@ -55,7 +55,7 @@ export function PublicLayout() {
             <img 
               src={volavanLogo} 
               alt="Volavan" 
-              className="h-14 w-auto object-contain transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110 group-hover:brightness-110" 
+              className="h-[70px] w-auto object-contain transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110 group-hover:brightness-110" 
             />
           </Link>
 
