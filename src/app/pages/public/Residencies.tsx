@@ -165,25 +165,6 @@ export default function Residencies() {
                   >
                     <Link to={targetEdition ? `/residencies/${targetEdition.slug}` : `/residencies`} className="flex flex-col h-full gap-8">
                       
-                      {/* STATUS BADGE - fixed height so cards align */}
-                      <div className="min-h-[28px] flex items-center">
-                        {hasOpenCall ? (
-                          <motion.div
-                            initial={{ opacity: 0, y: -10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.3 + index * 0.1 }}
-                            className="flex items-center gap-2.5 px-3 py-1.5 border border-volavan-aqua/40 rounded-sm"
-                          >
-                            <div className="w-1.5 h-1.5 rounded-full bg-volavan-aqua animate-pulse" />
-                            <span className="font-['Manrope'] text-[10px] uppercase tracking-[0.15em] text-volavan-aqua font-light">
-                              Open Call
-                            </span>
-                          </motion.div>
-                        ) : (
-                          <div className="h-[28px]" />
-                        )}
-                      </div>
-
                       {/* Card Image */}
                       <div className="w-full aspect-square overflow-hidden bg-volavan-earth-dark relative border border-volavan-cream/10 group-hover:border-volavan-aqua/50 transition-colors duration-500">
                         <div className="absolute inset-0 bg-volavan-earth/20 group-hover:bg-transparent transition-colors z-10 mix-blend-multiply" />
@@ -196,7 +177,22 @@ export default function Residencies() {
                         ) : (
                           <div className="w-full h-full bg-volavan-earth-dark" />
                         )}
-                        
+
+                        {/* Open Call badge — top-left inside image */}
+                        {hasOpenCall && (
+                          <motion.div
+                            initial={{ opacity: 0, y: -6 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.3 + index * 0.1 }}
+                            className="absolute top-4 left-4 z-30 flex items-center gap-2 px-3 py-1.5 bg-volavan-earth/70 backdrop-blur-sm border border-volavan-aqua/50 rounded-sm"
+                          >
+                            <div className="w-1.5 h-1.5 rounded-full bg-volavan-aqua animate-pulse" />
+                            <span className="font-['Manrope'] text-[10px] uppercase tracking-[0.15em] text-volavan-aqua font-light">
+                              Open Call
+                            </span>
+                          </motion.div>
+                        )}
+
                         {/* Tagline Overlay */}
                         {program.tagline && (
                           <div className="absolute inset-0 z-20 flex items-end">
