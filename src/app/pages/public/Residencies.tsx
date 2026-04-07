@@ -1,7 +1,18 @@
 import { useState, useMemo, useRef } from "react";
 import { Link } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
-import { ChevronDown, ArrowUpRight, Filter } from "lucide-react";
+import { ChevronDown, ArrowUpRight, Filter, Calendar } from "lucide-react";
+
+// Dynamically compute whether an edition's open call is active right now
+function isOpenCallActive(edition: any): boolean {
+  if (!edition?.callDates?.open || !edition?.callDates?.close) return false;
+  const now = new Date();
+  return now >= new Date(edition.callDates.open) && now <= new Date(edition.callDates.close);
+}
+
+function formatShortDate(dateStr: string): string {
+  return new Date(dateStr).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+}
 import { VButton } from "../../components/ui/VButton";
 import { getImageUrl } from "../../lib/sanity";
 import { SEOHead } from "../../components/SEOHead";
@@ -130,17 +141,17 @@ export default function Residencies() {
           >
             <AnimatePresence>
               {programs.map((program, index) => {
-                const editionsCount = program.editions?.length || 0;
-                
-                // Prioritize active editions (open_call or ongoing), otherwise take latest by year
-                const activeEdition = program.editions?.find(e => 
-                  e.status === 'open_call' || e.status === 'ongoing'
-                );
-                const targetEdition = activeEdition || program.editions?.[0]; // Fallback to latest by year
-                
-                // Check for different statuses in editions
-                const hasOpenCall = program.editions?.some(e => e.status === 'open_call');
-                const hasOngoing = program.editions?.some(e => e.status === 'ongoing');
+                // Prioritize edition with active open call, then latest
+                const openCallEdition = program.editions?.find(e => isOpenCallActive(e));
+                const targetEdition = openCallEdition || program.editions?.[0];
+
+                // Dynamic status flags
+                const hasOpenCall = !!openCallEdition;
+                const openCallDeadline = openCallEdition?.callDates?.close;
+
+                // Dates from the target edition
+                const startDate = targetEdition?.startDate;
+                const endDate = targetEdition?.endDate;
 
                 return (
                   <motion.div
@@ -154,34 +165,22 @@ export default function Residencies() {
                   >
                     <Link to={targetEdition ? `/residencies/${targetEdition.slug}` : `/residencies`} className="flex flex-col h-full gap-8">
                       
-                      {/* STATUS BADGES - Above Image with fixed height */}
-                      <div className="flex flex-wrap gap-2 min-h-[44px]">
-                        {hasOpenCall && (
+                      {/* STATUS BADGE - fixed height so cards align */}
+                      <div className="min-h-[28px] flex items-center">
+                        {hasOpenCall ? (
                           <motion.div
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.3 + index * 0.1 }}
-                            className="flex items-center gap-2.5 px-3 py-1.5 border border-volavan-aqua/40 rounded-sm h-fit"
+                            className="flex items-center gap-2.5 px-3 py-1.5 border border-volavan-aqua/40 rounded-sm"
                           >
-                            <div className="w-1.5 h-1.5 rounded-full bg-volavan-aqua" />
+                            <div className="w-1.5 h-1.5 rounded-full bg-volavan-aqua animate-pulse" />
                             <span className="font-['Manrope'] text-[10px] uppercase tracking-[0.15em] text-volavan-aqua font-light">
                               Open Call
                             </span>
                           </motion.div>
-                        )}
-                        
-                        {hasOngoing && (
-                          <motion.div
-                            initial={{ opacity: 0, y: -10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.4 + index * 0.1 }}
-                            className="flex items-center gap-2.5 px-3 py-1.5 border border-volavan-cream/30 rounded-sm h-fit"
-                          >
-                            <div className="w-1.5 h-1.5 rounded-full bg-volavan-cream" />
-                            <span className="font-['Manrope'] text-[10px] uppercase tracking-[0.15em] text-volavan-cream/80 font-light">
-                              In Progress
-                            </span>
-                          </motion.div>
+                        ) : (
+                          <div className="h-[28px]" />
                         )}
                       </div>
 
@@ -210,7 +209,7 @@ export default function Residencies() {
                       </div>
 
                       {/* Text Content */}
-                      <div className="space-y-4">
+                      <div className="space-y-3">
                         {/* Title */}
                         <div className="flex justify-between items-end gap-4">
                           <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-5xl italic text-volavan-cream leading-[0.95] tracking-tight group-hover:text-volavan-aqua transition-colors duration-500 hyphens-auto">
@@ -218,11 +217,19 @@ export default function Residencies() {
                           </h2>
                           <ArrowUpRight className="text-volavan-cream opacity-0 group-hover:opacity-100 transition-opacity duration-300 mb-1 flex-shrink-0" size={20} />
                         </div>
-                        
-                        {/* Description Preview (if available) */}
-                        {program.description && program.description[0] && (
-                          <p className="font-['Manrope'] text-sm text-volavan-cream/60 line-clamp-2 leading-relaxed">
-                            {program.description[0].children[0]?.text}
+
+                        {/* Dates */}
+                        {startDate && endDate && (
+                          <p className="font-['Manrope'] text-[11px] uppercase tracking-[0.18em] text-volavan-cream/40 flex items-center gap-2">
+                            <Calendar size={11} className="opacity-60 shrink-0" />
+                            {formatShortDate(startDate)} — {formatShortDate(endDate)}
+                          </p>
+                        )}
+
+                        {/* Open call deadline */}
+                        {hasOpenCall && openCallDeadline && (
+                          <p className="font-['Manrope'] text-[10px] uppercase tracking-[0.18em] text-volavan-aqua/60">
+                            Deadline — {formatShortDate(openCallDeadline)}
                           </p>
                         )}
                       </div>
