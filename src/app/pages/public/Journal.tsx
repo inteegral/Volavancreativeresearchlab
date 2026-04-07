@@ -64,69 +64,41 @@ export default function Journal() {
       </div>
 
       {/* Filter Buttons */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.15 }}
-        className="flex items-center justify-center gap-12 mb-20"
+        className="flex items-center justify-center gap-4 md:gap-12 mb-20"
       >
-        <button
-          onClick={() => setFilter('all')}
-          className={`group relative font-['Cormorant_Garamond'] text-2xl md:text-3xl italic transition-all duration-500 ${
-            filter === 'all' 
-              ? 'text-volavan-cream' 
-              : 'text-volavan-cream/30 hover:text-volavan-cream/60'
-          }`}
-        >
-          All
-          {filter === 'all' && (
-            <motion.div
-              layoutId="activeFilterUnderline"
-              className="absolute -bottom-2 left-0 right-0 h-[2px] bg-volavan-aqua"
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            />
-          )}
-        </button>
-        
-        <span className="text-volavan-cream/20 font-['Cormorant_Garamond'] text-2xl">/</span>
-        
-        <button
-          onClick={() => setFilter('articles')}
-          className={`group relative font-['Cormorant_Garamond'] text-2xl md:text-3xl italic transition-all duration-500 ${
-            filter === 'articles' 
-              ? 'text-volavan-cream' 
-              : 'text-volavan-cream/30 hover:text-volavan-cream/60'
-          }`}
-        >
-          Articles
-          {filter === 'articles' && (
-            <motion.div
-              layoutId="activeFilterUnderline"
-              className="absolute -bottom-2 left-0 right-0 h-[2px] bg-volavan-aqua"
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            />
-          )}
-        </button>
-        
-        <span className="text-volavan-cream/20 font-['Cormorant_Garamond'] text-2xl">/</span>
-        
-        <button
-          onClick={() => setFilter('videos')}
-          className={`group relative font-['Cormorant_Garamond'] text-2xl md:text-3xl italic transition-all duration-500 ${
-            filter === 'videos' 
-              ? 'text-volavan-cream' 
-              : 'text-volavan-cream/30 hover:text-volavan-cream/60'
-          }`}
-        >
-          Videos
-          {filter === 'videos' && (
-            <motion.div
-              layoutId="activeFilterUnderline"
-              className="absolute -bottom-2 left-0 right-0 h-[2px] bg-volavan-aqua"
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            />
-          )}
-        </button>
+        {([
+          { key: 'all', label: 'All' },
+          { key: 'articles', label: 'Articles' },
+          { key: 'videos', label: 'Videos' },
+        ] as { key: FilterType; label: string }[]).map((item, i, arr) => (
+          <>
+            <button
+              key={item.key}
+              onClick={() => setFilter(item.key)}
+              className={`group relative font-['Cormorant_Garamond'] text-xl md:text-3xl italic transition-all duration-500 whitespace-nowrap ${
+                filter === item.key
+                  ? 'text-volavan-cream'
+                  : 'text-volavan-cream/30 hover:text-volavan-cream/60'
+              }`}
+            >
+              {item.label}
+              {filter === item.key && (
+                <motion.div
+                  layoutId="activeFilterUnderline"
+                  className="absolute -bottom-2 left-0 right-0 h-[2px] bg-volavan-aqua"
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                />
+              )}
+            </button>
+            {i < arr.length - 1 && (
+              <span key={`sep-${i}`} className="text-volavan-cream/20 font-['Cormorant_Garamond'] text-xl md:text-2xl select-none">/</span>
+            )}
+          </>
+        ))}
       </motion.div>
 
       {/* Loading State */}
