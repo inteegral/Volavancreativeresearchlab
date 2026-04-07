@@ -34,6 +34,16 @@ export function ResidencyHero({
   const startDate = residency.residencyDates?.start;
   const endDate = residency.residencyDates?.end;
 
+  // Auto-scale the hero title so long names never overflow.
+  // Target: text fills ≈ 80 % of viewport width.
+  // Cormorant Garamond italic uppercase average char-width ≈ 0.62 em.
+  // fontSize × charCount × 0.62 ≤ 80vw  →  fontSize ≤ 129vw / charCount
+  // Capped at 17 vw (short names) and floored at 5 vw (pathologically long names).
+  const heroFontVw = Math.max(
+    5,
+    Math.min(17, parseFloat((129 / program.name.length).toFixed(1)))
+  );
+
   // Find a current/upcoming edition to link to (for past editions)
   const currentEdition = isPastEdition
     ? program.otherEditions?.find((ed) => {
@@ -105,7 +115,8 @@ export function ResidencyHero({
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
-            className="font-['Cormorant_Garamond'] text-[17vw] md:text-[14vw] lg:text-[12vw] xl:text-[10vw] italic text-volavan-cream leading-[0.9] tracking-tight w-full overflow-hidden"
+            style={{ fontSize: `${heroFontVw}vw` }}
+            className="font-['Cormorant_Garamond'] italic text-volavan-cream leading-[0.9] tracking-tight w-full overflow-hidden"
           >
             {program.name}
           </motion.h1>
