@@ -39,6 +39,7 @@ export function PublicLayout() {
   ];
 
   const isActive = (path: string) => location.pathname.startsWith(path);
+  const isFormPage = location.pathname.startsWith('/candidature') || location.pathname.startsWith('/apply');
 
   return (
     <div className="min-h-screen flex flex-col bg-volavan-earth text-volavan-cream">
@@ -161,19 +162,19 @@ export function PublicLayout() {
       <footer className="bg-volavan-earth text-volavan-cream py-20 px-6 md:px-6 border-t border-volavan-cream/10 mt-auto">
         <div className="max-w-3xl mx-auto flex flex-col items-center text-center gap-10">
           
-          {/* Newsletter Section */}
-          <div className="w-full max-w-md flex flex-col items-center gap-6 pb-8 border-b border-volavan-cream/10">
-            <p className="font-['Cormorant_Garamond'] text-xl md:text-2xl italic text-volavan-cream/80">
-              Stay Connected
-            </p>
-            <NewsletterForm />
-          </div>
-
           {/* Logo */}
           <img src={footerLogo} alt="VOLAVAN" className="h-[117.9px] w-auto mt-[100px]" />
 
           {/* Mission Statement */}
           
+
+          {/* Newsletter */}
+          {!isFormPage && (
+            <div className="w-full flex flex-col items-center gap-4">
+              <p className="font-['Manrope'] text-[9px] uppercase tracking-[0.25em] text-volavan-cream/30">Stay Connected</p>
+              <NewsletterForm variant="footer" className="max-w-sm" />
+            </div>
+          )}
 
           {/* Navigation */}
           <nav className="flex flex-col md:flex-row md:flex-wrap justify-center gap-4 md:gap-x-8 md:gap-y-4 my-2">
@@ -213,7 +214,6 @@ export function PublicLayout() {
             <div className="flex gap-6">
               <Link to="/privacy" className="hover:text-volavan-cream transition-colors">Privacy</Link>
               <Link to="/terms" className="hover:text-volavan-cream transition-colors">Terms</Link>
-              <Link to="/admin/social-media-kit" className="hover:text-volavan-cream transition-colors">Media Kit</Link>
             </div>
           </div>
 

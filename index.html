@@ -10,6 +10,18 @@
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/app/App.tsx"></script>
+    <!-- Dev-only: proxy Sanity XHR through Vite to bypass CORS -->
+    <script>
+      if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+        var _xhrOpen = XMLHttpRequest.prototype.open;
+        XMLHttpRequest.prototype.open = function(method, url) {
+          if (typeof url === 'string' && url.indexOf('98dco624.api.sanity.io') !== -1) {
+            arguments[1] = url.replace('https://98dco624.api.sanity.io', '/sanity-api');
+          }
+          return _xhrOpen.apply(this, arguments);
+        };
+      }
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

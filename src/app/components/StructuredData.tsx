@@ -7,16 +7,14 @@ export function OrganizationSchema() {
     "@type": "Organization",
     "name": "VOLAVAN",
     "url": "https://volavan.it",
-    "logo": "https://volavan.it/logo.png",
+    "logo": "https://volavan.it/favicon.svg",
     "description": "Spazio di coliving e coworking rurale creativo in Friuli. Residenze artistiche, workshop e progetti collaborativi immersi nella natura.",
     "address": {
       "@type": "PostalAddress",
       "addressCountry": "IT",
       "addressRegion": "Friuli Venezia Giulia"
     },
-    "sameAs": [
-      // Add social media links when available
-    ]
+    "sameAs": []
   };
 
   return (
@@ -180,7 +178,7 @@ export function ArticleSchema({
       "name": "VOLAVAN",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://volavan.it/logo.png"
+        "url": "https://volavan.it/favicon.svg"
       }
     },
     "mainEntityOfPage": {

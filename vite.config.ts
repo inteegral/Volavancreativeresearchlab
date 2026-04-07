@@ -19,4 +19,14 @@ export default defineConfig({
 
   // File types to support raw imports. Never add .css, .tsx, or .ts files to this.
   assetsInclude: ['**/*.svg', '**/*.csv'],
+
+  server: {
+    proxy: {
+      '/sanity-api': {
+        target: 'https://98dco624.api.sanity.io',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/sanity-api/, ''),
+      },
+    },
+  },
 })

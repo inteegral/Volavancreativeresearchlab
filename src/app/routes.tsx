@@ -17,10 +17,7 @@ import ResidencyDetail from "./pages/public/ResidencyDetail";
 import Journal from "./pages/public/Journal";
 import JournalDetail from "./pages/public/JournalDetail";
 import Candidature from "./pages/public/Candidature";
-
-// Admin Pages
-import SocialMediaKit from "./pages/admin/SocialMediaKit";
-import SocialCampaign from "./pages/admin/SocialCampaign";
+import Apply from "./pages/public/Apply";
 
 // Debug
 import DebugSanity from "./pages/DebugSanity";
@@ -81,9 +78,8 @@ export const router = createBrowserRouter([
           { path: "journal", Component: Journal },
           { path: "journal/:slug", Component: JournalDetail },
           { path: "candidature", Component: Candidature },
+          { path: "apply/:slug", Component: Apply },
           { path: "debug-sanity", Component: DebugSanity },
-          { path: "admin/social-media-kit", Component: SocialMediaKit },
-          { path: "admin/social-campaign", Component: SocialCampaign },
         ],
       },
       {

@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface SEOHeadProps {
   title?: string;
@@ -23,6 +24,8 @@ export function SEOHead({
   type = 'website',
   article
 }: SEOHeadProps) {
+  const { language } = useLanguage();
+  const locale = language === 'es' ? 'es_ES' : 'en_GB';
   const siteName = "VOLAVAN";
   const fullTitle = title ? `${title} | ${siteName}` : `${siteName} - Creative Research Lab`;
   const canonicalUrl = url ? `https://volavan.it${url}` : 'https://volavan.it';
@@ -80,7 +83,7 @@ export function SEOHead({
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta property="og:site_name" content={siteName} />
-      <meta property="og:locale" content="it_IT" />
+      <meta property="og:locale" content={locale} />
 
       {/* Article specific tags */}
       {type === 'article' && article && (

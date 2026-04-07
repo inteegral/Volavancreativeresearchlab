@@ -11,67 +11,64 @@ interface PortableTextRendererProps {
  */
 const components: PortableTextComponents = {
   block: {
-    // Headings
+    // Headings — usati raramente dentro il testo, ma supportati
     h1: ({ children }) => (
-      <h1 className="font-['Cormorant_Garamond'] text-5xl md:text-6xl italic text-volavan-cream mb-8">
+      <h1 className="font-['Cormorant_Garamond'] text-4xl md:text-5xl italic text-volavan-cream mt-12 mb-4">
         {children}
       </h1>
     ),
     h2: ({ children }) => (
-      <h2 className="font-['Cormorant_Garamond'] text-4xl md:text-5xl italic text-volavan-cream mb-6 mt-12">
+      <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl italic text-volavan-cream mt-10 mb-3">
         {children}
       </h2>
     ),
     h3: ({ children }) => (
-      <h3 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl italic text-volavan-cream mb-4 mt-10">
+      <h3 className="font-['Cormorant_Garamond'] text-2xl md:text-3xl italic text-volavan-cream mt-8 mb-3">
         {children}
       </h3>
     ),
     h4: ({ children }) => (
-      <h4 className="font-['Manrope'] text-xl font-medium text-volavan-cream mb-4 mt-8 uppercase tracking-wider">
+      <h4 className="font-['Manrope'] text-xs uppercase tracking-[0.2em] font-medium text-volavan-aqua mt-8 mb-2">
         {children}
       </h4>
     ),
-    
-    // Paragraphs
+
+    // Paragrafo — spaziatura verticale, larghezza ottimale per leggibilità
     normal: ({ children }) => (
-      <p className="font-['Manrope'] text-lg md:text-xl leading-relaxed text-volavan-cream/80 mb-0 indent-8 first:indent-0">
+      <p className="font-['Manrope'] text-sm md:text-base leading-[1.8] text-volavan-cream/75 mb-5 last:mb-0 max-w-[65ch]">
         {children}
       </p>
     ),
-    
-    // Blockquote
+
+    // Blockquote — citazione editoriale
     blockquote: ({ children }) => (
-      <blockquote className="border-l-4 border-volavan-aqua/40 pl-6 my-8 italic text-volavan-cream/70 font-['Cormorant_Garamond'] text-xl">
+      <blockquote className="border-l-2 border-volavan-aqua/50 pl-6 my-8 font-['Cormorant_Garamond'] text-xl italic text-volavan-cream/70 max-w-[55ch]">
         {children}
       </blockquote>
     ),
   },
-  
+
   list: {
-    // Bullet list
     bullet: ({ children }) => (
-      <ul className="list-disc list-outside ml-6 mb-6 space-y-3 text-volavan-cream/80 font-['Manrope']">
+      <ul className="mb-5 ml-4 space-y-2 text-volavan-cream/75 font-['Manrope'] text-sm md:text-base max-w-[65ch]">
         {children}
       </ul>
     ),
-    
-    // Numbered list
     number: ({ children }) => (
-      <ol className="list-decimal list-outside ml-6 mb-6 space-y-3 text-volavan-cream/80 font-['Manrope']">
+      <ol className="mb-5 ml-4 space-y-2 text-volavan-cream/75 font-['Manrope'] text-sm md:text-base list-decimal max-w-[65ch]">
         {children}
       </ol>
     ),
   },
-  
+
   listItem: {
     bullet: ({ children }) => (
-      <li className="leading-relaxed">
-        {children}
+      <li className="leading-[1.7] pl-1 flex gap-3 before:content-['—'] before:text-volavan-aqua/50 before:shrink-0 before:mt-px">
+        <span>{children}</span>
       </li>
     ),
     number: ({ children }) => (
-      <li className="leading-relaxed">
+      <li className="leading-[1.7] pl-1">
         {children}
       </li>
     ),
@@ -80,7 +77,7 @@ const components: PortableTextComponents = {
   marks: {
     // Strong/Bold
     strong: ({ children }) => (
-      <strong className="font-semibold text-volavan-cream">
+      <strong style={{ fontWeight: 700 }} className="text-volavan-cream">
         {children}
       </strong>
     ),
@@ -128,7 +125,7 @@ export function PortableTextRenderer({ value, className = '' }: PortableTextRend
   }
 
   return (
-    <div className={className}>
+    <div className={`space-y-1 ${className}`}>
       <PortableText value={value} components={components} />
     </div>
   );

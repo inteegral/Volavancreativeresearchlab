@@ -51,7 +51,7 @@ export default {
     latestEdition: "Última Edición",
     participatingArtists: "Artistas Participantes",
     projectDocumentation: "Documentación del Proyecto",
-    applyNow: "Solicitar Ahora",
+    applyNow: "Candidatarse",
     noOpenCall: "No hay convocatoria abierta en este momento"
   },
   journal: {

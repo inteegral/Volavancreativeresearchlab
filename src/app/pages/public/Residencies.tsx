@@ -1,7 +1,8 @@
 import { useState, useMemo, useRef } from "react";
 import { Link } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
-import { ArrowUpRight, Filter, ChevronDown } from "lucide-react";
+import { ChevronDown, ArrowUpRight } from "lucide-react";
+import { VButton } from "../../components/ui/VButton";
 import { getImageUrl } from "../../lib/sanity";
 import { SEOHead } from "../../components/SEOHead";
 import { SanityImage } from "../../components/SanityImage";
@@ -101,21 +102,16 @@ export default function Residencies() {
 
         {/* Scroll Down Button */}
         <div className="flex justify-center -mt-32 md:-mt-28">
-          <motion.button
+          <VButton
             onClick={scrollToGrid}
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="group inline-flex items-center gap-2 px-6 py-3 bg-volavan-aqua/10 border border-volavan-aqua/30 rounded-full text-volavan-aqua font-['Manrope'] text-xs uppercase tracking-[0.15em] hover:bg-volavan-aqua/20 hover:border-volavan-aqua/50 transition-all cursor-pointer"
+            variant="outline-aqua"
+            size="sm"
+            arrow={false}
             aria-label="Scroll to programmes"
           >
-            <span>Explore</span>
-            <ChevronDown 
-              size={14}
-              strokeWidth={1.5}
-              className="transition-transform group-hover:translate-y-0.5"
-            />
-          </motion.button>
+            Explore
+            <ChevronDown size={12} strokeWidth={1.5} className="transition-transform group-hover:translate-y-0.5" />
+          </VButton>
         </div>
       </div>
 
