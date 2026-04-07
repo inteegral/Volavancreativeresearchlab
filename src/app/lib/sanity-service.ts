@@ -102,50 +102,20 @@ export const sanityService = {
 
   getAllPrograms: async (lang: string = 'en'): Promise<SanityProgram[]> => {
     const programs = await sanityClient.fetch<any[]>(
-      `*[_type == "residencyProgram" && (!defined(language) || language == $lang)] | order(name asc) {
-        _id,
-        name,
-        "slug": slug.current,
-        language,
-        tagline,
-        disciplines,
-        location,
-        country,
-        logo,
-        "editions": select(
-          language == "en" || !defined(language) => *[_type == "residency" && program._ref == ^._id] | order(year desc) {
-            _id,
-            year,
-            "slug": slug.current,
-            coverImage,
-            "startDate": residencyDates.start,
-            "endDate": residencyDates.end,
-            callDates
-          },
-          *[_type == "translation.metadata" && references(^._id)][0]
-            .translations[_key == "en"][0]
-            .value-> {
-              "e": *[_type == "residency" && program._ref == ^._id] | order(year desc) {
-                _id,
-                year,
-                "slug": slug.current,
-                coverImage,
-                "startDate": residencyDates.start,
-                "endDate": residencyDates.end,
-                callDates
-              }
-            }.e
-        )
-      }`,
+      QUERIES.allPrograms,
       { lang }
     );
 
     if (!programs || programs.length === 0) return [];
 
-    return programs.map(program => ({
-      ...program,
-      heroImage: program.editions?.find((e: any) => e.coverImage)?.coverImage,
-    }));
+    // Attach editions by matching residencies to their program
+    return programs.map(program => {
+      const editions = (program.allResidencies || []).filter(
+        (r: any) => r.programRef === program._id
+      );
+      const heroImage = editions.find((e: any) => e.coverImage)?.coverImage;
+      return { ...program, editions, heroImage };
+    });
   },
 
   getProgramBySlug: async (slug: string, lang: string = 'en'): Promise<SanityProgram | null> => {
