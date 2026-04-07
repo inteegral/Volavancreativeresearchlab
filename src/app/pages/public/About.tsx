@@ -92,14 +92,14 @@ export default function About() {
             if (pattern === 0) {
               // Large, Italic, White (F5F5F0)
               return (
-                <p key={index} className="font-['Cormorant_Garamond'] text-2xl md:text-4xl leading-tight text-volavan-cream italic hyphens-auto">
+                <p key={index} className="font-['Cormorant_Garamond'] text-xl md:text-3xl leading-tight text-volavan-cream italic hyphens-auto">
                   {paragraph}
                 </p>
               );
             } else {
               // Smaller, Regular, Aqua (B5DAD9)
               return (
-                <p key={index} className="font-['Cormorant_Garamond'] text-lg md:text-2xl leading-relaxed text-volavan-aqua hyphens-auto">
+                <p key={index} className="font-['Cormorant_Garamond'] text-base md:text-xl leading-relaxed text-volavan-aqua hyphens-auto">
                   {paragraph}
                 </p>
               );
@@ -123,7 +123,7 @@ export default function About() {
         >
           {/* Section Title */}
           <div className="text-center space-y-4">
-            <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-5xl text-volavan-cream italic">
+            <h2 className="font-['Cormorant_Garamond'] text-2xl md:text-4xl text-volavan-cream italic">
               Upcoming Residencies
             </h2>
           </div>
@@ -237,7 +237,7 @@ export default function About() {
           >
             {/* Section Title */}
             <div className="text-center space-y-4">
-              <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-5xl text-volavan-cream italic">
+              <h2 className="font-['Cormorant_Garamond'] text-2xl md:text-4xl text-volavan-cream italic">
                 Latest from the Journal
               </h2>
               <p className="font-['Manrope'] text-xs md:text-sm text-volavan-cream/60 max-w-lg mx-auto">

@@ -34,12 +34,12 @@ export function UpcomingResidenciesSection({ programs, programsLoading }: Upcomi
         className="space-y-16"
       >
         <div className="text-center space-y-4">
-          <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-5xl text-volavan-cream italic">
+          <h2 className="font-['Cormorant_Garamond'] text-2xl md:text-4xl text-volavan-cream italic">
             Upcoming Residencies
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {programsLoading ? (
             <>
               <SkeletonCard />
@@ -88,12 +88,12 @@ export function UpcomingResidenciesSection({ programs, programsLoading }: Upcomi
                     )}
                   </div>
 
-                  <div className="p-6 space-y-3 bg-volavan-earth/50 backdrop-blur-sm">
-                    <h3 className="font-['Manrope'] text-xl uppercase tracking-[0.2em] text-volavan-cream text-left">
+                  <div className="p-4 space-y-2 bg-volavan-earth/50 backdrop-blur-sm">
+                    <h3 className="font-['Manrope'] text-sm uppercase tracking-[0.2em] text-volavan-cream text-left">
                       {program.name}
                     </h3>
                     {program.tagline && (
-                      <p className="font-['Cormorant_Garamond'] text-lg italic text-volavan-aqua text-left">
+                      <p className="font-['Cormorant_Garamond'] text-base italic text-volavan-aqua text-left">
                         {program.tagline}
                       </p>
                     )}

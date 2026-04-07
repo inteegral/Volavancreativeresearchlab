@@ -40,8 +40,8 @@ export function ResidencyHero({
   // fontSize × charCount × 0.62 ≤ 80vw  →  fontSize ≤ 129vw / charCount
   // Capped at 17 vw (short names) and floored at 5 vw (pathologically long names).
   const heroFontVw = Math.max(
-    5,
-    Math.min(17, parseFloat((129 / program.name.length).toFixed(1)))
+    4,
+    Math.min(13, parseFloat((98 / program.name.length).toFixed(1)))
   );
 
   // Find a current/upcoming edition to link to (for past editions)

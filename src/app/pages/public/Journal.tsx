@@ -57,7 +57,7 @@ export default function Journal() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="font-['Cormorant_Garamond'] text-5xl md:text-8xl italic leading-[0.9] text-volavan-cream"
+          className="font-['Cormorant_Garamond'] text-4xl md:text-6xl italic leading-[0.9] text-volavan-cream"
         >
           Journal
         </motion.h1>

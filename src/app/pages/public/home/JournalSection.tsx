@@ -24,7 +24,7 @@ export function JournalSection({ journalPosts, journalLoading, homeData }: Journ
         className="space-y-16"
       >
         <div className="text-center space-y-4">
-          <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-5xl text-volavan-cream italic">
+          <h2 className="font-['Cormorant_Garamond'] text-2xl md:text-4xl text-volavan-cream italic">
             {homeData?.journalSectionTitle || 'Latest from the Journal'}
           </h2>
           <p className="font-['Manrope'] text-xs md:text-sm text-volavan-cream/60 max-w-lg mx-auto">
@@ -85,7 +85,7 @@ export function JournalSection({ journalPosts, journalLoading, homeData }: Journ
                           })}
                         </time>
                       )}
-                      <h3 className="font-['Cormorant_Garamond'] text-2xl md:text-3xl leading-tight text-volavan-cream group-hover:text-volavan-aqua transition-colors">
+                      <h3 className="font-['Cormorant_Garamond'] text-xl md:text-2xl leading-tight text-volavan-cream group-hover:text-volavan-aqua transition-colors">
                         {journalPosts[0].title}
                       </h3>
                       {journalPosts[0].excerpt && (
@@ -147,7 +147,7 @@ export function JournalSection({ journalPosts, journalLoading, homeData }: Journ
                             })}
                           </time>
                         )}
-                        <h3 className="font-['Cormorant_Garamond'] text-lg md:text-xl leading-tight text-volavan-cream group-hover:text-volavan-aqua transition-colors line-clamp-2">
+                        <h3 className="font-['Cormorant_Garamond'] text-base md:text-lg leading-tight text-volavan-cream group-hover:text-volavan-aqua transition-colors line-clamp-2">
                           {post.title}
                         </h3>
                         {isVideo && (

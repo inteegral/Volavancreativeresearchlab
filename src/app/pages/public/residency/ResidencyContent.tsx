@@ -74,7 +74,7 @@ export function ResidencyContent({
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="font-['Cormorant_Garamond'] text-4xl md:text-5xl italic text-volavan-cream mb-8 pt-12 md:pt-16">
+            <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl italic text-volavan-cream mb-8 pt-12 md:pt-16">
               Concept
             </h2>
             <PortableTextRenderer value={program.concept} />
@@ -90,7 +90,7 @@ export function ResidencyContent({
             transition={{ duration: 0.8 }}
             className={`${program.concept ? 'border-t border-volavan-cream/10 pt-16' : ''}`}
           >
-            <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl italic text-volavan-aqua mb-8">
+            <h2 className="font-['Cormorant_Garamond'] text-2xl md:text-3xl italic text-volavan-aqua mb-8">
               What We Offer
             </h2>
             <PortableTextRenderer value={program.whatWeOffer} />
@@ -152,7 +152,7 @@ export function ResidencyContent({
             transition={{ duration: 0.8 }}
             className="border-t border-volavan-cream/10 pt-16"
           >
-            <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl italic text-volavan-aqua mb-12">
+            <h2 className="font-['Cormorant_Garamond'] text-2xl md:text-3xl italic text-volavan-aqua mb-12">
               {isPastEdition ? 'Selected Artists' : 'Meet the Artists'}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -213,7 +213,7 @@ export function ResidencyContent({
             transition={{ duration: 0.8 }}
             className="border-t border-volavan-cream/10 pt-16"
           >
-            <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl italic text-volavan-aqua mb-8">
+            <h2 className="font-['Cormorant_Garamond'] text-2xl md:text-3xl italic text-volavan-aqua mb-8">
               Application Requirements
             </h2>
             {program.applicationIntro && (

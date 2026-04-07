@@ -199,17 +199,17 @@ export function HomeHero({ homeData }: HomeHeroProps) {
       {/* Text */}
       <div className="space-y-8 w-full mt-4 max-w-4xl mx-auto">
         {homeData?.introText && (
-          <p className="font-['Cormorant_Garamond'] text-2xl md:text-4xl leading-tight text-volavan-cream italic text-right hyphens-auto whitespace-pre-line">
+          <p className="font-['Cormorant_Garamond'] text-xl md:text-3xl leading-tight text-volavan-cream italic text-right hyphens-auto whitespace-pre-line">
             {homeData.introText}
           </p>
         )}
         {homeData?.featureText && (
-          <p className="font-['Cormorant_Garamond'] text-lg md:text-2xl leading-relaxed text-volavan-aqua text-right hyphens-auto whitespace-pre-line">
+          <p className="font-['Cormorant_Garamond'] text-base md:text-xl leading-relaxed text-volavan-aqua text-right hyphens-auto whitespace-pre-line">
             {homeData.featureText}
           </p>
         )}
         {homeData?.closingText && (
-          <p className="font-['Cormorant_Garamond'] text-2xl md:text-4xl leading-tight text-volavan-cream italic text-right hyphens-auto whitespace-pre-line">
+          <p className="font-['Cormorant_Garamond'] text-xl md:text-3xl leading-tight text-volavan-cream italic text-right hyphens-auto whitespace-pre-line">
             {homeData.closingText}
           </p>
         )}

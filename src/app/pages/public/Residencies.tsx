@@ -82,7 +82,7 @@ export default function Residencies() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="font-['Cormorant_Garamond'] text-5xl md:text-8xl italic text-volavan-cream leading-[0.9]"
+                className="font-['Cormorant_Garamond'] text-4xl md:text-6xl italic text-volavan-cream leading-[0.9]"
               >
                 {pageContent.title}
               </motion.h1>
@@ -92,7 +92,7 @@ export default function Residencies() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="font-['Cormorant_Garamond'] text-xl md:text-3xl text-volavan-cream leading-relaxed text-right hyphens-auto whitespace-pre-line italic"
+                className="font-['Cormorant_Garamond'] text-base md:text-2xl text-volavan-cream leading-relaxed text-right hyphens-auto whitespace-pre-line italic"
               >
                 {pageContent.introText}
               </motion.p>
@@ -102,7 +102,7 @@ export default function Residencies() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="font-['Cormorant_Garamond'] text-lg md:text-2xl text-volavan-aqua leading-relaxed text-right hyphens-auto"
+                className="font-['Cormorant_Garamond'] text-sm md:text-xl text-volavan-aqua leading-relaxed text-right hyphens-auto"
               >
                 {pageContent.callToAction}
               </motion.p>
@@ -208,7 +208,7 @@ export default function Residencies() {
                       <div className="space-y-3">
                         {/* Title */}
                         <div className="flex justify-between items-end gap-4">
-                          <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-5xl italic text-volavan-cream leading-[0.95] tracking-tight group-hover:text-volavan-aqua transition-colors duration-500 hyphens-auto">
+                          <h2 className="font-['Cormorant_Garamond'] text-2xl md:text-4xl italic text-volavan-cream leading-[0.95] tracking-tight group-hover:text-volavan-aqua transition-colors duration-500 hyphens-auto">
                             {program.name}
                           </h2>
                           <ArrowUpRight className="text-volavan-cream opacity-0 group-hover:opacity-100 transition-opacity duration-300 mb-1 flex-shrink-0" size={20} />
