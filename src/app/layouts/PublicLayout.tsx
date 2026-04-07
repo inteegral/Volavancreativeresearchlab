@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { Logo } from "../components/Logo";
 import { Instagram, Facebook, Youtube, Mail } from "lucide-react";
 const volavanLogo = "/logo-circular.svg";
-const footerLogo = "/favicon.svg";
+const footerLogo = "/logo-footer.svg";
 import { ScrollToTop } from "../components/ScrollToTop";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
 import { useLanguage } from "../contexts/LanguageContext";
