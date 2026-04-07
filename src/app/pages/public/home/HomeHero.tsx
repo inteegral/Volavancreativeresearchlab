@@ -4,7 +4,7 @@ import { Volume2, VolumeX, Play } from "lucide-react";
 import { useLanguage } from "../../../contexts/LanguageContext";
 import type { SanityHome } from "../../../lib/sanity";
 
-const logoImage = "/favicon.svg";
+const logoImage = "/logo-footer.svg";
 
 interface HomeHeroProps {
   homeData?: SanityHome | null;
