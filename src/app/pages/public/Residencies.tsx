@@ -142,12 +142,29 @@ export default function Residencies() {
             <AnimatePresence>
               {[...programs]
                 .sort((a, b) => {
-                  // Sort chronologically by the target edition's start date, earliest first
-                  const getDate = (p: typeof a) => {
-                    const ed = p.editions?.find(e => isOpenCallActive(e)) || p.editions?.[0];
+                  const getRelevantEdition = (p: typeof a) =>
+                    p.editions?.find(e => isOpenCallActive(e)) || p.editions?.[0];
+
+                  const isPast = (p: typeof a) => {
+                    const ed = getRelevantEdition(p);
+                    if (!ed?.startDate) return true;
+                    return new Date(ed.startDate) < new Date();
+                  };
+
+                  const aPast = isPast(a);
+                  const bPast = isPast(b);
+
+                  // Active/future first, past last
+                  if (aPast !== bPast) return aPast ? 1 : -1;
+
+                  // Within same group: active sorted asc by date, past sorted desc
+                  const getTime = (p: typeof a) => {
+                    const ed = getRelevantEdition(p);
                     return ed?.startDate ? new Date(ed.startDate).getTime() : Infinity;
                   };
-                  return getDate(a) - getDate(b);
+                  return aPast
+                    ? getTime(b) - getTime(a)   // past: most recent first
+                    : getTime(a) - getTime(b);   // future: earliest first
                 })
                 .map((program, index) => {
                 // Prioritize edition with active open call, then latest
