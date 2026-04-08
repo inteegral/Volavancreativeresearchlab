@@ -22,7 +22,18 @@ export function UpcomingResidenciesSection({ programs, programsLoading }: Upcomi
           return status === 'upcoming' || status === 'open_call' || status === 'open_call_soon';
         });
       })
-      .slice(0, 3); // allow up to 3 so SYSTEMA 26 isn't cut off
+      .sort((a, b) => {
+        // Sort by the relevant edition's start date, earliest first
+        const getDate = (p: typeof a) => {
+          const ed = p.editions?.find(e => {
+            const s = calculateResidencyStatus(e);
+            return s === 'open_call' || s === 'upcoming' || s === 'open_call_soon';
+          }) || p.editions?.[0];
+          return ed?.startDate ? new Date(ed.startDate).getTime() : Infinity;
+        };
+        return getDate(a) - getDate(b);
+      })
+      .slice(0, 3);
   }, [programs]);
 
   return (

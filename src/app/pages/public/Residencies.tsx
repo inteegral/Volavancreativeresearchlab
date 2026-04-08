@@ -140,7 +140,16 @@ export default function Residencies() {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-20 w-full"
           >
             <AnimatePresence>
-              {programs.map((program, index) => {
+              {[...programs]
+                .sort((a, b) => {
+                  // Sort chronologically by the target edition's start date, earliest first
+                  const getDate = (p: typeof a) => {
+                    const ed = p.editions?.find(e => isOpenCallActive(e)) || p.editions?.[0];
+                    return ed?.startDate ? new Date(ed.startDate).getTime() : Infinity;
+                  };
+                  return getDate(a) - getDate(b);
+                })
+                .map((program, index) => {
                 // Prioritize edition with active open call, then latest
                 const openCallEdition = program.editions?.find(e => isOpenCallActive(e));
                 const targetEdition = openCallEdition || program.editions?.[0];
