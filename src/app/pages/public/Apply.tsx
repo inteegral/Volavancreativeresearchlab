@@ -46,24 +46,31 @@ interface FormValues {
 // ─── Shared input styles ────────────────────────────────────────────────────
 
 const inputClass = [
-  "w-full bg-transparent border-b border-volavan-cream/15 focus:border-volavan-cream/40",
-  "font-['Manrope'] text-sm text-volavan-cream placeholder:text-volavan-cream/20",
-  "py-2.5 outline-none transition-colors duration-300",
+  "w-full bg-volavan-cream/5 border border-volavan-cream/20 rounded-sm",
+  "focus:border-volavan-aqua/60 focus:bg-volavan-cream/8",
+  "font-['Manrope'] text-sm text-volavan-cream placeholder:text-volavan-cream/35",
+  "px-3 py-3 outline-none transition-all duration-300",
 ].join(" ");
 
-function Field({ label, error, children }: {
+function Field({ label, hint, error, children }: {
   label: string;
+  hint?: string;
   error?: string;
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col gap-1.5">
-      <label className="font-['Manrope'] text-[9px] uppercase tracking-[0.22em] text-volavan-cream/40">
+    <div className="flex flex-col gap-2">
+      <label className="font-['Manrope'] text-[10px] uppercase tracking-[0.2em] text-volavan-cream/60 font-medium">
         {label}
       </label>
+      {hint && (
+        <p className="font-['Manrope'] text-xs text-volavan-cream/40 -mt-1">{hint}</p>
+      )}
       {children}
       {error && (
-        <p className="font-['Manrope'] text-[9px] text-red-400/70">{error}</p>
+        <p className="font-['Manrope'] text-xs text-red-400/80 flex items-center gap-1">
+          <span>⚠</span> {error}
+        </p>
       )}
     </div>
   );
@@ -156,14 +163,23 @@ export default function Apply() {
         </Link>
 
         {/* Header */}
-        <div className="mb-10">
+        <div className="mb-12 pb-8 border-b border-volavan-cream/10">
           <h1 className="font-['Cormorant_Garamond'] text-4xl md:text-5xl italic text-volavan-cream leading-tight">
-            {config.name}
+            Apply — {config.name}
           </h1>
-          <p className="font-['Manrope'] text-[10px] text-volavan-cream/30 tracking-wide mt-2">
-            {config.location} · {config.year}
-            {config.deadline && ` · Deadline ${config.deadline}`}
-          </p>
+          <div className="flex flex-wrap gap-3 mt-4">
+            <span className="font-['Manrope'] text-xs text-volavan-cream/50 bg-volavan-cream/5 border border-volavan-cream/15 rounded-sm px-3 py-1">
+              {config.location}
+            </span>
+            <span className="font-['Manrope'] text-xs text-volavan-cream/50 bg-volavan-cream/5 border border-volavan-cream/15 rounded-sm px-3 py-1">
+              {config.year}
+            </span>
+            {config.deadline && (
+              <span className="font-['Manrope'] text-xs text-volavan-aqua/70 bg-volavan-aqua/5 border border-volavan-aqua/20 rounded-sm px-3 py-1">
+                Deadline: {config.deadline}
+              </span>
+            )}
+          </div>
         </div>
 
         {/* Form */}
@@ -172,79 +188,94 @@ export default function Apply() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           onSubmit={handleSubmit(onSubmit)}
-          className="space-y-6"
+          className="space-y-8"
         >
-          {/* Name row */}
-          <div className="grid grid-cols-2 gap-4">
-            <Field label="First name" error={errors.firstName?.message}>
+          {/* Section: Personal info */}
+          <div className="space-y-5">
+            <p className="font-['Manrope'] text-[10px] uppercase tracking-[0.25em] text-volavan-aqua/50">
+              Personal information
+            </p>
+
+            <div className="grid grid-cols-2 gap-4">
+              <Field label="First name *" error={errors.firstName?.message}>
+                <input
+                  {...register("firstName", { required: "Required" })}
+                  className={inputClass}
+                  placeholder="Anna"
+                  autoComplete="given-name"
+                />
+              </Field>
+              <Field label="Last name *" error={errors.lastName?.message}>
+                <input
+                  {...register("lastName", { required: "Required" })}
+                  className={inputClass}
+                  placeholder="Kovač"
+                  autoComplete="family-name"
+                />
+              </Field>
+            </div>
+
+            <Field label="Email address *" error={errors.email?.message}>
               <input
-                {...register("firstName", { required: "Required" })}
+                {...register("email", {
+                  required: "Required",
+                  pattern: { value: /^\S+@\S+\.\S+$/, message: "Invalid email address" },
+                })}
+                type="email"
                 className={inputClass}
-                placeholder="Anna"
-                autoComplete="given-name"
+                placeholder="your@email.com"
+                autoComplete="email"
               />
             </Field>
-            <Field label="Last name" error={errors.lastName?.message}>
+
+            <Field label="Nationality / Where you are based *" error={errors.nationality?.message}>
               <input
-                {...register("lastName", { required: "Required" })}
+                {...register("nationality", { required: "Required" })}
                 className={inputClass}
-                placeholder="Kovač"
-                autoComplete="family-name"
+                placeholder="e.g. Italian, based in Berlin"
               />
             </Field>
           </div>
 
-          <Field label="Email" error={errors.email?.message}>
-            <input
-              {...register("email", {
-                required: "Required",
-                pattern: { value: /^\S+@\S+\.\S+$/, message: "Invalid email" },
-              })}
-              type="email"
-              className={inputClass}
-              placeholder="your@email.com"
-              autoComplete="email"
-            />
-          </Field>
+          <div className="h-px bg-volavan-cream/10" />
 
-          <Field label="Nationality / Where you are based" error={errors.nationality?.message}>
-            <input
-              {...register("nationality", { required: "Required" })}
-              className={inputClass}
-              placeholder="Country"
-            />
-          </Field>
+          {/* Section: Artistic statement */}
+          <div className="space-y-5">
+            <p className="font-['Manrope'] text-[10px] uppercase tracking-[0.25em] text-volavan-aqua/50">
+              Artistic statement
+            </p>
 
-          <div className="h-px bg-volavan-cream/8" />
+            <Field
+              label="Why this residency, why now *"
+              hint="Tell us about your practice and what draws you to this residency. Write freely."
+              error={errors.statement?.message}
+            >
+              <textarea
+                {...register("statement", { required: "Required" })}
+                rows={7}
+                className={`${inputClass} resize-none leading-relaxed`}
+                placeholder="Share your thoughts, intentions, context…"
+              />
+            </Field>
 
-          <Field
-            label="Why this residency, why now"
-            error={errors.statement?.message}
-          >
-            <textarea
-              {...register("statement", { required: "Required" })}
-              rows={6}
-              className={`${inputClass} resize-none leading-[1.8]`}
-              placeholder="Write as much or as little as you need…"
-            />
-          </Field>
+            <Field
+              label="Work samples"
+              hint="A link to your portfolio, Vimeo, SoundCloud, Instagram, or any relevant work."
+              error={errors.workUrl?.message}
+            >
+              <input
+                {...register("workUrl")}
+                className={inputClass}
+                placeholder="https://…"
+              />
+            </Field>
+          </div>
 
-          <Field
-            label="Work samples — link to anything relevant"
-            error={errors.workUrl?.message}
-          >
-            <input
-              {...register("workUrl")}
-              className={inputClass}
-              placeholder="https://… (website, Vimeo, Google Drive, Instagram…)"
-            />
-          </Field>
+          <div className="h-px bg-volavan-cream/10" />
 
-          <div className="h-px bg-volavan-cream/8" />
-
-          <div className="flex flex-col gap-5 pt-1">
-            <p className="font-['Manrope'] text-[9px] text-volavan-cream/25 leading-relaxed">
-              Selected participants will be notified within 10 days of the deadline. We read every application carefully.
+          <div className="flex flex-col gap-5 pt-2">
+            <p className="font-['Manrope'] text-xs text-volavan-cream/40 leading-relaxed">
+              We read every application carefully. Selected participants will be notified within 10 days of the deadline.
             </p>
             <VButton
               type="submit"
