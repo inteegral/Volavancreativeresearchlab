@@ -6,6 +6,23 @@ interface PortableTextRendererProps {
   className?: string;
 }
 
+const EMOJI_RE = /[\u{1F000}-\u{1FFFF}\u{2600}-\u{27BF}\u{FE00}-\u{FEFF}]/gu;
+
+// Strip emoji from text spans inside heading blocks
+function cleanBlocks(blocks: PortableTextBlock[]): PortableTextBlock[] {
+  return blocks.map(block => {
+    if (!('style' in block) || !block.style || block.style === 'normal' || block.style === 'blockquote') return block;
+    return {
+      ...block,
+      children: block.children.map(child =>
+        typeof child.text === 'string'
+          ? { ...child, text: child.text.replace(EMOJI_RE, '').trim() }
+          : child
+      ),
+    };
+  });
+}
+
 /**
  * Custom components for rendering Portable Text with Volavan styling
  */
@@ -126,7 +143,7 @@ export function PortableTextRenderer({ value, className = '' }: PortableTextRend
 
   return (
     <div className={`space-y-1 overflow-x-hidden break-words ${className}`}>
-      <PortableText value={value} components={components} />
+      <PortableText value={cleanBlocks(value)} components={components} />
     </div>
   );
 }

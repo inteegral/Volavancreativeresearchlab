@@ -148,6 +148,11 @@ export const QUERIES = {
     seo,
     structure,
     "slug": slug.current,
+    "location": location-> {
+      name,
+      description,
+      gallery
+    },
     "artists": artists[].artist-> {
       _id,
       name,

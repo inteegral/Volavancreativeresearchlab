@@ -17,7 +17,7 @@ interface ResidencyContentProps {
   callCloseDate?: string;
 }
 
-type TabId = 'overview' | 'structure' | 'artists' | 'apply';
+type TabId = 'overview' | 'structure' | 'artists' | 'apply' | 'accommodation';
 
 export function ResidencyContent({
   residency,
@@ -31,12 +31,14 @@ export function ResidencyContent({
   const hasArtists = residency.artists && residency.artists.length > 0;
   const hasStructure = !!(residency as any).structure;
   const hasApply = isOpenCall && !!program.requirements;
+  const hasAccommodation = !!residency.location;
 
   const tabs: { id: TabId; label: string }[] = [
     { id: 'overview', label: 'Overview' },
     ...(hasStructure ? [{ id: 'structure' as TabId, label: 'Structure' }] : []),
-    ...(hasArtists ? [{ id: 'artists' as TabId, label: isPastEdition ? 'Artists' : 'Artists' }] : []),
+    ...(hasArtists ? [{ id: 'artists' as TabId, label: 'Artists' }] : []),
     ...(hasApply ? [{ id: 'apply' as TabId, label: 'Apply' }] : []),
+    ...(hasAccommodation ? [{ id: 'accommodation' as TabId, label: 'Accommodation' }] : []),
   ];
 
   const [activeTab, setActiveTab] = useState<TabId>('overview');
@@ -65,7 +67,7 @@ export function ResidencyContent({
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`pb-4 font-['Manrope'] text-[10px] uppercase tracking-[0.25em] transition-colors relative ${
+                className={`pb-4 font-['Manrope'] text-[12px] uppercase tracking-[0.25em] transition-colors relative ${
                   activeTab === tab.id
                     ? 'text-volavan-cream'
                     : 'text-volavan-cream/30 hover:text-volavan-cream/60'
@@ -283,6 +285,32 @@ export function ResidencyContent({
                 );
               })}
             </div>
+          </motion.div>
+        )}
+
+        {/* Accommodation */}
+        {activeTab === 'accommodation' && residency.location && (
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="space-y-12">
+
+            {residency.location.description && (
+              <PortableTextRenderer value={residency.location.description} />
+            )}
+
+            {residency.location.gallery && residency.location.gallery.length > 0 && (
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                {residency.location.gallery.map((image, i) => (
+                  <div key={i} className="aspect-square overflow-hidden group/loc relative">
+                    <div className="absolute inset-0 bg-volavan-earth/20 group-hover/loc:bg-transparent z-10 transition-colors duration-500" />
+                    <img
+                      src={getImageUrl(image, 600, 600)}
+                      alt={image.caption || `${residency.location!.name} ${i + 1}`}
+                      className="w-full h-full object-cover grayscale group-hover/loc:grayscale-0 transition-all duration-700 transform group-hover/loc:scale-105"
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+
           </motion.div>
         )}
 

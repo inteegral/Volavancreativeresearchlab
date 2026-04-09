@@ -119,6 +119,19 @@ export interface SanityArtist {
   residencies?: SanityResidency[];
 }
 
+export interface SanityLocation {
+  name: string;
+  city?: string;
+  country?: string;
+  description?: PortableTextBlock[];
+  coverImage?: SanityImage;
+  gallery?: SanityImage[];
+  coordinates?: {
+    lat?: number;
+    lng?: number;
+  };
+}
+
 export interface SanityResidency {
   _id?: string;
   title?: string;
@@ -156,6 +169,7 @@ export interface SanityResidency {
   };
   selectedCount?: number;
   program?: SanityProgram;
+  location?: SanityLocation;
   artists?: SanityArtist[] | {
     artist: SanityArtist;
   }[];
