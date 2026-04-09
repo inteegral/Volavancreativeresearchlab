@@ -7,6 +7,7 @@ import { OrganizationSchema } from "../../components/StructuredData";
 import { SanityImage } from "../../components/SanityImage";
 import { getImageUrl } from "../../lib/sanity";
 import { useAbout, useAllPrograms, useJournalContent, useSettings } from "../../hooks/useSanity";
+import { useLanguage } from "../../contexts/LanguageContext";
 import { UpcomingResidenciesSection } from "./home/UpcomingResidenciesSection";
 
 export default function About() {

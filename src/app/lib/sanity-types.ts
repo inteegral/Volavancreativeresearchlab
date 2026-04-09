@@ -140,8 +140,7 @@ export interface SanityResidency {
   status: 'upcoming' | 'open_call' | 'registration_open' | 'ongoing' | 'concluded';
   disciplines?: string[];
   capacity?: number;
-  location?: string;
-  country?: string;
+  location?: SanityLocation;
   startDate?: string;
   endDate?: string;
   residencyDates?: {
@@ -183,8 +182,6 @@ export interface SanityProgram {
   tagline?: string;
   disciplines?: string[];
   capacity?: number;
-  location?: string;
-  country?: string;
   logo?: SanityImage;
   feeAmount?: number | null;
   feeIncludes?: string;

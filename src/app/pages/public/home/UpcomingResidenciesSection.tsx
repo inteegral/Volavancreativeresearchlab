@@ -141,9 +141,9 @@ export function UpcomingResidenciesSection({ programs, programsLoading }: Upcomi
                         )}
                       </div>
                     )}
-                    {program.location && program.country && (
+                    {latestEdition.location && (
                       <p className="font-['Manrope'] text-sm text-volavan-cream/70 text-left">
-                        {program.location}, {program.country}
+                        {[latestEdition.location.city || latestEdition.location.name, latestEdition.location.country].filter(Boolean).join(', ')}
                       </p>
                     )}
                   </div>

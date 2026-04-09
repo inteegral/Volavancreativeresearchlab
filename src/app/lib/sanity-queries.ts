@@ -102,8 +102,6 @@ export const QUERIES = {
     language,
     tagline,
     disciplines,
-    location,
-    country,
     logo,
     "editions": *[_type == "residency" && program->slug.current == ^.slug.current] | order(year desc) {
       _id,
@@ -112,7 +110,12 @@ export const QUERIES = {
       coverImage,
       "startDate": residencyDates.start,
       "endDate": residencyDates.end,
-      callDates
+      callDates,
+      "location": location-> {
+        name,
+        city,
+        country
+      }
     }
   }`,
 
