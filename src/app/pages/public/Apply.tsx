@@ -13,6 +13,8 @@ const RESIDENCY_CONFIG: Record<string, {
   name: string;
   location: string;
   year: number;
+  startDate?: string;
+  endDate?: string;
   deadline?: string;
   formspreeId: string;
 }> = {
@@ -27,10 +29,23 @@ const RESIDENCY_CONFIG: Record<string, {
     name: "PHOS/PHANE",
     location: "Riga, Latvia",
     year: 2026,
+    startDate: "2026-06-07",
+    endDate: "2026-06-13",
     deadline: "May 8, 2026",
     formspreeId: "OiX6zdV28",
   },
 };
+
+function formatDateRange(start: string, end: string): string {
+  const s = new Date(start);
+  const e = new Date(end);
+  const opts: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short' };
+  const sameMonth = s.getMonth() === e.getMonth() && s.getFullYear() === e.getFullYear();
+  if (sameMonth) {
+    return `${s.getDate()} – ${e.toLocaleDateString('en-GB', { ...opts, year: 'numeric' })}`;
+  }
+  return `${s.toLocaleDateString('en-GB', opts)} – ${e.toLocaleDateString('en-GB', { ...opts, year: 'numeric' })}`;
+}
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -174,9 +189,11 @@ export default function Apply() {
             <span className="font-['Manrope'] text-xs text-volavan-cream/50 bg-volavan-cream/5 border border-volavan-cream/15 rounded-sm px-3 py-1">
               {config.location}
             </span>
-            <span className="font-['Manrope'] text-xs text-volavan-cream/50 bg-volavan-cream/5 border border-volavan-cream/15 rounded-sm px-3 py-1">
-              {config.year}
-            </span>
+            {config.startDate && config.endDate && (
+              <span className="font-['Manrope'] text-xs text-volavan-cream/60 bg-volavan-cream/5 border border-volavan-cream/15 rounded-sm px-3 py-1">
+                {formatDateRange(config.startDate, config.endDate)}
+              </span>
+            )}
             {config.deadline && (
               <span className="font-['Manrope'] text-xs text-volavan-aqua/70 bg-volavan-aqua/5 border border-volavan-aqua/20 rounded-sm px-3 py-1">
                 Deadline: {config.deadline}
