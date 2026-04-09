@@ -173,6 +173,7 @@ export default function Residencies() {
 
                 // Dynamic status flags
                 const hasOpenCall = !!openCallEdition;
+                const openCallOpen = openCallEdition?.callDates?.open;
                 const openCallDeadline = openCallEdition?.callDates?.close;
 
                 // Dates from the target edition
@@ -248,10 +249,14 @@ export default function Residencies() {
                           </p>
                         )}
 
-                        {/* Open call deadline */}
-                        {hasOpenCall && openCallDeadline && (
-                          <p className="font-['Manrope'] text-[10px] uppercase tracking-[0.18em] text-volavan-aqua/60">
-                            Deadline — {formatShortDate(openCallDeadline)}
+                        {/* Open call dates */}
+                        {hasOpenCall && (openCallOpen || openCallDeadline) && (
+                          <p className="font-['Manrope'] text-[10px] uppercase tracking-[0.18em] text-volavan-aqua/60 flex items-center gap-2">
+                            <span>Open Call</span>
+                            <span className="opacity-40">—</span>
+                            {openCallOpen && <span>{formatShortDate(openCallOpen)}</span>}
+                            {openCallOpen && openCallDeadline && <span className="opacity-40">→</span>}
+                            {openCallDeadline && <span>{formatShortDate(openCallDeadline)}</span>}
                           </p>
                         )}
                       </div>
