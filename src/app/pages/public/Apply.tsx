@@ -164,8 +164,11 @@ export default function Apply() {
 
         {/* Header */}
         <div className="mb-12 pb-8 border-b border-volavan-cream/10">
+          <p className="font-['Manrope'] text-[10px] uppercase tracking-[0.3em] text-volavan-aqua/60 mb-3">
+            Application
+          </p>
           <h1 className="font-['Cormorant_Garamond'] text-4xl md:text-5xl italic text-volavan-cream leading-tight">
-            Apply — {config.name}
+            {config.name}
           </h1>
           <div className="flex flex-wrap gap-3 mt-4">
             <span className="font-['Manrope'] text-xs text-volavan-cream/50 bg-volavan-cream/5 border border-volavan-cream/15 rounded-sm px-3 py-1">
