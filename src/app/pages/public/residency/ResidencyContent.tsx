@@ -37,8 +37,8 @@ export function ResidencyContent({
     { id: 'overview', label: 'Overview' },
     ...(hasStructure ? [{ id: 'structure' as TabId, label: 'Structure' }] : []),
     ...(hasArtists ? [{ id: 'artists' as TabId, label: 'Artists' }] : []),
-    ...(hasApply ? [{ id: 'apply' as TabId, label: 'Apply' }] : []),
     ...(hasAccommodation ? [{ id: 'accommodation' as TabId, label: 'Accommodation' }] : []),
+    ...(hasApply ? [{ id: 'apply' as TabId, label: 'Apply' }] : []),
   ];
 
   const [activeTab, setActiveTab] = useState<TabId>('overview');
@@ -226,9 +226,6 @@ export function ResidencyContent({
         {/* Structure */}
         {activeTab === 'structure' && (
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl italic text-volavan-cream mb-8">
-              How It Works
-            </h2>
             <PortableTextRenderer value={(residency as any).structure} />
           </motion.div>
         )}
