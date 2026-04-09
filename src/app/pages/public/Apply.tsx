@@ -23,6 +23,13 @@ const RESIDENCY_CONFIG: Record<string, {
     deadline: "May 8, 2026",
     formspreeId: import.meta.env.VITE_FORMSPREE_ENDPOINT || "",
   },
+  "phosphane": {
+    name: "PHOS/PHANE",
+    location: "Riga, Latvia",
+    year: 2026,
+    deadline: "May 8, 2026",
+    formspreeId: "OiX6zdV28",
+  },
 };
 
 // ─── Types ──────────────────────────────────────────────────────────────────
