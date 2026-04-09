@@ -172,9 +172,11 @@ export default function Residencies() {
                 const targetEdition = openCallEdition || program.editions?.[0];
 
                 // Dynamic status flags
-                const hasOpenCall = !!openCallEdition;
-                const openCallOpen = openCallEdition?.callDates?.open;
-                const openCallDeadline = openCallEdition?.callDates?.close;
+                const hasActiveOpenCall = !!openCallEdition;
+                // Show call dates from target edition regardless of active status
+                const openCallOpen = targetEdition?.callDates?.open;
+                const openCallDeadline = targetEdition?.callDates?.close;
+                const hasCallDates = !!(openCallOpen || openCallDeadline);
 
                 // Dates from the target edition
                 const startDate = targetEdition?.startDate;
@@ -206,7 +208,7 @@ export default function Residencies() {
                         )}
 
                         {/* Open Call badge — top-left inside image */}
-                        {hasOpenCall && (
+                        {hasActiveOpenCall && (
                           <motion.div
                             initial={{ opacity: 0, y: -6 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -250,14 +252,23 @@ export default function Residencies() {
                         )}
 
                         {/* Open call dates */}
-                        {hasOpenCall && (openCallOpen || openCallDeadline) && (
-                          <p className="font-['Manrope'] text-[10px] uppercase tracking-[0.18em] text-volavan-aqua/60 flex items-center gap-2">
-                            <span>Open Call</span>
-                            <span className="opacity-40">—</span>
-                            {openCallOpen && <span>{formatShortDate(openCallOpen)}</span>}
-                            {openCallOpen && openCallDeadline && <span className="opacity-40">→</span>}
-                            {openCallDeadline && <span>{formatShortDate(openCallDeadline)}</span>}
-                          </p>
+                        {hasCallDates && (
+                          <div className="flex flex-col gap-1 mt-1 pl-3 border-l border-volavan-aqua/20">
+                            {openCallOpen && (
+                              <p className="font-['Manrope'] text-[10px] uppercase tracking-[0.18em] text-volavan-aqua/50">
+                                <span className="text-volavan-aqua/30">Open Call</span>
+                                <span className="mx-1.5 opacity-30">·</span>
+                                {formatShortDate(openCallOpen)}
+                              </p>
+                            )}
+                            {openCallDeadline && (
+                              <p className="font-['Manrope'] text-[10px] uppercase tracking-[0.18em] text-volavan-aqua/70">
+                                <span className="text-volavan-aqua/40">Deadline</span>
+                                <span className="mx-1.5 opacity-30">·</span>
+                                {formatShortDate(openCallDeadline)}
+                              </p>
+                            )}
+                          </div>
                         )}
                       </div>
 
