@@ -1,11 +1,16 @@
 import { useMemo } from "react";
 import { Link } from "react-router";
 import { motion } from "motion/react";
+import { Calendar } from "lucide-react";
 import { getImageUrl, calculateResidencyStatus } from "../../../lib/sanity";
 import { VLink } from "../../../components/ui/VButton";
 import { SanityImage } from "../../../components/SanityImage";
 import { SkeletonCard } from "../../../components/ui/skeleton";
 import type { SanityProgram } from "../../../lib/sanity";
+
+function formatShortDate(dateStr: string): string {
+  return new Date(dateStr).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+}
 
 interface UpcomingResidenciesSectionProps {
   programs: SanityProgram[];
@@ -74,6 +79,10 @@ export function UpcomingResidenciesSection({ programs, programsLoading }: Upcomi
 
               const isOpenCall = calculateResidencyStatus(latestEdition) === 'open_call';
               const coverImage = latestEdition.coverImage;
+              const openCallOpen = latestEdition.callDates?.open;
+              const openCallDeadline = latestEdition.callDates?.close;
+              const callDeadlinePassed = openCallDeadline ? new Date(openCallDeadline) < new Date() : false;
+              const hasCallDates = !callDeadlinePassed && !!(openCallOpen || openCallDeadline);
 
               return (
                 <Link
@@ -109,10 +118,27 @@ export function UpcomingResidenciesSection({ programs, programsLoading }: Upcomi
                       </p>
                     )}
                     {latestEdition.startDate && latestEdition.endDate && (
-                      <div className="flex items-center gap-2 text-xs text-volavan-aqua font-['Manrope'] uppercase tracking-wide">
-                        <span>{new Date(latestEdition.startDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
-                        <span>—</span>
-                        <span>{new Date(latestEdition.endDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                      <p className="font-['Manrope'] text-[13px] uppercase tracking-[0.18em] text-volavan-cream/40 flex items-center gap-2">
+                        <Calendar size={11} className="opacity-60 shrink-0" />
+                        {formatShortDate(latestEdition.startDate)} — {formatShortDate(latestEdition.endDate)}
+                      </p>
+                    )}
+                    {hasCallDates && (
+                      <div className="flex flex-col gap-1 pl-3 border-l border-volavan-aqua/20">
+                        {openCallOpen && (
+                          <p className="font-['Manrope'] text-[10px] uppercase tracking-[0.18em] text-volavan-aqua/50">
+                            <span className="text-volavan-aqua/30">Open Call</span>
+                            <span className="mx-1.5 opacity-30">·</span>
+                            {formatShortDate(openCallOpen)}
+                          </p>
+                        )}
+                        {openCallDeadline && (
+                          <p className="font-['Manrope'] text-[10px] uppercase tracking-[0.18em] text-volavan-aqua/70">
+                            <span className="text-volavan-aqua/40">Deadline</span>
+                            <span className="mx-1.5 opacity-30">·</span>
+                            {formatShortDate(openCallDeadline)}
+                          </p>
+                        )}
                       </div>
                     )}
                     {program.location && program.country && (
