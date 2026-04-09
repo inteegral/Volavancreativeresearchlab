@@ -105,7 +105,7 @@ export const QUERIES = {
     location,
     country,
     logo,
-    "editions": *[_type == "residency" && program._ref == ^._id] | order(year desc) {
+    "editions": *[_type == "residency" && program->slug.current == ^.slug.current] | order(year desc) {
       _id,
       year,
       "slug": slug.current,
