@@ -19,6 +19,9 @@ import JournalDetail from "./pages/public/JournalDetail";
 import Candidature from "./pages/public/Candidature";
 import Apply from "./pages/public/Apply";
 
+// Studio
+import StudioPage from "./pages/StudioPage"
+
 // Debug
 import DebugSanity from "./pages/DebugSanity";
 
@@ -81,6 +84,10 @@ export const router = createBrowserRouter([
           { path: "apply/:slug", Component: Apply },
           { path: "debug-sanity", Component: DebugSanity },
         ],
+      },
+      {
+        path: "studio/*",
+        Component: StudioPage,
       },
       {
         path: "*",
