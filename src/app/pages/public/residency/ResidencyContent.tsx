@@ -295,7 +295,7 @@ export function ResidencyContent({
 
             {residency.location.gallery && residency.location.gallery.length > 0 && (
               <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                {residency.location.gallery.map((image, i) => (
+                {residency.location.gallery.filter((img: any) => img?.asset?._ref).map((image, i) => (
                   <div key={i} className="aspect-square overflow-hidden group/loc relative">
                     <div className="absolute inset-0 bg-volavan-earth/20 group-hover/loc:bg-transparent z-10 transition-colors duration-500" />
                     <img
