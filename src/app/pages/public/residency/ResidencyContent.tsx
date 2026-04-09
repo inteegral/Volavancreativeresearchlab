@@ -29,7 +29,7 @@ export function ResidencyContent({
   callCloseDate,
 }: ResidencyContentProps) {
   const hasArtists = residency.artists && residency.artists.length > 0;
-  const hasStructure = !!(residency as any).structure || !!program.structure;
+  const hasStructure = !!(residency as any).structure;
   const hasApply = isOpenCall && !!program.requirements;
 
   const tabs: { id: TabId; label: string }[] = [
@@ -227,7 +227,7 @@ export function ResidencyContent({
             <h2 className="font-['Cormorant_Garamond'] text-3xl md:text-4xl italic text-volavan-cream mb-8">
               How It Works
             </h2>
-            <PortableTextRenderer value={(residency as any).structure || program.structure} />
+            <PortableTextRenderer value={(residency as any).structure} />
           </motion.div>
         )}
 

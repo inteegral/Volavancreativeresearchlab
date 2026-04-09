@@ -173,10 +173,11 @@ export default function Residencies() {
 
                 // Dynamic status flags
                 const hasActiveOpenCall = !!openCallEdition;
-                // Show call dates from target edition regardless of active status
+                // Show call dates from target edition only if deadline hasn't passed yet
                 const openCallOpen = targetEdition?.callDates?.open;
                 const openCallDeadline = targetEdition?.callDates?.close;
-                const hasCallDates = !!(openCallOpen || openCallDeadline);
+                const callDeadlinePassed = openCallDeadline ? new Date(openCallDeadline) < new Date() : false;
+                const hasCallDates = !callDeadlinePassed && !!(openCallOpen || openCallDeadline);
 
                 // Dates from the target edition
                 const startDate = targetEdition?.startDate;
@@ -245,7 +246,7 @@ export default function Residencies() {
 
                         {/* Dates */}
                         {startDate && endDate && (
-                          <p className="font-['Manrope'] text-[11px] uppercase tracking-[0.18em] text-volavan-cream/40 flex items-center gap-2">
+                          <p className="font-['Manrope'] text-[13px] uppercase tracking-[0.18em] text-volavan-cream/40 flex items-center gap-2">
                             <Calendar size={11} className="opacity-60 shrink-0" />
                             {formatShortDate(startDate)} — {formatShortDate(endDate)}
                           </p>

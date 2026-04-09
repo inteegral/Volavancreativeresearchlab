@@ -146,6 +146,7 @@ export const QUERIES = {
     callDates,
     gallery,
     seo,
+    structure,
     "slug": slug.current,
     "artists": artists[].artist-> {
       _id,
@@ -168,8 +169,6 @@ export const QUERIES = {
       "slug": slug.current,
       tagline,
       concept,
-      structure,
-      structureDetails,
       whatWeOffer,
       requirements,
       applicationIntro,

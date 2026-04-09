@@ -144,7 +144,7 @@ export function ResidencyHero({
           {(formattedDates || (program.location && program.country)) && (
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-8 items-center text-volavan-cream/60 border-t border-volavan-cream/10 pt-6 w-full max-w-2xl justify-center">
               {formattedDates && (
-                <span className="font-['Manrope'] text-[11px] uppercase tracking-[0.2em] flex items-center gap-2">
+                <span className="font-['Manrope'] text-[13px] uppercase tracking-[0.2em] flex items-center gap-2">
                   <Calendar size={13} className="opacity-50 shrink-0" />
                   {formattedDates}
                 </span>

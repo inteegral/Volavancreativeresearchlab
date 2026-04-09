@@ -175,10 +175,6 @@ export interface SanityProgram {
   feeAmount?: number | null;
   feeIncludes?: string;
   concept?: PortableTextBlock[];
-  structure?: PortableTextBlock[];
-  structureDetails?: {
-    format?: string;
-  };
   whatWeOffer?: PortableTextBlock[];
   requirements?: PortableTextBlock[];
   applicationIntro?: string;
