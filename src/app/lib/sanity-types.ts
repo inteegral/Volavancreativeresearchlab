@@ -159,6 +159,7 @@ export interface SanityResidency {
   feeIncludes?: string;
   keyFigures?: {
     role?: string;
+    statement?: string;
     artist: {
       _id: string;
       name: string;
@@ -166,6 +167,7 @@ export interface SanityResidency {
       photo?: SanityImage;
       nationality?: string;
       disciplines?: string[];
+      bio?: PortableTextBlock[];
     };
   }[];
   directorStatement?: { _key: string; _type: string; value: string; }[];

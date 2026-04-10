@@ -107,6 +107,13 @@ export const residency = defineType({
               type: 'string',
               placeholder: 'e.g. Artistic Director, Curator, Mentor…',
             }),
+            defineField({
+              name: 'statement',
+              title: 'Statement',
+              description: 'Curatorial note or personal statement for this edition',
+              type: 'text',
+              rows: 4,
+            }),
           ],
           preview: {
             select: { title: 'artist.name', subtitle: 'role' },

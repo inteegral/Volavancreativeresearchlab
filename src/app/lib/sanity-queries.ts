@@ -154,13 +154,15 @@ export const QUERIES = {
     structure,
     "keyFigures": keyFigures[] {
       role,
+      statement,
       "artist": artist-> {
         _id,
         name,
         "slug": slug.current,
         photo,
         nationality,
-        disciplines
+        disciplines,
+        bio
       }
     },
     directorStatement,
