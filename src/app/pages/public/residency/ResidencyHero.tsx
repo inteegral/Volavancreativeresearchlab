@@ -177,7 +177,7 @@ export function ResidencyHero({
 
           {/* CTA or past-edition link */}
           {isOpenCall ? (
-            <div className="w-full max-w-2xl border-t border-b border-volavan-cream/10 py-5 flex justify-center">
+            <div className="w-full max-w-2xl border-t border-b border-volavan-cream/10 py-5 flex justify-center mt-[60px]">
               <VLink
                 to={`/apply/${residency.slug || ''}`}
                 variant="ghost"
