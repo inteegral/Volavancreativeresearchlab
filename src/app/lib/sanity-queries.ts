@@ -152,13 +152,16 @@ export const QUERIES = {
     gallery,
     seo,
     structure,
-    "artisticDirector": artisticDirector-> {
-      _id,
-      name,
-      "slug": slug.current,
-      photo,
-      nationality,
-      disciplines
+    "keyFigures": keyFigures[] {
+      role,
+      "artist": artist-> {
+        _id,
+        name,
+        "slug": slug.current,
+        photo,
+        nationality,
+        disciplines
+      }
     },
     directorStatement,
     "slug": slug.current,

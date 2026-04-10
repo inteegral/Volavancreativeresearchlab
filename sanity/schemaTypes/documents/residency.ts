@@ -86,10 +86,33 @@ export const residency = defineType({
       to: [{ type: 'location' }],
     }),
     defineField({
-      name: 'artisticDirector',
-      title: 'Artistic Director',
-      type: 'reference',
-      to: [{ type: 'artist' }],
+      name: 'keyFigures',
+      title: 'Key Figures',
+      description: 'Artistic directors, curators, mentors and other key people for this edition',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'artist',
+              title: 'Person',
+              type: 'reference',
+              to: [{ type: 'artist' }],
+              validation: (r) => r.required(),
+            }),
+            defineField({
+              name: 'role',
+              title: 'Role',
+              type: 'string',
+              placeholder: 'e.g. Artistic Director, Curator, Mentor…',
+            }),
+          ],
+          preview: {
+            select: { title: 'artist.name', subtitle: 'role' },
+          },
+        }),
+      ],
     }),
     defineField({
       name: 'directorStatement',
