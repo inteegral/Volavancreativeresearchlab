@@ -189,14 +189,11 @@ export function ResidencyContent({
                   Logistics & Fees
                 </h2>
                 {residency.feeAmount !== null && residency.feeAmount !== undefined && (
-                  <div className="mb-8 inline-flex items-baseline gap-3 px-6 py-4 bg-volavan-cream/5 border border-volavan-cream/10 rounded-sm">
-                    <span className="font-['Cormorant_Garamond'] text-3xl italic text-volavan-aqua">
-                      €{residency.feeAmount}
-                    </span>
-                    <span className="font-['Manrope'] text-xs uppercase tracking-[0.15em] text-volavan-cream/40">
-                      participation fee
-                    </span>
-                  </div>
+                  <p className="font-['Manrope'] text-sm text-volavan-cream/50 mb-6">
+                    <span className="text-volavan-aqua/80">€{residency.feeAmount}</span>
+                    <span className="mx-2 opacity-30">·</span>
+                    participation fee
+                  </p>
                 )}
                 {residency.feeIncludes && (
                   <FeeIncludesText text={residency.feeIncludes} />
