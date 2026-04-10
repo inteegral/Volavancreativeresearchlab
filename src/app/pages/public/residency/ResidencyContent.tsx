@@ -76,7 +76,7 @@ export function ResidencyContent({
 
   const tabs: { id: TabId; label: string }[] = [
     { id: 'overview', label: 'Overview' },
-    ...(hasStructure ? [{ id: 'structure' as TabId, label: 'Structure' }] : []),
+    ...(hasStructure ? [{ id: 'structure' as TabId, label: 'Program' }] : []),
     ...(hasArtists ? [{ id: 'artists' as TabId, label: 'Artists' }] : []),
     ...(hasAccommodation ? [{ id: 'accommodation' as TabId, label: 'Accommodation' }] : []),
     ...(hasApply ? [{ id: 'apply' as TabId, label: 'Apply' }] : []),
@@ -174,6 +174,57 @@ export function ResidencyContent({
                   What We Offer
                 </h2>
                 <PortableTextRenderer value={program.whatWeOffer} />
+              </motion.div>
+            )}
+
+            {/* Artistic Director */}
+            {residency.artisticDirector && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.12 }}
+                className="border-t border-volavan-cream/10 pt-16"
+              >
+                <h2 className="font-['Cormorant_Garamond'] text-2xl md:text-3xl italic text-volavan-aqua mb-8">
+                  Artistic Director
+                </h2>
+                <Link
+                  to={`/artists/${residency.artisticDirector.slug}`}
+                  className="group flex items-center gap-5 hover:opacity-80 transition-opacity"
+                >
+                  {residency.artisticDirector.photo && (
+                    <div className="w-16 h-16 rounded-full overflow-hidden shrink-0 bg-volavan-earth/40">
+                      <img
+                        src={getImageUrl(residency.artisticDirector.photo, 128, 128)}
+                        alt={residency.artisticDirector.name}
+                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                      />
+                    </div>
+                  )}
+                  <div className="flex flex-col gap-1">
+                    <span className="font-['Cormorant_Garamond'] text-xl italic text-volavan-cream group-hover:text-volavan-aqua transition-colors">
+                      {residency.artisticDirector.name}
+                    </span>
+                    {residency.artisticDirector.nationality && (
+                      <span className="font-['Manrope'] text-xs uppercase tracking-[0.18em] text-volavan-cream/40">
+                        {residency.artisticDirector.nationality}
+                      </span>
+                    )}
+                    {residency.artisticDirector.disciplines && residency.artisticDirector.disciplines.length > 0 && (
+                      <span className="font-['Manrope'] text-[10px] uppercase tracking-[0.15em] text-volavan-aqua/50">
+                        {residency.artisticDirector.disciplines.join(', ')}
+                      </span>
+                    )}
+                  </div>
+                </Link>
+                {residency.directorStatement && residency.directorStatement.length > 0 && (() => {
+                  const stmt = residency.directorStatement.find(s => s._type === 'internationalizedArrayTextValue' && s._key === 'en') || residency.directorStatement[0];
+                  return stmt?.value ? (
+                    <p className="font-['Cormorant_Garamond'] text-lg italic text-volavan-cream/60 leading-relaxed mt-6 pl-1 border-l border-volavan-aqua/20">
+                      {stmt.value}
+                    </p>
+                  ) : null;
+                })()}
               </motion.div>
             )}
 

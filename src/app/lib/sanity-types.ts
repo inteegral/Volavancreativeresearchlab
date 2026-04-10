@@ -157,6 +157,15 @@ export interface SanityResidency {
   callClose?: string;
   feeAmount?: number;
   feeIncludes?: string;
+  artisticDirector?: {
+    _id: string;
+    name: string;
+    slug: string;
+    photo?: SanityImage;
+    nationality?: string;
+    disciplines?: string[];
+  };
+  directorStatement?: { _key: string; _type: string; value: string; }[];
   description?: PortableTextBlock[];
   whatWeOffer?: PortableTextBlock[];
   requirements?: PortableTextBlock[];
