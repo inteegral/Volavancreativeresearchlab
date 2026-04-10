@@ -233,6 +233,9 @@ export function ResidencyContent({
                             </p>
                           ) : null;
                         })()}
+                        <span className="font-['Manrope'] text-[10px] uppercase tracking-[0.2em] text-volavan-aqua/50 group-hover:text-volavan-aqua transition-colors mt-1">
+                          See more →
+                        </span>
                       </div>
                     </Link>
                   ))}
