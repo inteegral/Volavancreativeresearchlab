@@ -188,54 +188,44 @@ export function ResidencyContent({
                 <h2 className="font-['Cormorant_Garamond'] text-2xl md:text-3xl italic text-volavan-aqua mb-8">
                   Key Figures
                 </h2>
-                <div className="flex flex-col gap-12">
-                  {residency.keyFigures.map((figure, i) => (
-                    <div key={figure.artist._id || i} className="flex flex-col gap-6">
-                      {/* Header: photo + name + role */}
-                      <Link
-                        to={`/artists/${figure.artist.slug}`}
-                        className="group flex items-center gap-5 hover:opacity-80 transition-opacity"
-                      >
-                        {figure.artist.photo && (
-                          <div className="w-14 h-14 rounded-full overflow-hidden shrink-0 bg-volavan-earth/40">
-                            <img
-                              src={getImageUrl(figure.artist.photo, 112, 112)}
-                              alt={figure.artist.name}
-                              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                            />
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+                  {residency.keyFigures.filter(f => f.artist).map((figure, i) => (
+                    <Link
+                      key={figure.artist._id || i}
+                      to={`/artists/${figure.artist.slug}`}
+                      className="group flex flex-col gap-3 hover:opacity-80 transition-opacity"
+                    >
+                      <div className="aspect-square overflow-hidden rounded-sm bg-volavan-earth/40">
+                        {figure.artist.photo ? (
+                          <img
+                            src={getImageUrl(figure.artist.photo, 400, 400)}
+                            alt={figure.artist.name}
+                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center">
+                            <span className="font-['Cormorant_Garamond'] text-4xl italic text-volavan-cream/20">
+                              {figure.artist.name?.charAt(0)}
+                            </span>
                           </div>
                         )}
-                        <div className="flex flex-col gap-0.5">
-                          {figure.role && (
-                            <span className="font-['Manrope'] text-[10px] uppercase tracking-[0.2em] text-volavan-aqua/50">
-                              {figure.role}
-                            </span>
-                          )}
-                          <span className="font-['Cormorant_Garamond'] text-xl italic text-volavan-cream group-hover:text-volavan-aqua transition-colors">
-                            {figure.artist.name}
+                      </div>
+                      <div className="flex flex-col gap-0.5">
+                        {figure.role && (
+                          <span className="font-['Manrope'] text-[10px] uppercase tracking-[0.2em] text-volavan-aqua/50">
+                            {figure.role}
                           </span>
-                          {figure.artist.nationality && (
-                            <span className="font-['Manrope'] text-xs uppercase tracking-[0.15em] text-volavan-cream/35">
-                              {figure.artist.nationality}
-                            </span>
-                          )}
-                        </div>
-                      </Link>
-
-                      {/* Edition statement */}
-                      {figure.statement && (
-                        <p className="font-['Cormorant_Garamond'] text-lg italic text-volavan-cream/60 leading-relaxed pl-4 border-l border-volavan-aqua/20">
-                          {figure.statement}
-                        </p>
-                      )}
-
-                      {/* Artist bio */}
-                      {figure.artist.bio && (
-                        <div className="text-sm opacity-80">
-                          <PortableTextRenderer value={figure.artist.bio} />
-                        </div>
-                      )}
-                    </div>
+                        )}
+                        <span className="font-['Cormorant_Garamond'] text-lg italic text-volavan-cream group-hover:text-volavan-aqua transition-colors">
+                          {figure.artist.name}
+                        </span>
+                        {figure.artist.nationality && (
+                          <span className="font-['Manrope'] text-[10px] uppercase tracking-[0.15em] text-volavan-cream/35">
+                            {figure.artist.nationality}
+                          </span>
+                        )}
+                      </div>
+                    </Link>
                   ))}
                 </div>
               </motion.div>
