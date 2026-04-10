@@ -186,7 +186,7 @@ export function ResidencyContent({
                 className="border-t border-volavan-cream/10 pt-16"
               >
                 <h2 className="font-['Cormorant_Garamond'] text-2xl md:text-3xl italic text-volavan-aqua mb-8">
-                  Key Figures
+                  Curators
                 </h2>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
                   {residency.keyFigures.filter(f => f.artist).map((figure, i) => (
@@ -210,7 +210,7 @@ export function ResidencyContent({
                           </div>
                         )}
                       </div>
-                      <div className="flex flex-col gap-0.5">
+                      <div className="flex flex-col gap-1.5">
                         {figure.role && (
                           <span className="font-['Manrope'] text-[10px] uppercase tracking-[0.2em] text-volavan-aqua/50">
                             {figure.role}
@@ -224,6 +224,15 @@ export function ResidencyContent({
                             {figure.artist.nationality}
                           </span>
                         )}
+                        {figure.artist.bio && (() => {
+                          const firstBlock = figure.artist.bio.find((b: any) => b._type === 'block' && b.style === 'normal');
+                          const text = firstBlock?.children?.map((c: any) => c.text).join('') || '';
+                          return text ? (
+                            <p className="font-['Manrope'] text-xs text-volavan-cream/45 leading-relaxed line-clamp-3 mt-1">
+                              {text}
+                            </p>
+                          ) : null;
+                        })()}
                       </div>
                     </Link>
                   ))}
