@@ -156,7 +156,7 @@ export interface SanityResidency {
   callOpen?: string;
   callClose?: string;
   feeAmount?: number;
-  feeIncludes?: PortableTextBlock[];
+  feeIncludes?: string;
   description?: PortableTextBlock[];
   whatWeOffer?: PortableTextBlock[];
   requirements?: PortableTextBlock[];

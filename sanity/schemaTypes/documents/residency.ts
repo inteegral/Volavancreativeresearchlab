@@ -52,7 +52,8 @@ export const residency = defineType({
       name: 'feeIncludes',
       title: 'Fee Includes',
       description: 'What is included in the fee (accommodation, meals, etc.)',
-      type: 'blockContent',
+      type: 'text',
+      rows: 8,
     }),
     defineField({
       name: 'structure',

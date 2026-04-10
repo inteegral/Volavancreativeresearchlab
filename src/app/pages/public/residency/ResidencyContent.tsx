@@ -7,6 +7,47 @@ import { PortableTextRenderer } from "../../../components/PortableTextRenderer";
 import { VideoPlayer } from "../../../components/VideoPlayer";
 import type { SanityResidency, SanityProgram } from "../../../lib/sanity";
 
+// Renders feeIncludes plain text with section headings and bullet-style items
+function FeeIncludesText({ text }: { text: string }) {
+  const lines = text.split('\n');
+  const elements: React.ReactNode[] = [];
+  let key = 0;
+
+  for (const raw of lines) {
+    const line = raw.trim();
+    if (!line) { key++; continue; }
+
+    // ALL-CAPS heading (e.g. "APPLICATION & PAYMENT")
+    if (/^[A-Z][A-Z &/]+$/.test(line)) {
+      elements.push(
+        <p key={key++} className="font-['Manrope'] text-[10px] uppercase tracking-[0.25em] text-volavan-aqua/60 mt-8 mb-2">
+          {line}
+        </p>
+      );
+    // "Label: rest of text" line
+    } else if (/^[A-Z][^.]+:\s/.test(line) || /^[A-Z][^.]+:$/.test(line)) {
+      const colonIdx = line.indexOf(':');
+      const label = line.slice(0, colonIdx);
+      const rest = line.slice(colonIdx + 1).trim();
+      elements.push(
+        <p key={key++} className="font-['Manrope'] text-sm text-volavan-cream/80 leading-relaxed mt-3">
+          <span className="text-volavan-cream font-medium">{label}:</span>
+          {rest && ` ${rest}`}
+        </p>
+      );
+    // Normal paragraph
+    } else {
+      elements.push(
+        <p key={key++} className="font-['Manrope'] text-sm text-volavan-cream/60 leading-relaxed mt-2">
+          {line}
+        </p>
+      );
+    }
+  }
+
+  return <div className="space-y-0">{elements}</div>;
+}
+
 interface ResidencyContentProps {
   residency: SanityResidency;
   program: SanityProgram;
@@ -158,7 +199,7 @@ export function ResidencyContent({
                   </div>
                 )}
                 {residency.feeIncludes && (
-                  <PortableTextRenderer value={residency.feeIncludes} />
+                  <FeeIncludesText text={residency.feeIncludes} />
                 )}
               </motion.div>
             ) : null}
