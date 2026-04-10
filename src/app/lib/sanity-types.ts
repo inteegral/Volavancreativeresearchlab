@@ -156,7 +156,7 @@ export interface SanityResidency {
   callOpen?: string;
   callClose?: string;
   feeAmount?: number;
-  feeIncludes?: string;
+  feeIncludes?: PortableTextBlock[];
   description?: PortableTextBlock[];
   whatWeOffer?: PortableTextBlock[];
   requirements?: PortableTextBlock[];
@@ -183,8 +183,6 @@ export interface SanityProgram {
   disciplines?: string[];
   capacity?: number;
   logo?: SanityImage;
-  feeAmount?: number | null;
-  feeIncludes?: string;
   concept?: PortableTextBlock[];
   whatWeOffer?: PortableTextBlock[];
   requirements?: PortableTextBlock[];

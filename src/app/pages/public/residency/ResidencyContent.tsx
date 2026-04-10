@@ -133,22 +133,35 @@ export function ResidencyContent({
                   What We Offer
                 </h2>
                 <PortableTextRenderer value={program.whatWeOffer} />
-                {residency.feeAmount !== null && residency.feeAmount !== undefined && (
-                  <div className="mt-8 p-6 bg-volavan-cream/5 border border-volavan-cream/10 rounded-sm">
-                    <div className="flex items-baseline gap-4">
-                      <span className="font-['Cormorant_Garamond'] text-3xl italic text-volavan-aqua">
-                        €{residency.feeAmount}
-                      </span>
-                      {residency.feeIncludes && (
-                        <span className="font-['Manrope'] text-sm text-volavan-cream/60">
-                          {residency.feeIncludes}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                )}
               </motion.div>
             )}
+
+            {/* Logistics & Fees */}
+            {(residency.feeAmount !== null && residency.feeAmount !== undefined) || residency.feeIncludes ? (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.15 }}
+                className="border-t border-volavan-cream/10 pt-16"
+              >
+                <h2 className="font-['Cormorant_Garamond'] text-2xl md:text-3xl italic text-volavan-aqua mb-8">
+                  Logistics & Fees
+                </h2>
+                {residency.feeAmount !== null && residency.feeAmount !== undefined && (
+                  <div className="mb-8 inline-flex items-baseline gap-3 px-6 py-4 bg-volavan-cream/5 border border-volavan-cream/10 rounded-sm">
+                    <span className="font-['Cormorant_Garamond'] text-3xl italic text-volavan-aqua">
+                      €{residency.feeAmount}
+                    </span>
+                    <span className="font-['Manrope'] text-xs uppercase tracking-[0.15em] text-volavan-cream/40">
+                      participation fee
+                    </span>
+                  </div>
+                )}
+                {residency.feeIncludes && (
+                  <PortableTextRenderer value={residency.feeIncludes} />
+                )}
+              </motion.div>
+            ) : null}
 
             {/* Gallery */}
             {residency.gallery && residency.gallery.length > 0 && (
