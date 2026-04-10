@@ -122,12 +122,6 @@ export const residency = defineType({
       ],
     }),
     defineField({
-      name: 'directorStatement',
-      title: 'Director Statement',
-      description: 'Curatorial approach for this edition — available in EN and ES',
-      type: 'internationalizedArrayText',
-    }),
-    defineField({
       name: 'artists',
       title: 'Artists',
       type: 'array',
