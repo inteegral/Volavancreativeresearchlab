@@ -16,14 +16,14 @@ const RESIDENCY_CONFIG: Record<string, {
   startDate?: string;
   endDate?: string;
   deadline?: string;
-  formspreeId: string;
+  formsparkId: string;
 }> = {
   "systema-26": {
     name: "SYSTEMA 26",
     location: "Riga, Latvia",
     year: 2026,
     deadline: "May 8, 2026",
-    formspreeId: import.meta.env.VITE_FORMSPREE_ENDPOINT || "",
+    formsparkId: import.meta.env.VITE_FORMSPARK_SYSTEMA || "",
   },
   "phosphene": {
     name: "PHOS/PHANE",
@@ -32,7 +32,7 @@ const RESIDENCY_CONFIG: Record<string, {
     startDate: "2026-06-07",
     endDate: "2026-06-13",
     deadline: "May 8, 2026",
-    formspreeId: "OiX6zdV28",
+    formsparkId: "OiX6zdV28",
   },
 };
 
@@ -105,7 +105,7 @@ export default function Apply() {
     if (!config) return;
     setIsSubmitting(true);
     try {
-      const res = await fetch(`https://formspree.io/f/${config.formspreeId}`, {
+      const res = await fetch(`https://submit-form.com/${config.formsparkId}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ residency: config.name, year: config.year, ...data }),
