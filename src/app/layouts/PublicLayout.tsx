@@ -6,6 +6,7 @@ import { Instagram, Facebook, Youtube, Mail } from "lucide-react";
 const volavanLogo = "/logo-circular.svg";
 const footerLogo = "/logo-footer.svg";
 import { ScrollToTop } from "../components/ScrollToTop";
+import { NewsletterForm } from "../components/NewsletterForm";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useAnalytics } from "../hooks/useAnalytics";
@@ -163,6 +164,14 @@ export function PublicLayout() {
           
           {/* Logo */}
           <img src={footerLogo} alt="VOLAVAN" className="h-[117.9px] w-auto mt-[100px]" />
+
+          {/* Newsletter */}
+          {!isFormPage && (
+            <div className="w-full flex flex-col items-center gap-4">
+              <p className="font-['Manrope'] text-[9px] uppercase tracking-[0.25em] text-volavan-cream/30">Stay Connected</p>
+              <NewsletterForm variant="footer" className="max-w-sm" />
+            </div>
+          )}
 
           {/* Mission Statement */}
           
