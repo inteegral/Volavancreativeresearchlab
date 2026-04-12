@@ -31,16 +31,6 @@ export function trackApplicationSubmitted(programName: string, year?: number) {
   });
 }
 
-/**
- * Track newsletter subscription
- * Call this after successful MailerLite subscription
- */
-export function trackNewsletterSubscribe(location: string = 'footer') {
-  trackEvent('newsletter_subscribe', {
-    form_location: location,
-    timestamp: new Date().toISOString(),
-  });
-}
 
 /**
  * Track contact form submission
@@ -91,16 +81,6 @@ export function trackExternalLinkClick(linkUrl: string, linkText: string) {
  *   const handleSubmit = async (data) => {
  *     await submitToAPI(data);
  *     trackApplicationSubmitted('Contemporaneo', 2025);
- *   };
- * }
- * 
- * // In newsletter form:
- * import { trackNewsletterSubscribe } from '../lib/analytics-events';
- * 
- * function NewsletterForm() {
- *   const handleSubmit = async (email) => {
- *     await subscribeToMailerLite(email);
- *     trackNewsletterSubscribe('footer');
  *   };
  * }
  * 

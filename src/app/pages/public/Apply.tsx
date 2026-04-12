@@ -280,7 +280,7 @@ export default function Apply() {
 
             <Field
               label="Work samples"
-              hint="A link to your portfolio, Vimeo, SoundCloud, Instagram, or any relevant work."
+              hint="A link to your portfolio, Vimeo, SoundCloud, Instagram, or any relevant work (if any)."
               error={errors.workUrl?.message}
             >
               <input

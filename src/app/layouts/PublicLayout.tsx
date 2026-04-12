@@ -9,7 +9,6 @@ import { ScrollToTop } from "../components/ScrollToTop";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useAnalytics } from "../hooks/useAnalytics";
-import { NewsletterForm } from "../components/NewsletterForm";
 
 export function PublicLayout() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -168,58 +167,3 @@ export function PublicLayout() {
           {/* Mission Statement */}
           
 
-          {/* Newsletter */}
-          {!isFormPage && (
-            <div className="w-full flex flex-col items-center gap-4">
-              <p className="font-['Manrope'] text-[9px] uppercase tracking-[0.25em] text-volavan-cream/30">Stay Connected</p>
-              <NewsletterForm variant="footer" className="max-w-sm" />
-            </div>
-          )}
-
-          {/* Navigation */}
-          <nav className="flex flex-col md:flex-row md:flex-wrap justify-center gap-4 md:gap-x-8 md:gap-y-4 my-2">
-            {navLinks.map((link) => (
-              <Link 
-                key={link.path}
-                to={link.path}
-                className="font-['Manrope'] text-xs uppercase tracking-[0.15em] text-volavan-cream/70 hover:text-volavan-aqua hover:opacity-100 transition-all"
-              >
-                {link.name}
-              </Link>
-            ))}
-          </nav>
-
-          {/* Contact Details */}
-          <div className="flex flex-col gap-3 font-['Manrope'] text-xs leading-relaxed tracking-wide text-volavan-cream/40 uppercase">
-            <p className="normal-case">Volavan cooperativa cultural CRL • Fermil • Portugal</p>
-            
-          </div>
-
-          {/* Socials */}
-          <div className="flex gap-6 opacity-40">
-            <a href="https://www.facebook.com/volavan.coop" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-volavan-aqua hover:opacity-100 transition-all duration-300 transform hover:scale-110">
-              <Facebook size={22} strokeWidth={1} />
-            </a>
-            <a href="https://www.instagram.com/volavan.rural/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-volavan-aqua hover:opacity-100 transition-all duration-300 transform hover:scale-110">
-              <Instagram size={22} strokeWidth={1} />
-            </a>
-            <a href="https://www.youtube.com/@wearevolavan" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="hover:text-volavan-aqua hover:opacity-100 transition-all duration-300 transform hover:scale-110">
-              <Youtube size={22} strokeWidth={1} />
-            </a>
-          </div>
-
-          {/* Bottom Bar */}
-          <div className="pt-8 w-full border-t border-volavan-cream/5 flex flex-col md:flex-row justify-center items-center gap-6 text-xs tracking-widest text-volavan-cream/30 font-['Manrope'] uppercase mt-4">
-            <span>© {new Date().getFullYear()} Volavan</span>
-            <div className="flex gap-6">
-              <Link to="/privacy" className="hover:text-volavan-cream transition-colors">Privacy</Link>
-              <Link to="/terms" className="hover:text-volavan-cream transition-colors">Terms</Link>
-            </div>
-          </div>
-
-        </div>
-      </footer>
-      <ScrollToTop />
-    </div>
-  );
-}
