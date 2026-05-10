@@ -203,22 +203,20 @@ export default function Residencies() {
                         )}
 
                         {/* Status badge — top-left inside image */}
-                        {editionStatus !== 'completed' && (
-                          <motion.div
-                            initial={{ opacity: 0, y: -6 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.3 + index * 0.1 }}
-                            className={`absolute top-4 left-4 z-30 flex items-center gap-2 px-3 py-1.5 bg-volavan-earth/70 backdrop-blur-sm border ${statusBadge.borderColor} rounded-sm`}
+                        <motion.div
+                          initial={{ opacity: 0, y: -6 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.3 + index * 0.1 }}
+                          className={`absolute top-4 left-4 z-30 flex items-center gap-2 px-3 py-1.5 bg-volavan-earth/70 backdrop-blur-sm border ${statusBadge.borderColor} rounded-sm`}
+                        >
+                          {hasActiveOpenCall && <div className="w-1.5 h-1.5 rounded-full bg-volavan-aqua animate-pulse" />}
+                          <span
+                            className="font-['Manrope'] text-[10px] uppercase tracking-[0.15em] font-light"
+                            style={{ color: statusBadge.color }}
                           >
-                            {hasActiveOpenCall && <div className="w-1.5 h-1.5 rounded-full bg-volavan-aqua animate-pulse" />}
-                            <span
-                              className="font-['Manrope'] text-[10px] uppercase tracking-[0.15em] font-light"
-                              style={{ color: statusBadge.color }}
-                            >
-                              {statusBadge.label}
-                            </span>
-                          </motion.div>
-                        )}
+                            {statusBadge.label}
+                          </span>
+                        </motion.div>
 
                         {/* Tagline Overlay */}
                         {program.tagline && (
