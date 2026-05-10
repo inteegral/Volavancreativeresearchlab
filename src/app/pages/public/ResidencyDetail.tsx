@@ -96,7 +96,6 @@ export default function ResidencyDetail() {
   const isOpenCall = currentStatus === 'open_call';
   const statusBadge = getStatusBadge(currentStatus, isPastEdition, residency.year);
   const callCloseDate = residency.callDates?.close;
-  const isCaTru = slug?.toLowerCase().includes('ca-tru') ?? false;
 
   return (
     <div className="w-full bg-volavan-earth text-volavan-cream -mt-24 overflow-x-hidden">
@@ -141,7 +140,6 @@ export default function ResidencyDetail() {
         slug={slug!}
         isOpenCall={isOpenCall}
         isPastEdition={isPastEdition}
-        isCaTru={isCaTru}
         callCloseDate={callCloseDate}
       />
 

@@ -204,6 +204,11 @@ export interface SanityProgram {
   heroImage?: SanityImage;
   coverImage?: SanityImage;
   gallery?: SanityImage[];
+  video?: {
+    videoId?: string;
+    startTime?: number;
+    endTime?: number;
+  };
   seo?: {
     title?: string;
     description?: string;

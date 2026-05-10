@@ -198,6 +198,7 @@ export const QUERIES = {
       applicationIntro,
       disciplines,
       gallery,
+      video,
       seo,
       "otherEditions": *[_type == "residency" && program._ref == ^._id && slug.current != "${slug}" && defined(slug.current) && defined(year)] | order(year desc) {
         year,

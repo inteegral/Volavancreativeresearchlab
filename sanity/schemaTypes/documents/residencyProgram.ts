@@ -82,6 +82,30 @@ export const residencyProgram = defineType({
       rows: 2,
     }),
     defineField({
+      name: 'video',
+      title: 'Program Video',
+      description: 'Optional YouTube video shown in the Overview tab of the program page',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'videoId',
+          title: 'YouTube Video ID',
+          type: 'string',
+          description: 'The ID from the YouTube URL (e.g. "41z5HiWIAOs")',
+        }),
+        defineField({
+          name: 'startTime',
+          title: 'Start Time (seconds)',
+          type: 'number',
+        }),
+        defineField({
+          name: 'endTime',
+          title: 'End Time (seconds)',
+          type: 'number',
+        }),
+      ],
+    }),
+    defineField({
       name: 'gallery',
       title: 'Program Gallery',
       description: 'Evergreen photos representing the program identity — venues, atmosphere, visual brand. Shared across all editions and used on the program page. JPG, PNG or WebP only.',

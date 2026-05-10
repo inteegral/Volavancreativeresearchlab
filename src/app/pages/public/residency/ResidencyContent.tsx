@@ -54,7 +54,6 @@ interface ResidencyContentProps {
   slug: string;
   isOpenCall: boolean;
   isPastEdition: boolean;
-  isCaTru: boolean;
   callCloseDate?: string;
 }
 
@@ -66,7 +65,6 @@ export function ResidencyContent({
   slug,
   isOpenCall,
   isPastEdition,
-  isCaTru,
   callCloseDate,
 }: ResidencyContentProps) {
   const hasArtists = residency.artists && residency.artists.length > 0;
@@ -131,8 +129,8 @@ export function ResidencyContent({
         {activeTab === 'overview' && (
           <div className="space-y-20">
 
-            {/* VIDEO - Ca Tru only */}
-            {isCaTru && (
+            {/* Program video */}
+            {program.video?.videoId && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -141,9 +139,9 @@ export function ResidencyContent({
               >
                 <div className="aspect-video w-full rounded-sm overflow-hidden max-w-3xl">
                   <VideoPlayer
-                    videoId="41z5HiWIAOs"
-                    startTime={227}
-                    endTime={281}
+                    videoId={program.video.videoId}
+                    startTime={program.video.startTime}
+                    endTime={program.video.endTime}
                     autoplay={true}
                     playerId={`youtube-player-${slug}`}
                     className="w-full h-full"
