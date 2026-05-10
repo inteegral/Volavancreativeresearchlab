@@ -29,8 +29,11 @@ export function getStatus(edition: {
     if (now >= new Date(residencyDates.start) && now <= new Date(residencyDates.end)) return 'in_residence';
   }
 
-  // Under selection (call closed, residency not yet started)
-  if (callDates?.close && now > new Date(callDates.close)) return 'under_selection';
+  // Under selection (call closed, residency start date known and in the future)
+  if (callDates?.close && now > new Date(callDates.close)) {
+    if (residencyDates?.start && now < new Date(residencyDates.start)) return 'under_selection';
+    return 'completed';
+  }
 
   // Open call
   if (callDates?.open && callDates?.close) {
