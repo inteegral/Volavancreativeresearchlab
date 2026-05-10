@@ -147,7 +147,7 @@ export function ResidencyContent({
               >
                 <div className="aspect-video w-full rounded-sm overflow-hidden max-w-3xl">
                   <VideoPlayer
-                    videoId={program.video.videoId}
+                    videoId={program.video.videoId.trim()}
                     startTime={program.video.startTime}
                     endTime={program.video.endTime}
                     autoplay={true}

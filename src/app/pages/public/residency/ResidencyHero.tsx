@@ -153,6 +153,23 @@ export function ResidencyHero({
             </div>
           )}
 
+          {/* Open Call + Deadline */}
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-8 items-center text-volavan-cream/50">
+            <span className="font-['Manrope'] text-[10px] uppercase tracking-[0.2em] flex items-center gap-1.5">
+              <span className="text-volavan-cream/30">Open Call</span>
+              {residency.callDates?.open && (
+                <><span className="opacity-30 mx-0.5">·</span>{new Date(residency.callDates.open).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</>
+              )}
+            </span>
+            <span className="hidden sm:inline w-px h-3 bg-volavan-cream/10" />
+            <span className="font-['Manrope'] text-[10px] uppercase tracking-[0.2em] flex items-center gap-1.5">
+              <span className="text-volavan-cream/30">Deadline</span>
+              {residency.callDates?.close && (
+                <><span className="opacity-30 mx-0.5">·</span>{new Date(residency.callDates.close).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</>
+              )}
+            </span>
+          </div>
+
           {/* Disciplines */}
           {program.disciplines && program.disciplines.length > 0 && (
             <div className="flex flex-wrap justify-center gap-2 md:gap-5 max-w-sm md:max-w-xl">
