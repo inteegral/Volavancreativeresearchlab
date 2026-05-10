@@ -2,18 +2,12 @@ import { useState, useMemo, useRef } from "react";
 import { Link } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
 import { ChevronDown, ArrowUpRight, Filter, Calendar } from "lucide-react";
-
-// Dynamically compute whether an edition's open call is active right now
-function isOpenCallActive(edition: any): boolean {
-  if (!edition?.callDates?.open || !edition?.callDates?.close) return false;
-  const now = new Date();
-  return now >= new Date(edition.callDates.open) && now <= new Date(edition.callDates.close);
-}
+import { getStatus, getStatusBadge } from "../../lib/residency-status";
+import { VButton } from "../../components/ui/VButton";
 
 function formatShortDate(dateStr: string): string {
   return new Date(dateStr).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 }
-import { VButton } from "../../components/ui/VButton";
 import { getImageUrl } from "../../lib/sanity";
 import { SEOHead } from "../../components/SEOHead";
 import { SanityImage } from "../../components/SanityImage";
@@ -142,42 +136,42 @@ export default function Residencies() {
             <AnimatePresence>
               {[...programs]
                 .sort((a, b) => {
+                  // Pick the most relevant edition: first non-completed, else first
                   const getRelevantEdition = (p: typeof a) =>
-                    p.editions?.find(e => isOpenCallActive(e)) || p.editions?.[0];
+                    p.editions?.find(e => getStatus(e) !== 'completed') ?? p.editions?.[0];
 
-                  const isPast = (p: typeof a) => {
+                  const isCompleted = (p: typeof a) => {
                     const ed = getRelevantEdition(p);
-                    if (!ed?.startDate) return true;
-                    return new Date(ed.startDate) < new Date();
+                    return !ed || getStatus(ed) === 'completed';
                   };
 
-                  const aPast = isPast(a);
-                  const bPast = isPast(b);
+                  const aCompleted = isCompleted(a);
+                  const bCompleted = isCompleted(b);
 
-                  // Active/future first, past last
-                  if (aPast !== bPast) return aPast ? 1 : -1;
+                  // Active/future first, completed last
+                  if (aCompleted !== bCompleted) return aCompleted ? 1 : -1;
 
-                  // Within same group: active sorted asc by date, past sorted desc
                   const getTime = (p: typeof a) => {
                     const ed = getRelevantEdition(p);
                     return ed?.startDate ? new Date(ed.startDate).getTime() : Infinity;
                   };
-                  return aPast
-                    ? getTime(b) - getTime(a)   // past: most recent first
-                    : getTime(a) - getTime(b);   // future: earliest first
+                  return aCompleted
+                    ? getTime(b) - getTime(a)   // completed: most recent first
+                    : getTime(a) - getTime(b);  // active: earliest first
                 })
                 .map((program, index) => {
-                // Prioritize edition with active open call, then latest
-                const openCallEdition = program.editions?.find(e => isOpenCallActive(e));
-                const targetEdition = openCallEdition || program.editions?.[0];
+                // Pick the most relevant (non-completed) edition, fallback to latest
+                const targetEdition =
+                  program.editions?.find(e => getStatus(e) !== 'completed') ??
+                  program.editions?.[0];
 
-                // Dynamic status flags
-                const hasActiveOpenCall = !!openCallEdition;
-                // Show call dates from target edition only if deadline hasn't passed yet
-                const openCallOpen = targetEdition?.callDates?.open;
-                const openCallDeadline = targetEdition?.callDates?.close;
-                const callDeadlinePassed = openCallDeadline ? new Date(openCallDeadline) < new Date() : false;
-                const hasCallDates = !callDeadlinePassed && !!(openCallOpen || openCallDeadline);
+                const editionStatus = targetEdition ? getStatus(targetEdition) : 'upcoming';
+                const statusBadge = getStatusBadge(editionStatus);
+                const hasActiveOpenCall = editionStatus === 'open_call';
+                // Show call dates only while open call is active
+                const openCallOpen = hasActiveOpenCall ? targetEdition?.callDates?.open : undefined;
+                const openCallDeadline = hasActiveOpenCall ? targetEdition?.callDates?.close : undefined;
+                const hasCallDates = !!(openCallOpen || openCallDeadline);
 
                 // Dates from the target edition
                 const startDate = targetEdition?.startDate;
@@ -208,17 +202,20 @@ export default function Residencies() {
                           <div className="w-full h-full bg-volavan-earth-dark" />
                         )}
 
-                        {/* Open Call badge — top-left inside image */}
-                        {hasActiveOpenCall && (
+                        {/* Status badge — top-left inside image */}
+                        {editionStatus !== 'completed' && (
                           <motion.div
                             initial={{ opacity: 0, y: -6 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.3 + index * 0.1 }}
-                            className="absolute top-4 left-4 z-30 flex items-center gap-2 px-3 py-1.5 bg-volavan-earth/70 backdrop-blur-sm border border-volavan-aqua/50 rounded-sm"
+                            className={`absolute top-4 left-4 z-30 flex items-center gap-2 px-3 py-1.5 bg-volavan-earth/70 backdrop-blur-sm border ${statusBadge.borderColor} rounded-sm`}
                           >
-                            <div className="w-1.5 h-1.5 rounded-full bg-volavan-aqua animate-pulse" />
-                            <span className="font-['Manrope'] text-[10px] uppercase tracking-[0.15em] text-volavan-aqua font-light">
-                              Open Call
+                            {hasActiveOpenCall && <div className="w-1.5 h-1.5 rounded-full bg-volavan-aqua animate-pulse" />}
+                            <span
+                              className="font-['Manrope'] text-[10px] uppercase tracking-[0.15em] font-light"
+                              style={{ color: statusBadge.color }}
+                            >
+                              {statusBadge.label}
                             </span>
                           </motion.div>
                         )}
