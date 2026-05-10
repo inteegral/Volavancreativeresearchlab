@@ -73,7 +73,7 @@ export function UpcomingResidenciesSection({ programs, programsLoading }: Upcomi
               const isOpenCall = editionStatus === 'open_call';
               const isOpenSoon = editionStatus === 'open_soon';
               const coverImage = latestEdition.coverImage;
-              const showCallDates = isOpenCall || isOpenSoon;
+              const showCallDates = true;
               const openCallOpen = latestEdition.callDates?.open;
               const openCallDeadline = latestEdition.callDates?.close;
 

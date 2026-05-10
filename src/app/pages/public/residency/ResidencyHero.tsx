@@ -130,7 +130,7 @@ export function ResidencyHero({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="flex flex-col items-center gap-6 pb-10"
+          className="flex flex-col items-center gap-6 mt-auto pb-10"
         >
           {/* Dates + Location */}
           {(formattedDates || (program.location && program.country)) && (
@@ -178,7 +178,7 @@ export function ResidencyHero({
 
           {/* Disciplines */}
           {program.disciplines && program.disciplines.length > 0 && (
-            <div className="flex flex-wrap justify-center gap-2 md:gap-5 max-w-sm md:max-w-xl">
+            <div className="flex flex-wrap justify-center gap-2 md:gap-5 max-w-sm md:max-w-xl pt-5">
               {program.disciplines.slice(0, 3).map((discipline, i) => (
                 <span
                   key={i}
@@ -222,12 +222,12 @@ export function ResidencyHero({
               }
               className="flex flex-col items-center gap-2 text-volavan-cream/40 hover:text-volavan-aqua transition-colors cursor-pointer"
             >
-              <span className="text-[8px] uppercase tracking-[0.2em] font-['Manrope']">Scroll</span>
+              <span className="text-[9px] uppercase tracking-[0.25em] font-['Manrope']">Scroll</span>
               <motion.div
-                animate={{ y: [0, 6, 0] }}
+                animate={{ y: [0, 8, 0] }}
                 transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
               >
-                <ArrowDown size={16} strokeWidth={1} />
+                <ArrowDown size={22} strokeWidth={1} />
               </motion.div>
             </motion.button>
           )}
