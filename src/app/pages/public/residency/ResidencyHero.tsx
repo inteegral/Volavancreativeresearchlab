@@ -41,7 +41,7 @@ export function ResidencyHero({
     ? program.otherEditions?.find((ed) => {
         if (!ed) return false;
         const s = getStatus(ed);
-        return s === 'upcoming' || s === 'open_call' || s === 'under_selection' || s === 'in_residence';
+        return s === 'upcoming' || s === 'open_call' || s === 'reviewing' || s === 'in_residence';
       })
     : null;
 
@@ -84,7 +84,7 @@ export function ResidencyHero({
 
         {/* ZONE 1 – top spacer + status badge (accounts for fixed header) */}
         <div className="pt-32 flex justify-center">
-          {statusBadge && (
+          {statusBadge && currentStatus !== 'upcoming' && (
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}

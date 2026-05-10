@@ -1,7 +1,7 @@
 export type ResidencyStatus =
   | 'upcoming'
   | 'open_call'
-  | 'under_selection'
+  | 'reviewing'
   | 'in_residence'
   | 'completed';
 
@@ -31,7 +31,7 @@ export function getStatus(edition: {
 
   // Under selection (call closed, residency start date known and in the future)
   if (callDates?.close && now > new Date(callDates.close)) {
-    if (residencyDates?.start && now < new Date(residencyDates.start)) return 'under_selection';
+    if (residencyDates?.start && now < new Date(residencyDates.start)) return 'reviewing';
     return 'completed';
   }
 
@@ -48,7 +48,7 @@ export function getStatusBadge(status: ResidencyStatus, year?: number): StatusBa
   switch (status) {
     case 'open_call':
       return { label: 'Open Call', color: '#B5DAD9', bgColor: 'bg-volavan-aqua/15', borderColor: 'border-volavan-aqua/40' };
-    case 'under_selection':
+    case 'reviewing':
       return { label: 'Reviewing Applications', color: '#F5F5F0', bgColor: 'bg-volavan-cream/10', borderColor: 'border-volavan-cream/30' };
     case 'in_residence':
       return { label: 'In Residence', color: '#B5DAD9', bgColor: 'bg-volavan-aqua/15', borderColor: 'border-volavan-aqua/40' };

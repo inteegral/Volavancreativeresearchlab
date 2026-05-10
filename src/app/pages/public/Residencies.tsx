@@ -21,7 +21,7 @@ const FILTER_LABELS: Record<FilterStatus, string> = {
   all: 'All',
   upcoming: 'Upcoming',
   open_call: 'Open Call',
-  under_selection: 'Reviewing Applications',
+  reviewing: 'Reviewing Applications',
   in_residence: 'In Residence',
   completed: 'Closed',
 };
@@ -46,7 +46,7 @@ export default function Residencies() {
       const ed = p.editions?.find(e => getStatus(e) !== 'completed') ?? p.editions?.[0];
       if (ed) statuses.add(getStatus(ed));
     });
-    const order: ResidencyStatus[] = ['open_call', 'in_residence', 'under_selection', 'upcoming', 'completed'];
+    const order: ResidencyStatus[] = ['open_call', 'in_residence', 'reviewing', 'upcoming', 'completed'];
     return ['all', ...order.filter(s => statuses.has(s))];
   }, [programs]);
 
