@@ -1,19 +1,14 @@
 import { useState, useMemo, useRef } from "react";
-import { Link } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
-import { ChevronDown, ArrowUpRight, Filter, Calendar } from "lucide-react";
-import { getStatus, getStatusBadge, type ResidencyStatus } from "../../lib/residency-status";
+import { ChevronDown, Filter } from "lucide-react";
+import { getStatus, type ResidencyStatus } from "../../lib/residency-status";
 import { VButton } from "../../components/ui/VButton";
-
-function formatShortDate(dateStr: string): string {
-  return new Date(dateStr).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
-}
-import { getImageUrl } from "../../lib/sanity";
 import { SEOHead } from "../../components/SEOHead";
-import { SanityImage } from "../../components/SanityImage";
 import { SkeletonCard } from "../../components/ui/skeleton";
+import { ProgramCard } from "../../components/ProgramCard";
 import { useLanguage } from "../../contexts/LanguageContext";
 import { useAllPrograms, useResidenciesPage, useSettings } from "../../hooks/useSanity";
+import type { SanityProgram } from "../../lib/sanity";
 
 type FilterStatus = 'all' | ResidencyStatus;
 
@@ -24,7 +19,12 @@ const FILTER_LABELS: Record<FilterStatus, string> = {
   open_call: 'Open Call',
   reviewing: 'Reviewing Applications',
   in_residence: 'In Residence',
-  completed: 'Closed',
+  completed: 'Completed',
+};
+
+type CompletedItem = {
+  program: SanityProgram;
+  edition: NonNullable<SanityProgram['editions']>[0];
 };
 
 export default function Residencies() {
@@ -32,11 +32,9 @@ export default function Residencies() {
   const gridRef = useRef<HTMLDivElement>(null);
   const [activeFilter, setActiveFilter] = useState<FilterStatus>('all');
 
-  // Fetch data with SWR
   const { programs, isLoading: programsLoading, isError: programsError } = useAllPrograms();
   const { page: pageContent, isLoading: pageLoading, isError: pageError } = useResidenciesPage();
   const { settings, isLoading: settingsLoading, isError: settingsError } = useSettings();
-
 
   const loading = programsLoading || pageLoading || settingsLoading;
   const error = programsError || pageError || settingsError;
@@ -46,20 +44,30 @@ export default function Residencies() {
     programs.forEach(p => {
       const ed = p.editions?.find(e => getStatus(e) !== 'completed') ?? p.editions?.[0];
       if (ed) statuses.add(getStatus(ed));
+      if (p.editions?.some(e => getStatus(e) === 'completed')) statuses.add('completed');
     });
     const order: ResidencyStatus[] = ['open_call', 'open_soon', 'in_residence', 'reviewing', 'upcoming', 'completed'];
     return ['all', ...order.filter(s => statuses.has(s))];
   }, [programs]);
 
-  // Smooth scroll to grid
-  const scrollToGrid = () => {
-    gridRef.current?.scrollIntoView({ 
-      behavior: 'smooth',
-      block: 'start'
+  const completedItems = useMemo<CompletedItem[]>(() => {
+    const items: CompletedItem[] = [];
+    programs.forEach(p => {
+      p.editions?.forEach(e => {
+        if (getStatus(e) === 'completed') items.push({ program: p, edition: e });
+      });
     });
+    return items.sort((a, b) => {
+      const aTime = a.edition.startDate ? new Date(a.edition.startDate).getTime() : 0;
+      const bTime = b.edition.startDate ? new Date(b.edition.startDate).getTime() : 0;
+      return bTime - aTime;
+    });
+  }, [programs]);
+
+  const scrollToGrid = () => {
+    gridRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  // Show error state
   if (error) {
     return (
       <div className="w-full min-h-screen bg-volavan-earth text-volavan-cream px-6 py-24 flex items-center justify-center">
@@ -73,20 +81,19 @@ export default function Residencies() {
 
   return (
     <div className="w-full min-h-screen bg-volavan-earth text-volavan-cream px-6 py-24 md:py-32 max-w-7xl mx-auto">
-      <SEOHead 
+      <SEOHead
         title={pageContent?.seo?.title || "Art Residencies"}
         description={pageContent?.seo?.description || "Discover our artistic residency programs at VOLAVAN."}
         url="/residencies"
         image={settings?.defaultSeo?.ogImage?.asset?.url}
       />
-      
-      {/* 1. HEADER SECTION */}
+
+      {/* 1. HEADER */}
       <div className="w-full mb-32 max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
-          
           <div className="space-y-6 max-w-2xl">
             {pageContent?.supertitle && (
-              <motion.span 
+              <motion.span
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="inline-block font-['Manrope'] text-sm uppercase tracking-[0.25em] text-volavan-aqua"
@@ -95,7 +102,7 @@ export default function Residencies() {
               </motion.span>
             )}
             {pageContent?.title && (
-              <motion.h1 
+              <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
@@ -105,7 +112,7 @@ export default function Residencies() {
               </motion.h1>
             )}
             {pageContent?.introText && (
-              <motion.p 
+              <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
@@ -115,7 +122,7 @@ export default function Residencies() {
               </motion.p>
             )}
             {pageContent?.callToAction && (
-              <motion.p 
+              <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
@@ -125,18 +132,10 @@ export default function Residencies() {
               </motion.p>
             )}
           </div>
-
         </div>
 
-        {/* Scroll Down Button */}
         <div className="flex justify-center -mt-32 md:-mt-28">
-          <VButton
-            onClick={scrollToGrid}
-            variant="outline-aqua"
-            size="sm"
-            arrow={false}
-            aria-label="Scroll to programmes"
-          >
+          <VButton onClick={scrollToGrid} variant="outline-aqua" size="sm" arrow={false} aria-label="Scroll to programmes">
             Explore
             <ChevronDown size={12} strokeWidth={1.5} className="transition-transform group-hover:translate-y-0.5" />
           </VButton>
@@ -152,17 +151,12 @@ export default function Residencies() {
                 key={f}
                 onClick={() => setActiveFilter(f)}
                 className={`pb-4 font-['Manrope'] text-[11px] uppercase tracking-[0.25em] transition-colors relative whitespace-nowrap ${
-                  activeFilter === f
-                    ? 'text-volavan-cream'
-                    : 'text-volavan-cream/30 hover:text-volavan-cream/60'
+                  activeFilter === f ? 'text-volavan-cream' : 'text-volavan-cream/30 hover:text-volavan-cream/60'
                 }`}
               >
                 {FILTER_LABELS[f]}
                 {activeFilter === f && (
-                  <motion.div
-                    layoutId="filter-indicator"
-                    className="absolute bottom-0 left-0 right-0 h-px bg-volavan-cream"
-                  />
+                  <motion.div layoutId="filter-indicator" className="absolute bottom-0 left-0 right-0 h-px bg-volavan-cream" />
                 )}
               </button>
             ))}
@@ -170,19 +164,33 @@ export default function Residencies() {
         </div>
       )}
 
-      {/* 3. PROGRAMS GRID */}
+      {/* 3. GRID */}
       <div ref={gridRef} className="w-full max-w-7xl mx-auto">
         {loading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-20 w-full">
-            <SkeletonCard />
-            <SkeletonCard />
-            <SkeletonCard />
+            <SkeletonCard /><SkeletonCard /><SkeletonCard />
           </div>
+        ) : activeFilter === 'completed' ? (
+          <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-20 w-full">
+            <AnimatePresence>
+              {completedItems.map(({ program, edition }, index) => (
+                <ProgramCard
+                  key={edition._id ?? edition.slug}
+                  href={`/residencies/${edition.slug}`}
+                  image={edition.coverImage ?? program.heroImage}
+                  name={program.name}
+                  year={edition.year}
+                  tagline={program.tagline}
+                  startDate={edition.startDate}
+                  endDate={edition.endDate}
+                  status="completed"
+                  index={index}
+                />
+              ))}
+            </AnimatePresence>
+          </motion.div>
         ) : (
-          <motion.div 
-            layout
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-20 w-full"
-          >
+          <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-20 w-full">
             <AnimatePresence>
               {[...programs]
                 .filter(p => {
@@ -191,165 +199,58 @@ export default function Residencies() {
                   return getStatus(ed) === activeFilter;
                 })
                 .sort((a, b) => {
-                  // Pick the most relevant edition: first non-completed, else first
-                  const getRelevantEdition = (p: typeof a) =>
+                  const relevant = (p: typeof a) =>
                     p.editions?.find(e => getStatus(e) !== 'completed') ?? p.editions?.[0];
-
                   const isCompleted = (p: typeof a) => {
-                    const ed = getRelevantEdition(p);
+                    const ed = relevant(p);
                     return !ed || getStatus(ed) === 'completed';
                   };
-
                   const aCompleted = isCompleted(a);
                   const bCompleted = isCompleted(b);
-
-                  // Active/future first, completed last
                   if (aCompleted !== bCompleted) return aCompleted ? 1 : -1;
-
                   const getTime = (p: typeof a) => {
-                    const ed = getRelevantEdition(p);
+                    const ed = relevant(p);
                     return ed?.startDate ? new Date(ed.startDate).getTime() : Infinity;
                   };
-                  return aCompleted
-                    ? getTime(b) - getTime(a)   // completed: most recent first
-                    : getTime(a) - getTime(b);  // active: earliest first
+                  return aCompleted ? getTime(b) - getTime(a) : getTime(a) - getTime(b);
                 })
                 .map((program, index) => {
-                // Pick the most relevant (non-completed) edition, fallback to latest
-                const targetEdition =
-                  program.editions?.find(e => getStatus(e) !== 'completed') ??
-                  program.editions?.[0];
+                  const targetEdition =
+                    program.editions?.find(e => getStatus(e) !== 'completed') ?? program.editions?.[0];
+                  const status = targetEdition ? getStatus(targetEdition) : 'upcoming';
+                  const showCallDates = status === 'open_call' || status === 'open_soon';
 
-                const editionStatus = targetEdition ? getStatus(targetEdition) : 'upcoming';
-                const statusBadge = getStatusBadge(editionStatus);
-                const hasActiveOpenCall = editionStatus === 'open_call';
-                const isOpenSoon = editionStatus === 'open_soon';
-                // Show call dates when open call is active or opening soon
-                const openCallOpen = (hasActiveOpenCall || isOpenSoon) ? targetEdition?.callDates?.open : undefined;
-                const openCallDeadline = (hasActiveOpenCall || isOpenSoon) ? targetEdition?.callDates?.close : undefined;
-                const hasCallDates = !!(openCallOpen || openCallDeadline);
-
-                // Dates from the target edition
-                const startDate = targetEdition?.startDate;
-                const endDate = targetEdition?.endDate;
-
-                return (
-                  <motion.div
-                    layout
-                    key={program._id}
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    className="group flex flex-col justify-between h-full pt-6 cursor-pointer min-w-0"
-                  >
-                    <Link to={targetEdition ? `/residencies/${targetEdition.slug}` : `/residencies`} className="flex flex-col h-full gap-8">
-                      
-                      {/* Card Image */}
-                      <div className="w-full aspect-square overflow-hidden bg-volavan-earth-dark relative border border-volavan-cream/10 group-hover:border-volavan-aqua/50 transition-colors duration-500">
-                        <div className="absolute inset-0 bg-volavan-earth/20 group-hover:bg-transparent transition-colors z-10 mix-blend-multiply" />
-                        {program.heroImage ? (
-                          <img
-                            src={getImageUrl(program.heroImage, 800, 800)}
-                            alt={program.name}
-                            className="w-full h-full object-cover transform scale-100 group-hover:scale-110 transition-transform duration-1000 ease-out filter grayscale group-hover:grayscale-0 opacity-80 group-hover:opacity-100"
-                          />
-                        ) : (
-                          <div className="w-full h-full bg-volavan-earth-dark" />
-                        )}
-
-                        {/* Status badge — top-left inside image */}
-                        {editionStatus !== 'upcoming' && (
-                          <motion.div
-                            initial={{ opacity: 0, y: -6 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.3 + index * 0.1 }}
-                            className={`absolute top-4 left-4 z-30 flex items-center gap-2 px-3 py-1.5 bg-volavan-earth/70 backdrop-blur-sm border ${statusBadge.borderColor} rounded-sm`}
-                          >
-                            {hasActiveOpenCall && <div className="w-1.5 h-1.5 rounded-full bg-volavan-aqua animate-pulse" />}
-                            <span
-                              className="font-['Manrope'] text-[10px] uppercase tracking-[0.15em] font-light"
-                              style={{ color: statusBadge.color }}
-                            >
-                              {statusBadge.label}
-                            </span>
-                          </motion.div>
-                        )}
-
-                        {/* Tagline Overlay */}
-                        {program.tagline && (
-                          <div className="absolute inset-0 z-20 flex items-end">
-                            <div className="absolute inset-0 bg-gradient-to-t from-volavan-earth via-volavan-earth/55 to-transparent" />
-                            <p className="relative font-['Cormorant_Garamond'] text-lg md:text-xl text-volavan-cream italic leading-tight p-6" style={{ textShadow: '0 2px 8px rgba(106, 116, 108, 0.8)' }}>
-                              {program.tagline}
-                            </p>
-                          </div>
-                        )}
-                      </div>
-
-                      {/* Text Content */}
-                      <div className="space-y-3">
-                        {/* Title */}
-                        <div className="flex justify-between items-end gap-4">
-                          <h2 className="font-['Cormorant_Garamond'] text-2xl md:text-4xl italic text-volavan-cream leading-[0.95] tracking-tight group-hover:text-volavan-aqua transition-colors duration-500 hyphens-auto">
-                            {program.name}
-                          </h2>
-                          <ArrowUpRight className="text-volavan-cream opacity-0 group-hover:opacity-100 transition-opacity duration-300 mb-1 flex-shrink-0" size={20} />
-                        </div>
-
-                        {/* Dates */}
-                        {startDate && endDate && (
-                          <p className="font-['Manrope'] text-[13px] uppercase tracking-[0.18em] text-volavan-cream/40 flex items-center gap-2">
-                            <Calendar size={11} className="opacity-60 shrink-0" />
-                            {formatShortDate(startDate)} — {formatShortDate(endDate)}
-                          </p>
-                        )}
-
-                        {/* Open call dates */}
-                        {hasCallDates && (
-                          <div className="flex flex-col gap-1 mt-1 pl-3 border-l border-volavan-aqua/20">
-                            {openCallOpen && (
-                              <p className="font-['Manrope'] text-[10px] uppercase tracking-[0.18em] text-volavan-aqua/50">
-                                <span className="text-volavan-aqua/30">Open Call</span>
-                                <span className="mx-1.5 opacity-30">·</span>
-                                {formatShortDate(openCallOpen)}
-                              </p>
-                            )}
-                            {openCallDeadline && (
-                              <p className="font-['Manrope'] text-[10px] uppercase tracking-[0.18em] text-volavan-aqua/70">
-                                <span className="text-volavan-aqua/40">Deadline</span>
-                                <span className="mx-1.5 opacity-30">·</span>
-                                {formatShortDate(openCallDeadline)}
-                              </p>
-                            )}
-                          </div>
-                        )}
-                      </div>
-
-                    </Link>
-                  </motion.div>
-                );
-              })}
+                  return (
+                    <ProgramCard
+                      key={program._id}
+                      href={targetEdition ? `/residencies/${targetEdition.slug}` : '/residencies'}
+                      image={program.heroImage}
+                      name={program.name}
+                      tagline={program.tagline}
+                      startDate={targetEdition?.startDate}
+                      endDate={targetEdition?.endDate}
+                      status={status}
+                      callOpenDate={showCallDates ? targetEdition?.callDates?.open : undefined}
+                      callCloseDate={showCallDates ? targetEdition?.callDates?.close : undefined}
+                      index={index}
+                    />
+                  );
+                })}
             </AnimatePresence>
           </motion.div>
         )}
 
-        {!loading && programs.filter(p => {
+        {!loading && activeFilter !== 'completed' && programs.filter(p => {
           if (activeFilter === 'all') return true;
           const ed = p.editions?.find(e => getStatus(e) !== 'completed') ?? p.editions?.[0];
           return getStatus(ed) === activeFilter;
         }).length === 0 && (
-          <motion.div 
-            initial={{ opacity: 0 }} 
-            animate={{ opacity: 1 }}
-            className="w-full py-32 flex flex-col items-center justify-center text-volavan-cream/40"
-          >
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="w-full py-32 flex flex-col items-center justify-center text-volavan-cream/40">
             <Filter size={32} className="mb-4 opacity-50" strokeWidth={1} />
             <p className="font-['Manrope'] text-sm uppercase tracking-[0.2em]">No programs found</p>
           </motion.div>
         )}
       </div>
-
     </div>
   );
 }

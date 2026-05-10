@@ -63,7 +63,7 @@ export function getStatusBadge(status: ResidencyStatus): StatusBadge {
     case 'in_residence':
       return { label: 'In Residence', color: '#B5DAD9', bgColor: 'bg-volavan-aqua/15', borderColor: 'border-volavan-aqua/40' };
     case 'completed':
-      return { label: 'Closed', color: '#F5F5F0', bgColor: 'bg-volavan-cream/5', borderColor: 'border-volavan-cream/20' };
+      return { label: 'Completed', color: '#F5F5F0', bgColor: 'bg-volavan-cream/5', borderColor: 'border-volavan-cream/20' };
     case 'upcoming':
     default:
       return { label: 'Upcoming', color: '#F5F5F0', bgColor: 'bg-volavan-cream/10', borderColor: 'border-volavan-cream/30' };

@@ -73,9 +73,9 @@ export function UpcomingResidenciesSection({ programs, programsLoading }: Upcomi
               const isOpenCall = editionStatus === 'open_call';
               const isOpenSoon = editionStatus === 'open_soon';
               const coverImage = latestEdition.coverImage;
-              const openCallOpen = (isOpenCall || isOpenSoon) ? latestEdition.callDates?.open : undefined;
-              const openCallDeadline = (isOpenCall || isOpenSoon) ? latestEdition.callDates?.close : undefined;
-              const hasCallDates = !!(openCallOpen || openCallDeadline);
+              const showCallDates = isOpenCall || isOpenSoon;
+              const openCallOpen = latestEdition.callDates?.open;
+              const openCallDeadline = latestEdition.callDates?.close;
 
               return (
                 <Link
@@ -121,22 +121,16 @@ export function UpcomingResidenciesSection({ programs, programsLoading }: Upcomi
                         {formatShortDate(latestEdition.startDate)} — {formatShortDate(latestEdition.endDate)}
                       </p>
                     )}
-                    {hasCallDates && (
+                    {showCallDates && (
                       <div className="flex flex-col gap-1 pl-3 border-l border-volavan-aqua/20">
-                        {openCallOpen && (
-                          <p className="font-['Manrope'] text-[10px] uppercase tracking-[0.18em] text-volavan-aqua/50">
-                            <span className="text-volavan-aqua/30">Open Call</span>
-                            <span className="mx-1.5 opacity-30">·</span>
-                            {formatShortDate(openCallOpen)}
-                          </p>
-                        )}
-                        {openCallDeadline && (
-                          <p className="font-['Manrope'] text-[10px] uppercase tracking-[0.18em] text-volavan-aqua/70">
-                            <span className="text-volavan-aqua/40">Deadline</span>
-                            <span className="mx-1.5 opacity-30">·</span>
-                            {formatShortDate(openCallDeadline)}
-                          </p>
-                        )}
+                        <p className="font-['Manrope'] text-[10px] uppercase tracking-[0.18em] text-volavan-aqua/50">
+                          <span className="text-volavan-aqua/30">Open Call</span>
+                          {openCallOpen && <><span className="mx-1.5 opacity-30">·</span>{formatShortDate(openCallOpen)}</>}
+                        </p>
+                        <p className="font-['Manrope'] text-[10px] uppercase tracking-[0.18em] text-volavan-aqua/70">
+                          <span className="text-volavan-aqua/40">Deadline</span>
+                          {openCallDeadline && <><span className="mx-1.5 opacity-30">·</span>{formatShortDate(openCallDeadline)}</>}
+                        </p>
                       </div>
                     )}
                     {latestEdition.location && (
