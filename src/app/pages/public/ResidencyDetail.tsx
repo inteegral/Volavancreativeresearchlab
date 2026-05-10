@@ -9,35 +9,7 @@ import { useLanguage } from "../../contexts/LanguageContext";
 import { ResidencyHero } from "./residency/ResidencyHero";
 import { ResidencyContent } from "./residency/ResidencyContent";
 import { ResidencyCTA } from "./residency/ResidencyCTA";
-
-function getStatus(edition: any): string | null {
-  if (!edition) return null;
-
-  const now = new Date();
-  const { callDates, residencyDates } = edition;
-
-  if (residencyDates?.start && residencyDates?.end) {
-    if (now >= new Date(residencyDates.start) && now <= new Date(residencyDates.end)) return 'ongoing';
-  }
-  if (callDates?.open && callDates?.close) {
-    if (now >= new Date(callDates.open) && now <= new Date(callDates.close)) return 'open_call';
-  }
-  if (callDates?.close && residencyDates?.start) {
-    if (new Date(callDates.close) < now && now < new Date(residencyDates.start)) return 'upcoming';
-  }
-  if (!callDates && residencyDates?.start) {
-    if (now < new Date(residencyDates.start)) return 'open_call_soon';
-  }
-  return null;
-}
-
-function getStatusBadge(currentStatus: string | null, isPastEdition: boolean, year?: number) {
-  if (currentStatus === 'ongoing') return { label: 'Happening Now', color: '#B5DAD9', bgColor: 'bg-volavan-aqua/15', borderColor: 'border-volavan-aqua/40' };
-  if (currentStatus === 'upcoming') return { label: 'Upcoming', color: '#F5F5F0', bgColor: 'bg-volavan-cream/10', borderColor: 'border-volavan-cream/30' };
-  if (currentStatus === 'open_call_soon') return { label: 'Open Call Soon', color: '#B5DAD9', bgColor: 'bg-volavan-aqua/10', borderColor: 'border-volavan-aqua/30' };
-  if (isPastEdition && year) return { label: `Edition ${year}`, color: '#F5F5F0', bgColor: 'bg-volavan-cream/5', borderColor: 'border-volavan-cream/20' };
-  return null;
-}
+import { getStatus, getStatusBadge } from "../../lib/residency-status";
 
 export default function ResidencyDetail() {
   const { slug } = useParams();
@@ -46,9 +18,7 @@ export default function ResidencyDetail() {
   const { settings } = useSettings();
 
   const currentStatus = getStatus(residency);
-  const isPastEdition = residency?.residencyDates?.end
-    ? new Date(residency.residencyDates.end) < new Date()
-    : false;
+  const isPastEdition = currentStatus === 'completed';
 
   useEffect(() => {
     if (residency?.program) {
@@ -94,7 +64,7 @@ export default function ResidencyDetail() {
   }
 
   const isOpenCall = currentStatus === 'open_call';
-  const statusBadge = getStatusBadge(currentStatus, isPastEdition, residency.year);
+  const statusBadge = getStatusBadge(currentStatus, residency.year);
   const callCloseDate = residency.callDates?.close;
 
   return (
@@ -131,7 +101,6 @@ export default function ResidencyDetail() {
         statusBadge={statusBadge}
         isOpenCall={isOpenCall}
         isPastEdition={isPastEdition}
-        getStatus={getStatus}
       />
 
       <ResidencyContent
@@ -139,7 +108,6 @@ export default function ResidencyDetail() {
         program={program}
         slug={slug!}
         isOpenCall={isOpenCall}
-        isPastEdition={isPastEdition}
         callCloseDate={callCloseDate}
       />
 

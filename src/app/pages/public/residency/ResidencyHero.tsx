@@ -3,22 +3,15 @@ import { VLink } from "../../../components/ui/VButton";
 import { motion } from "motion/react";
 import { getImageUrl } from "../../../lib/sanity";
 import type { SanityResidency, SanityProgram } from "../../../lib/sanity";
-
-interface StatusBadge {
-  label: string;
-  color: string;
-  bgColor: string;
-  borderColor: string;
-}
+import { getStatus, type StatusBadge, type ResidencyStatus } from "../../../lib/residency-status";
 
 interface ResidencyHeroProps {
   residency: SanityResidency;
   program: SanityProgram;
-  currentStatus: string | null;
-  statusBadge: StatusBadge | null;
+  currentStatus: ResidencyStatus;
+  statusBadge: StatusBadge;
   isOpenCall: boolean;
   isPastEdition: boolean;
-  getStatus: (edition: any) => string | null;
 }
 
 export function ResidencyHero({
@@ -28,7 +21,6 @@ export function ResidencyHero({
   statusBadge,
   isOpenCall,
   isPastEdition,
-  getStatus,
 }: ResidencyHeroProps) {
   const heroImage = residency.coverImage;
   const startDate = residency.residencyDates?.start;
@@ -44,12 +36,12 @@ export function ResidencyHero({
     Math.min(13, parseFloat((98 / program.name.length).toFixed(1)))
   );
 
-  // Find a current/upcoming edition to link to (for past editions)
+  // Find an active/upcoming edition to link to when viewing a past one
   const currentEdition = isPastEdition
     ? program.otherEditions?.find((ed) => {
         if (!ed) return false;
         const s = getStatus(ed);
-        return s === 'open_call' || s === 'ongoing' || s === 'upcoming' || s === 'open_call_soon';
+        return s === 'upcoming' || s === 'open_call' || s === 'under_selection' || s === 'in_residence';
       })
     : null;
 

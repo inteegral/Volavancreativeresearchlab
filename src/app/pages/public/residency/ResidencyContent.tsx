@@ -64,7 +64,6 @@ interface ResidencyContentProps {
   program: SanityProgram;
   slug: string;
   isOpenCall: boolean;
-  isPastEdition: boolean;
   callCloseDate?: string;
 }
 
@@ -75,7 +74,6 @@ export function ResidencyContent({
   program,
   slug,
   isOpenCall,
-  isPastEdition,
   callCloseDate,
 }: ResidencyContentProps) {
   const hasArtists = residency.artists && residency.artists.length > 0;
@@ -362,7 +360,7 @@ export function ResidencyContent({
               <EmptyTab />
             ) : (<>
             <h2 className="font-['Cormorant_Garamond'] text-2xl md:text-3xl italic text-volavan-aqua mb-12">
-              {isPastEdition ? 'Selected Artists' : 'Meet the Artists'}
+              Selected Artists
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {residency.artists?.map((item: any, i: number) => {
