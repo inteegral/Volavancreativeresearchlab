@@ -130,7 +130,7 @@ export function ResidencyHero({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="flex flex-col items-center gap-5 pb-10"
+          className="flex flex-col items-center gap-6 pb-10"
         >
           {/* Dates + Location */}
           {(formattedDates || (program.location && program.country)) && (
@@ -154,18 +154,24 @@ export function ResidencyHero({
           )}
 
           {/* Open Call + Deadline */}
-          <div className="flex flex-col sm:flex-row gap-2 sm:gap-8 items-center text-volavan-cream/50">
-            <span className="font-['Manrope'] text-[10px] uppercase tracking-[0.2em] flex items-center gap-1.5">
-              <span className="text-volavan-cream/30">Open Call</span>
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-10 items-center border-t border-volavan-cream/10 pt-6 w-full max-w-2xl justify-center">
+            <span className="font-['Manrope'] text-[11px] uppercase tracking-[0.2em] text-volavan-cream/50 flex items-center gap-3">
+              <span className="text-volavan-cream/25">Open Call</span>
               {residency.callDates?.open && (
-                <><span className="opacity-30 mx-0.5">·</span>{new Date(residency.callDates.open).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</>
+                <>
+                  <span className="w-px h-3 bg-volavan-cream/15 inline-block" />
+                  {new Date(residency.callDates.open).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
+                </>
               )}
             </span>
-            <span className="hidden sm:inline w-px h-3 bg-volavan-cream/10" />
-            <span className="font-['Manrope'] text-[10px] uppercase tracking-[0.2em] flex items-center gap-1.5">
-              <span className="text-volavan-cream/30">Deadline</span>
+            <span className="hidden sm:inline w-px h-3 bg-volavan-cream/15" />
+            <span className="font-['Manrope'] text-[11px] uppercase tracking-[0.2em] text-volavan-cream/50 flex items-center gap-3">
+              <span className="text-volavan-cream/25">Deadline</span>
               {residency.callDates?.close && (
-                <><span className="opacity-30 mx-0.5">·</span>{new Date(residency.callDates.close).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</>
+                <>
+                  <span className="w-px h-3 bg-volavan-cream/15 inline-block" />
+                  {new Date(residency.callDates.close).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
+                </>
               )}
             </span>
           </div>
