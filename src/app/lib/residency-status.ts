@@ -49,7 +49,7 @@ export function getStatusBadge(status: ResidencyStatus, year?: number): StatusBa
     case 'open_call':
       return { label: 'Open Call', color: '#B5DAD9', bgColor: 'bg-volavan-aqua/15', borderColor: 'border-volavan-aqua/40' };
     case 'under_selection':
-      return { label: 'Under Selection', color: '#F5F5F0', bgColor: 'bg-volavan-cream/10', borderColor: 'border-volavan-cream/30' };
+      return { label: 'Reviewing Applications', color: '#F5F5F0', bgColor: 'bg-volavan-cream/10', borderColor: 'border-volavan-cream/30' };
     case 'in_residence':
       return { label: 'In Residence', color: '#B5DAD9', bgColor: 'bg-volavan-aqua/15', borderColor: 'border-volavan-aqua/40' };
     case 'completed':

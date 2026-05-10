@@ -2,7 +2,7 @@ import { useState, useMemo, useRef } from "react";
 import { Link } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
 import { ChevronDown, ArrowUpRight, Filter, Calendar } from "lucide-react";
-import { getStatus, getStatusBadge } from "../../lib/residency-status";
+import { getStatus, getStatusBadge, type ResidencyStatus } from "../../lib/residency-status";
 import { VButton } from "../../components/ui/VButton";
 
 function formatShortDate(dateStr: string): string {
@@ -15,9 +15,21 @@ import { SkeletonCard } from "../../components/ui/skeleton";
 import { useLanguage } from "../../contexts/LanguageContext";
 import { useAllPrograms, useResidenciesPage, useSettings } from "../../hooks/useSanity";
 
+type FilterStatus = 'all' | ResidencyStatus;
+
+const FILTER_LABELS: Record<FilterStatus, string> = {
+  all: 'All',
+  upcoming: 'Upcoming',
+  open_call: 'Open Call',
+  under_selection: 'Reviewing Applications',
+  in_residence: 'In Residence',
+  completed: 'Closed',
+};
+
 export default function Residencies() {
   const { language } = useLanguage();
   const gridRef = useRef<HTMLDivElement>(null);
+  const [activeFilter, setActiveFilter] = useState<FilterStatus>('all');
 
   // Fetch data with SWR
   const { programs, isLoading: programsLoading, isError: programsError } = useAllPrograms();
@@ -27,6 +39,16 @@ export default function Residencies() {
 
   const loading = programsLoading || pageLoading || settingsLoading;
   const error = programsError || pageError || settingsError;
+
+  const availableFilters = useMemo<FilterStatus[]>(() => {
+    const statuses = new Set<ResidencyStatus>();
+    programs.forEach(p => {
+      const ed = p.editions?.find(e => getStatus(e) !== 'completed') ?? p.editions?.[0];
+      if (ed) statuses.add(getStatus(ed));
+    });
+    const order: ResidencyStatus[] = ['open_call', 'in_residence', 'under_selection', 'upcoming', 'completed'];
+    return ['all', ...order.filter(s => statuses.has(s))];
+  }, [programs]);
 
   // Smooth scroll to grid
   const scrollToGrid = () => {
@@ -120,7 +142,34 @@ export default function Residencies() {
         </div>
       </div>
 
-      {/* 2. PROGRAMS GRID */}
+      {/* 2. FILTER BAR */}
+      {!loading && availableFilters.length > 2 && (
+        <div className="w-full max-w-7xl mx-auto mb-16">
+          <div className="flex gap-8 border-b border-volavan-cream/10 flex-wrap">
+            {availableFilters.map(f => (
+              <button
+                key={f}
+                onClick={() => setActiveFilter(f)}
+                className={`pb-4 font-['Manrope'] text-[11px] uppercase tracking-[0.25em] transition-colors relative whitespace-nowrap ${
+                  activeFilter === f
+                    ? 'text-volavan-cream'
+                    : 'text-volavan-cream/30 hover:text-volavan-cream/60'
+                }`}
+              >
+                {FILTER_LABELS[f]}
+                {activeFilter === f && (
+                  <motion.div
+                    layoutId="filter-indicator"
+                    className="absolute bottom-0 left-0 right-0 h-px bg-volavan-cream"
+                  />
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* 3. PROGRAMS GRID */}
       <div ref={gridRef} className="w-full max-w-7xl mx-auto">
         {loading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-20 w-full">
@@ -135,6 +184,11 @@ export default function Residencies() {
           >
             <AnimatePresence>
               {[...programs]
+                .filter(p => {
+                  if (activeFilter === 'all') return true;
+                  const ed = p.editions?.find(e => getStatus(e) !== 'completed') ?? p.editions?.[0];
+                  return getStatus(ed) === activeFilter;
+                })
                 .sort((a, b) => {
                   // Pick the most relevant edition: first non-completed, else first
                   const getRelevantEdition = (p: typeof a) =>
@@ -203,20 +257,22 @@ export default function Residencies() {
                         )}
 
                         {/* Status badge — top-left inside image */}
-                        <motion.div
-                          initial={{ opacity: 0, y: -6 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: 0.3 + index * 0.1 }}
-                          className={`absolute top-4 left-4 z-30 flex items-center gap-2 px-3 py-1.5 bg-volavan-earth/70 backdrop-blur-sm border ${statusBadge.borderColor} rounded-sm`}
-                        >
-                          {hasActiveOpenCall && <div className="w-1.5 h-1.5 rounded-full bg-volavan-aqua animate-pulse" />}
-                          <span
-                            className="font-['Manrope'] text-[10px] uppercase tracking-[0.15em] font-light"
-                            style={{ color: statusBadge.color }}
+                        {editionStatus !== 'upcoming' && (
+                          <motion.div
+                            initial={{ opacity: 0, y: -6 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.3 + index * 0.1 }}
+                            className={`absolute top-4 left-4 z-30 flex items-center gap-2 px-3 py-1.5 bg-volavan-earth/70 backdrop-blur-sm border ${statusBadge.borderColor} rounded-sm`}
                           >
-                            {statusBadge.label}
-                          </span>
-                        </motion.div>
+                            {hasActiveOpenCall && <div className="w-1.5 h-1.5 rounded-full bg-volavan-aqua animate-pulse" />}
+                            <span
+                              className="font-['Manrope'] text-[10px] uppercase tracking-[0.15em] font-light"
+                              style={{ color: statusBadge.color }}
+                            >
+                              {statusBadge.label}
+                            </span>
+                          </motion.div>
+                        )}
 
                         {/* Tagline Overlay */}
                         {program.tagline && (
@@ -276,7 +332,11 @@ export default function Residencies() {
           </motion.div>
         )}
 
-        {!loading && programs.length === 0 && (
+        {!loading && programs.filter(p => {
+          if (activeFilter === 'all') return true;
+          const ed = p.editions?.find(e => getStatus(e) !== 'completed') ?? p.editions?.[0];
+          return getStatus(ed) === activeFilter;
+        }).length === 0 && (
           <motion.div 
             initial={{ opacity: 0 }} 
             animate={{ opacity: 1 }}

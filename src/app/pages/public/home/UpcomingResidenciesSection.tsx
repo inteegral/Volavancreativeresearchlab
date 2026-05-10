@@ -92,15 +92,17 @@ export function UpcomingResidenciesSection({ programs, programsLoading }: Upcomi
                       className="w-full h-full group-hover:scale-105 transition-transform duration-700 saturate-[0.45] opacity-65"
                     />
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-volavan-earth/60 pointer-events-none" />
-                    <div className={`absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 bg-volavan-earth/70 backdrop-blur-sm border ${statusBadge.borderColor} rounded-sm`}>
-                      {isOpenCall && <div className="w-1.5 h-1.5 rounded-full bg-volavan-aqua animate-pulse" />}
-                      <span
-                        className="font-['Manrope'] text-[10px] uppercase tracking-[0.15em] font-light"
-                        style={{ color: statusBadge.color }}
-                      >
-                        {statusBadge.label}
-                      </span>
-                    </div>
+                    {editionStatus !== 'upcoming' && (
+                      <div className={`absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 bg-volavan-earth/70 backdrop-blur-sm border ${statusBadge.borderColor} rounded-sm`}>
+                        {isOpenCall && <div className="w-1.5 h-1.5 rounded-full bg-volavan-aqua animate-pulse" />}
+                        <span
+                          className="font-['Manrope'] text-[10px] uppercase tracking-[0.15em] font-light"
+                          style={{ color: statusBadge.color }}
+                        >
+                          {statusBadge.label}
+                        </span>
+                      </div>
+                    )}
                   </div>
 
                   <div className="p-4 space-y-2 bg-volavan-earth/50 backdrop-blur-sm">
