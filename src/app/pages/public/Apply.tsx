@@ -6,35 +6,7 @@ import { toast } from "sonner";
 import { ArrowLeft, CheckCircle } from "lucide-react";
 import { SEOHead } from "../../components/SEOHead";
 import { VButton } from "../../components/ui/VButton";
-
-// ─── Config per residency ───────────────────────────────────────────────────
-
-const RESIDENCY_CONFIG: Record<string, {
-  name: string;
-  location: string;
-  year: number;
-  startDate?: string;
-  endDate?: string;
-  deadline?: string;
-  formsparkId: string;
-}> = {
-  "systema-26": {
-    name: "SYSTEMA 26",
-    location: "Riga, Latvia",
-    year: 2026,
-    deadline: "May 8, 2026",
-    formsparkId: import.meta.env.VITE_FORMSPARK_SYSTEMA || "",
-  },
-  "phosphene": {
-    name: "PHOS/PHANE",
-    location: "Riga, Latvia",
-    year: 2026,
-    startDate: "2026-06-07",
-    endDate: "2026-06-13",
-    deadline: "May 8, 2026",
-    formsparkId: "OiX6zdV28",
-  },
-};
+import { useResidency } from "../../hooks/useSanity";
 
 function formatDateRange(start: string, end: string): string {
   const s = new Date(start);
@@ -47,7 +19,9 @@ function formatDateRange(start: string, end: string): string {
   return `${s.toLocaleDateString('en-GB', opts)} – ${e.toLocaleDateString('en-GB', { ...opts, year: 'numeric' })}`;
 }
 
-// ─── Types ──────────────────────────────────────────────────────────────────
+function formatDeadline(dateStr: string): string {
+  return new Date(dateStr).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+}
 
 interface FormValues {
   firstName: string;
@@ -57,8 +31,6 @@ interface FormValues {
   statement: string;
   workUrl: string;
 }
-
-// ─── Shared input styles ────────────────────────────────────────────────────
 
 const inputClass = [
   "w-full bg-volavan-cream/5 border border-volavan-cream/20 rounded-sm",
@@ -91,24 +63,35 @@ function Field({ label, hint, error, children }: {
   );
 }
 
-// ─── Page ───────────────────────────────────────────────────────────────────
-
 export default function Apply() {
   const { slug } = useParams<{ slug: string }>();
-  const config = slug ? RESIDENCY_CONFIG[slug] : undefined;
+  const { residency, isLoading } = useResidency(slug);
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm<FormValues>();
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const program = residency?.program;
+  const formsparkId = residency?.formsparkId;
+  const programName = program?.name ?? '';
+  const location = program?.location && program?.country
+    ? `${program.location}, ${program.country}`
+    : program?.location ?? program?.country ?? '';
+  const startDate = residency?.residencyDates?.start;
+  const endDate = residency?.residencyDates?.end;
+  const deadline = residency?.callDates?.close;
+
   const onSubmit = async (data: FormValues) => {
-    if (!config) return;
+    if (!formsparkId) {
+      toast.error("Application form not configured. Please contact us directly.");
+      return;
+    }
     setIsSubmitting(true);
     try {
-      const res = await fetch(`https://submit-form.com/${config.formsparkId}`, {
+      const res = await fetch(`https://submit-form.com/${formsparkId}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ residency: config.name, year: config.year, ...data }),
+        body: JSON.stringify({ residency: programName, year: residency?.year, ...data }),
       });
       if (!res.ok) throw new Error();
       setSubmitted(true);
@@ -120,7 +103,15 @@ export default function Apply() {
     }
   };
 
-  if (!config) {
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-volavan-earth flex items-center justify-center">
+        <div className="w-6 h-6 border border-volavan-aqua/40 border-t-volavan-aqua rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  if (!residency || !program) {
     return (
       <div className="min-h-screen bg-volavan-earth flex flex-col items-center justify-center gap-6 text-volavan-cream">
         <p className="font-['Cormorant_Garamond'] text-3xl italic">No open call found</p>
@@ -151,7 +142,7 @@ export default function Apply() {
             to={`/residencies/${slug}`}
             className="mt-4 font-['Manrope'] text-[9px] uppercase tracking-[0.22em] text-volavan-aqua/60 hover:text-volavan-aqua border-b border-volavan-aqua/20 hover:border-volavan-aqua/60 pb-1 transition-colors"
           >
-            Back to {config.name}
+            Back to {programName}
           </Link>
         </motion.div>
       </div>
@@ -161,8 +152,8 @@ export default function Apply() {
   return (
     <div className="min-h-screen bg-volavan-earth text-volavan-cream">
       <SEOHead
-        title={`Apply — ${config.name} ${config.year}`}
-        description={`Apply to ${config.name}, ${config.location}, ${config.year}.`}
+        title={`Apply — ${programName}${residency.year ? ` ${residency.year}` : ''}`}
+        description={`Apply to ${programName}${location ? `, ${location}` : ''}.`}
         url={`/apply/${slug}`}
       />
 
@@ -174,7 +165,7 @@ export default function Apply() {
           className="group inline-flex items-center gap-2 font-['Manrope'] text-[9px] uppercase tracking-[0.2em] text-volavan-cream/25 hover:text-volavan-cream/60 transition-colors mb-10"
         >
           <ArrowLeft size={11} className="group-hover:-translate-x-0.5 transition-transform" />
-          {config.name}
+          {programName}
         </Link>
 
         {/* Header */}
@@ -183,20 +174,22 @@ export default function Apply() {
             Application
           </p>
           <h1 className="font-['Cormorant_Garamond'] text-4xl md:text-5xl italic text-volavan-cream leading-tight">
-            {config.name}
+            {programName}
           </h1>
           <div className="flex flex-wrap gap-3 mt-4">
-            <span className="font-['Manrope'] text-xs text-volavan-cream/50 bg-volavan-cream/5 border border-volavan-cream/15 rounded-sm px-3 py-1">
-              {config.location}
-            </span>
-            {config.startDate && config.endDate && (
-              <span className="font-['Manrope'] text-xs text-volavan-cream/60 bg-volavan-cream/5 border border-volavan-cream/15 rounded-sm px-3 py-1">
-                {formatDateRange(config.startDate, config.endDate)}
+            {location && (
+              <span className="font-['Manrope'] text-xs text-volavan-cream/50 bg-volavan-cream/5 border border-volavan-cream/15 rounded-sm px-3 py-1">
+                {location}
               </span>
             )}
-            {config.deadline && (
+            {startDate && endDate && (
+              <span className="font-['Manrope'] text-xs text-volavan-cream/60 bg-volavan-cream/5 border border-volavan-cream/15 rounded-sm px-3 py-1">
+                {formatDateRange(startDate, endDate)}
+              </span>
+            )}
+            {deadline && (
               <span className="font-['Manrope'] text-xs text-volavan-aqua/70 bg-volavan-aqua/5 border border-volavan-aqua/20 rounded-sm px-3 py-1">
-                Deadline: {config.deadline}
+                Deadline: {formatDeadline(deadline)}
               </span>
             )}
           </div>
@@ -210,7 +203,7 @@ export default function Apply() {
           onSubmit={handleSubmit(onSubmit)}
           className="space-y-8"
         >
-          {/* Section: Personal info */}
+          {/* Personal info */}
           <div className="space-y-5">
             <p className="font-['Manrope'] text-[10px] uppercase tracking-[0.25em] text-volavan-aqua/50">
               Personal information
@@ -259,7 +252,7 @@ export default function Apply() {
 
           <div className="h-px bg-volavan-cream/10" />
 
-          {/* Section: Artistic statement */}
+          {/* Artistic statement */}
           <div className="space-y-5">
             <p className="font-['Manrope'] text-[10px] uppercase tracking-[0.25em] text-volavan-aqua/50">
               Artistic statement
@@ -301,11 +294,16 @@ export default function Apply() {
               type="submit"
               variant="outline-aqua"
               size="md"
-              disabled={isSubmitting}
-              className={isSubmitting ? "opacity-40 pointer-events-none" : ""}
+              disabled={isSubmitting || !formsparkId}
+              className={(isSubmitting || !formsparkId) ? "opacity-40 pointer-events-none" : ""}
             >
               {isSubmitting ? "Sending…" : "Submit application"}
             </VButton>
+            {!formsparkId && (
+              <p className="font-['Manrope'] text-[10px] text-volavan-cream/30 text-center">
+                Application form not yet configured.
+              </p>
+            )}
           </div>
         </motion.form>
       </div>

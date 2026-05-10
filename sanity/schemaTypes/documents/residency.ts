@@ -157,6 +157,12 @@ export const residency = defineType({
       ],
     }),
     defineField({
+      name: 'formsparkId',
+      title: 'Formspark ID',
+      description: 'The Formspark form ID for this edition\'s application form (e.g. "OiX6zdV28").',
+      type: 'string',
+    }),
+    defineField({
       name: 'seo',
       title: 'SEO',
       description: 'Override program SEO for this edition. Leave all fields empty to inherit from the program.',

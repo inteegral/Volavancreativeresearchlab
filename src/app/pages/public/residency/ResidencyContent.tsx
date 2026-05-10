@@ -81,7 +81,7 @@ export function ResidencyContent({
   callCloseDate,
 }: ResidencyContentProps) {
   const hasArtists = residency.artists && residency.artists.length > 0;
-  const hasStructure = !!program.structure;
+  const hasStructure = !!residency.structure;
   const tabs: { id: TabId; label: string }[] = [
     { id: 'overview', label: 'Overview' },
     { id: 'structure', label: 'Program' },
@@ -350,7 +350,7 @@ export function ResidencyContent({
         {activeTab === 'structure' && (
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             {hasStructure ? (
-              <PortableTextRenderer value={program.structure} />
+              <PortableTextRenderer value={residency.structure} />
             ) : (
               <EmptyTab />
             )}

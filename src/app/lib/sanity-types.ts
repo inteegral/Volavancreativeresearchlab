@@ -180,6 +180,8 @@ export interface SanityResidency {
     title?: string;
     description?: string;
   };
+  structure?: PortableTextBlock[];
+  formsparkId?: string;
   selectedCount?: number;
   program?: SanityProgram;
   location?: SanityLocation;
