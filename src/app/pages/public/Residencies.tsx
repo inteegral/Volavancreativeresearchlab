@@ -218,7 +218,6 @@ export default function Residencies() {
                   const targetEdition =
                     program.editions?.find(e => getStatus(e) !== 'completed') ?? program.editions?.[0];
                   const status = targetEdition ? getStatus(targetEdition) : 'upcoming';
-                  const showCallDates = status === 'open_call' || status === 'open_soon';
 
                   return (
                     <ProgramCard
@@ -230,8 +229,8 @@ export default function Residencies() {
                       startDate={targetEdition?.startDate}
                       endDate={targetEdition?.endDate}
                       status={status}
-                      callOpenDate={showCallDates ? targetEdition?.callDates?.open : undefined}
-                      callCloseDate={showCallDates ? targetEdition?.callDates?.close : undefined}
+                      callOpenDate={targetEdition?.callDates?.open}
+                      callCloseDate={targetEdition?.callDates?.close}
                       index={index}
                     />
                   );

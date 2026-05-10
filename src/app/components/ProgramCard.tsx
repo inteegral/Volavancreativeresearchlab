@@ -37,7 +37,7 @@ export function ProgramCard({
 }: ProgramCardProps) {
   const statusBadge = getStatusBadge(status);
   const showBadge = status !== 'upcoming';
-  const showCallDates = status === 'open_call' || status === 'open_soon';
+  const showCallDates = true;
   const isOpenCall = status === 'open_call';
 
   return (
