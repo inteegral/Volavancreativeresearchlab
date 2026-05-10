@@ -84,7 +84,7 @@ export function ResidencyHero({
 
         {/* ZONE 1 – top spacer + status badge (accounts for fixed header) */}
         <div className="pt-32 flex justify-center">
-          {statusBadge && currentStatus !== 'upcoming' && (
+          {statusBadge && (
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
