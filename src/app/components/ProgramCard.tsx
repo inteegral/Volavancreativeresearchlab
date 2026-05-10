@@ -108,12 +108,10 @@ export function ProgramCard({
             />
           </div>
 
-          {startDate && endDate && (
-            <p className="font-['Manrope'] text-[13px] uppercase tracking-[0.18em] text-volavan-cream/40 flex items-center gap-2">
-              <Calendar size={11} className="opacity-60 shrink-0" />
-              {formatShortDate(startDate)} — {formatShortDate(endDate)}
-            </p>
-          )}
+          <p className="font-['Manrope'] text-[13px] uppercase tracking-[0.18em] text-volavan-cream/40 flex items-center gap-2">
+            <Calendar size={11} className="opacity-60 shrink-0" />
+            {startDate && endDate ? `${formatShortDate(startDate)} — ${formatShortDate(endDate)}` : ''}
+          </p>
 
           {showCallDates && (
             <div className="flex flex-col gap-1 mt-1 pl-3 border-l border-volavan-aqua/20">
