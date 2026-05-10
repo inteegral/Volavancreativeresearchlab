@@ -48,6 +48,17 @@ function FeeIncludesText({ text }: { text: string }) {
   return <div className="space-y-0">{elements}</div>;
 }
 
+function EmptyTab({ message = "No information available at the moment." }: { message?: string }) {
+  return (
+    <div className="py-16 flex flex-col items-center gap-4 text-center">
+      <div className="w-px h-12 bg-gradient-to-b from-transparent via-volavan-cream/20 to-transparent" />
+      <p className="font-['Cormorant_Garamond'] text-xl italic text-volavan-cream/30">
+        {message}
+      </p>
+    </div>
+  );
+}
+
 interface ResidencyContentProps {
   residency: SanityResidency;
   program: SanityProgram;
@@ -69,15 +80,12 @@ export function ResidencyContent({
 }: ResidencyContentProps) {
   const hasArtists = residency.artists && residency.artists.length > 0;
   const hasStructure = !!(residency as any).structure;
-  const hasApply = isOpenCall && !!program.requirements;
-  const hasAccommodation = !!residency.location;
-
   const tabs: { id: TabId; label: string }[] = [
     { id: 'overview', label: 'Overview' },
-    ...(hasStructure ? [{ id: 'structure' as TabId, label: 'Program' }] : []),
-    ...(hasArtists ? [{ id: 'artists' as TabId, label: 'Artists' }] : []),
-    ...(hasAccommodation ? [{ id: 'accommodation' as TabId, label: 'Accommodation' }] : []),
-    ...(hasApply ? [{ id: 'apply' as TabId, label: 'Apply' }] : []),
+    { id: 'structure', label: 'Program' },
+    { id: 'artists', label: 'Artists' },
+    { id: 'accommodation', label: 'Accommodation' },
+    { id: 'apply', label: 'Apply' },
   ];
 
   const [activeTab, setActiveTab] = useState<TabId>('overview');
@@ -100,30 +108,28 @@ export function ResidencyContent({
       <div className="lg:col-span-7">
 
         {/* Tab Nav */}
-        {tabs.length > 1 && (
-          <div className="flex gap-8 border-b border-volavan-cream/10 mb-16">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`pb-4 font-['Manrope'] text-[12px] uppercase tracking-[0.25em] transition-colors relative ${
-                  activeTab === tab.id
-                    ? 'text-volavan-cream'
-                    : 'text-volavan-cream/30 hover:text-volavan-cream/60'
-                }`}
-              >
-                {tab.label}
-                {activeTab === tab.id && (
-                  <motion.div
-                    layoutId="tab-indicator"
-                    className="absolute bottom-0 left-0 right-0 h-px bg-volavan-cream"
-                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                  />
-                )}
-              </button>
-            ))}
-          </div>
-        )}
+        <div className="flex gap-8 border-b border-volavan-cream/10 mb-16 flex-wrap">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`pb-4 font-['Manrope'] text-[12px] uppercase tracking-[0.25em] transition-colors relative ${
+                activeTab === tab.id
+                  ? 'text-volavan-cream'
+                  : 'text-volavan-cream/30 hover:text-volavan-cream/60'
+              }`}
+            >
+              {tab.label}
+              {activeTab === tab.id && (
+                <motion.div
+                  layoutId="tab-indicator"
+                  className="absolute bottom-0 left-0 right-0 h-px bg-volavan-cream"
+                  transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                />
+              )}
+            </button>
+          ))}
+        </div>
 
         {/* Overview */}
         {activeTab === 'overview' && (
@@ -341,13 +347,20 @@ export function ResidencyContent({
         {/* Structure */}
         {activeTab === 'structure' && (
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <PortableTextRenderer value={(residency as any).structure} />
+            {hasStructure ? (
+              <PortableTextRenderer value={(residency as any).structure} />
+            ) : (
+              <EmptyTab />
+            )}
           </motion.div>
         )}
 
         {/* Artists */}
         {activeTab === 'artists' && (
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+            {!hasArtists ? (
+              <EmptyTab />
+            ) : (<>
             <h2 className="font-['Cormorant_Garamond'] text-2xl md:text-3xl italic text-volavan-aqua mb-12">
               {isPastEdition ? 'Selected Artists' : 'Meet the Artists'}
             </h2>
@@ -397,47 +410,57 @@ export function ResidencyContent({
                 );
               })}
             </div>
+            </>)}
           </motion.div>
         )}
 
         {/* Accommodation */}
-        {activeTab === 'accommodation' && residency.location && (
+        {activeTab === 'accommodation' && (
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="space-y-12">
-
-            {residency.location.description && (
-              <PortableTextRenderer value={residency.location.description} />
-            )}
-
-            {residency.location.gallery && residency.location.gallery.length > 0 && (
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                {residency.location.gallery.filter((img: any) => img?.asset?._ref).map((image, i) => (
-                  <div key={i} className="aspect-square overflow-hidden group/loc relative">
-                    <div className="absolute inset-0 bg-volavan-earth/20 group-hover/loc:bg-transparent z-10 transition-colors duration-500" />
-                    <img
-                      src={getImageUrl(image, 600, 600)}
-                      alt={image.caption || `${residency.location!.name} ${i + 1}`}
-                      className="w-full h-full object-cover grayscale group-hover/loc:grayscale-0 transition-all duration-700 transform group-hover/loc:scale-105"
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
-
+            {!residency.location ? (
+              <EmptyTab />
+            ) : (<>
+              {residency.location.description && (
+                <PortableTextRenderer value={residency.location.description} />
+              )}
+              {residency.location.gallery && residency.location.gallery.length > 0 && (
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                  {residency.location.gallery.filter((img: any) => img?.asset?._ref).map((image, i) => (
+                    <div key={i} className="aspect-square overflow-hidden group/loc relative">
+                      <div className="absolute inset-0 bg-volavan-earth/20 group-hover/loc:bg-transparent z-10 transition-colors duration-500" />
+                      <img
+                        src={getImageUrl(image, 600, 600)}
+                        alt={image.caption || `${residency.location!.name} ${i + 1}`}
+                        className="w-full h-full object-cover grayscale group-hover/loc:grayscale-0 transition-all duration-700 transform group-hover/loc:scale-105"
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </>)}
           </motion.div>
         )}
 
         {/* Apply */}
         {activeTab === 'apply' && (
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <h2 className="font-['Cormorant_Garamond'] text-2xl md:text-3xl italic text-volavan-aqua mb-8">
-              Application Requirements
-            </h2>
-            {program.applicationIntro && (
-              <p className="font-['Manrope'] text-base text-volavan-cream/70 mb-8 leading-relaxed whitespace-pre-line">
-                {program.applicationIntro}
-              </p>
-            )}
-            <PortableTextRenderer value={program.requirements} />
+            {!isOpenCall ? (
+              <EmptyTab message="Applications are currently closed. Check back when the open call opens." />
+            ) : (<>
+              <h2 className="font-['Cormorant_Garamond'] text-2xl md:text-3xl italic text-volavan-aqua mb-8">
+                Application Requirements
+              </h2>
+              {program.applicationIntro && (
+                <p className="font-['Manrope'] text-base text-volavan-cream/70 mb-8 leading-relaxed whitespace-pre-line">
+                  {program.applicationIntro}
+                </p>
+              )}
+              {program.requirements ? (
+                <PortableTextRenderer value={program.requirements} />
+              ) : (
+                <EmptyTab />
+              )}
+            </>)}
           </motion.div>
         )}
 

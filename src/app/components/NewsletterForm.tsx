@@ -42,10 +42,43 @@ export function NewsletterForm({ className = '', variant = 'footer' }: Newslette
 
   if (variant === 'inline') {
     return (
-      <form onSubmit={handleSubmit} className={}>
+      <form onSubmit={handleSubmit} className={`flex gap-3 w-full ${className}`}>
         <input
-          type=email
+          type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder=your@email.com
-          className=flex-1
+          placeholder="your@email.com"
+          className="flex-1 bg-transparent border-b border-volavan-cream/20 focus:border-volavan-aqua outline-none py-2 font-['Manrope'] text-sm text-volavan-cream placeholder:text-volavan-cream/30 transition-colors"
+          required
+        />
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="font-['Manrope'] text-[10px] uppercase tracking-[0.2em] text-volavan-aqua hover:text-volavan-cream transition-colors disabled:opacity-40"
+        >
+          {isSubmitting ? '...' : 'Subscribe'}
+        </button>
+      </form>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className={`flex gap-3 w-full ${className}`}>
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="your@email.com"
+        className="flex-1 bg-transparent border-b border-volavan-cream/20 focus:border-volavan-aqua outline-none py-2 font-['Manrope'] text-sm text-volavan-cream placeholder:text-volavan-cream/30 transition-colors"
+        required
+      />
+      <button
+        type="submit"
+        disabled={isSubmitting}
+        className="font-['Manrope'] text-[10px] uppercase tracking-[0.2em] text-volavan-aqua hover:text-volavan-cream transition-colors disabled:opacity-40"
+      >
+        {isSubmitting ? '...' : 'Subscribe'}
+      </button>
+    </form>
+  );
+}
