@@ -71,9 +71,10 @@ export function UpcomingResidenciesSection({ programs, programsLoading }: Upcomi
               const editionStatus = getStatus(latestEdition);
               const statusBadge = getStatusBadge(editionStatus);
               const isOpenCall = editionStatus === 'open_call';
+              const isOpenSoon = editionStatus === 'open_soon';
               const coverImage = latestEdition.coverImage;
-              const openCallOpen = isOpenCall ? latestEdition.callDates?.open : undefined;
-              const openCallDeadline = isOpenCall ? latestEdition.callDates?.close : undefined;
+              const openCallOpen = (isOpenCall || isOpenSoon) ? latestEdition.callDates?.open : undefined;
+              const openCallDeadline = (isOpenCall || isOpenSoon) ? latestEdition.callDates?.close : undefined;
               const hasCallDates = !!(openCallOpen || openCallDeadline);
 
               return (

@@ -1,5 +1,6 @@
 export type ResidencyStatus =
   | 'upcoming'
+  | 'open_soon'
   | 'open_call'
   | 'reviewing'
   | 'in_residence'
@@ -11,6 +12,8 @@ export interface StatusBadge {
   bgColor: string;
   borderColor: string;
 }
+
+const DAYS_30_MS = 30 * 24 * 60 * 60 * 1000;
 
 export function getStatus(edition: {
   callDates?: { open?: string; close?: string };
@@ -29,7 +32,7 @@ export function getStatus(edition: {
     if (now >= new Date(residencyDates.start) && now <= new Date(residencyDates.end)) return 'in_residence';
   }
 
-  // Under selection (call closed, residency start date known and in the future)
+  // Reviewing (call closed, residency not yet started)
   if (callDates?.close && now > new Date(callDates.close)) {
     if (residencyDates?.start && now < new Date(residencyDates.start)) return 'reviewing';
     return 'completed';
@@ -40,12 +43,19 @@ export function getStatus(edition: {
     if (now >= new Date(callDates.open) && now <= new Date(callDates.close)) return 'open_call';
   }
 
-  // Default: upcoming
+  // Open soon (call opens within 30 days)
+  if (callDates?.open) {
+    const openDate = new Date(callDates.open);
+    if (openDate > now && openDate.getTime() - now.getTime() <= DAYS_30_MS) return 'open_soon';
+  }
+
   return 'upcoming';
 }
 
-export function getStatusBadge(status: ResidencyStatus, year?: number): StatusBadge {
+export function getStatusBadge(status: ResidencyStatus): StatusBadge {
   switch (status) {
+    case 'open_soon':
+      return { label: 'Open Soon', color: '#B5DAD9', bgColor: 'bg-volavan-aqua/10', borderColor: 'border-volavan-aqua/30' };
     case 'open_call':
       return { label: 'Open Call', color: '#B5DAD9', bgColor: 'bg-volavan-aqua/15', borderColor: 'border-volavan-aqua/40' };
     case 'reviewing':

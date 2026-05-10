@@ -9,10 +9,12 @@ interface ResidencyCTAProps {
   residency: SanityResidency;
   program: SanityProgram;
   isOpenCall: boolean;
+  isOpenSoon?: boolean;
+  callOpenDate?: string;
   callCloseDate?: string;
 }
 
-export function ResidencyCTA({ residency, program, isOpenCall, callCloseDate }: ResidencyCTAProps) {
+export function ResidencyCTA({ residency, program, isOpenCall, isOpenSoon, callOpenDate, callCloseDate }: ResidencyCTAProps) {
   const { t } = useLanguage();
 
   return (
@@ -41,6 +43,22 @@ export function ResidencyCTA({ residency, program, isOpenCall, callCloseDate }: 
               </VLink>
               {callCloseDate && (
                 <p className="font-['Manrope'] text-[10px] uppercase tracking-[0.2em] text-volavan-cream/40">
+                  Deadline — {formatDate(callCloseDate)}
+                </p>
+              )}
+            </>
+          ) : isOpenSoon ? (
+            <>
+              <VButton variant="disabled" size="lg">
+                {t.residencies.applyNow}
+              </VButton>
+              {callOpenDate && (
+                <p className="font-['Manrope'] text-[10px] uppercase tracking-[0.2em] text-volavan-cream/40">
+                  Open Call opens — {formatDate(callOpenDate)}
+                </p>
+              )}
+              {callCloseDate && (
+                <p className="font-['Manrope'] text-[10px] uppercase tracking-[0.2em] text-volavan-cream/30">
                   Deadline — {formatDate(callCloseDate)}
                 </p>
               )}

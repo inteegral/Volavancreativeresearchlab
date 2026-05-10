@@ -64,7 +64,9 @@ export default function ResidencyDetail() {
   }
 
   const isOpenCall = currentStatus === 'open_call';
-  const statusBadge = getStatusBadge(currentStatus, residency.year);
+  const isOpenSoon = currentStatus === 'open_soon';
+  const statusBadge = getStatusBadge(currentStatus);
+  const callOpenDate = residency.callDates?.open;
   const callCloseDate = residency.callDates?.close;
 
   return (
@@ -108,6 +110,8 @@ export default function ResidencyDetail() {
         program={program}
         slug={slug!}
         isOpenCall={isOpenCall}
+        isOpenSoon={isOpenSoon}
+        callOpenDate={callOpenDate}
         callCloseDate={callCloseDate}
       />
 
@@ -115,6 +119,8 @@ export default function ResidencyDetail() {
         residency={residency}
         program={program}
         isOpenCall={isOpenCall}
+        isOpenSoon={isOpenSoon}
+        callOpenDate={callOpenDate}
         callCloseDate={callCloseDate}
       />
     </div>

@@ -64,6 +64,8 @@ interface ResidencyContentProps {
   program: SanityProgram;
   slug: string;
   isOpenCall: boolean;
+  isOpenSoon?: boolean;
+  callOpenDate?: string;
   callCloseDate?: string;
 }
 
@@ -74,6 +76,8 @@ export function ResidencyContent({
   program,
   slug,
   isOpenCall,
+  isOpenSoon,
+  callOpenDate,
   callCloseDate,
 }: ResidencyContentProps) {
   const hasArtists = residency.artists && residency.artists.length > 0;
@@ -443,7 +447,20 @@ export function ResidencyContent({
         {activeTab === 'apply' && (
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             {!isOpenCall ? (
-              <EmptyTab message="Applications are currently closed. Check back when the open call opens." />
+              isOpenSoon ? (
+                <div className="flex flex-col gap-4">
+                  <p className="font-['Cormorant_Garamond'] text-xl italic text-volavan-cream/70">
+                    The open call opens on {formatDate(callOpenDate!)}.
+                  </p>
+                  {callCloseDate && (
+                    <p className="font-['Manrope'] text-[11px] uppercase tracking-[0.2em] text-volavan-cream/40">
+                      Deadline — {formatDate(callCloseDate)}
+                    </p>
+                  )}
+                </div>
+              ) : (
+                <EmptyTab message="Applications are currently closed. Check back when the open call opens." />
+              )
             ) : (<>
               <h2 className="font-['Cormorant_Garamond'] text-2xl md:text-3xl italic text-volavan-aqua mb-8">
                 Application Requirements

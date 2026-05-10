@@ -20,6 +20,7 @@ type FilterStatus = 'all' | ResidencyStatus;
 const FILTER_LABELS: Record<FilterStatus, string> = {
   all: 'All',
   upcoming: 'Upcoming',
+  open_soon: 'Open Soon',
   open_call: 'Open Call',
   reviewing: 'Reviewing Applications',
   in_residence: 'In Residence',
@@ -46,7 +47,7 @@ export default function Residencies() {
       const ed = p.editions?.find(e => getStatus(e) !== 'completed') ?? p.editions?.[0];
       if (ed) statuses.add(getStatus(ed));
     });
-    const order: ResidencyStatus[] = ['open_call', 'in_residence', 'reviewing', 'upcoming', 'completed'];
+    const order: ResidencyStatus[] = ['open_call', 'open_soon', 'in_residence', 'reviewing', 'upcoming', 'completed'];
     return ['all', ...order.filter(s => statuses.has(s))];
   }, [programs]);
 
@@ -222,9 +223,10 @@ export default function Residencies() {
                 const editionStatus = targetEdition ? getStatus(targetEdition) : 'upcoming';
                 const statusBadge = getStatusBadge(editionStatus);
                 const hasActiveOpenCall = editionStatus === 'open_call';
-                // Show call dates only while open call is active
-                const openCallOpen = hasActiveOpenCall ? targetEdition?.callDates?.open : undefined;
-                const openCallDeadline = hasActiveOpenCall ? targetEdition?.callDates?.close : undefined;
+                const isOpenSoon = editionStatus === 'open_soon';
+                // Show call dates when open call is active or opening soon
+                const openCallOpen = (hasActiveOpenCall || isOpenSoon) ? targetEdition?.callDates?.open : undefined;
+                const openCallDeadline = (hasActiveOpenCall || isOpenSoon) ? targetEdition?.callDates?.close : undefined;
                 const hasCallDates = !!(openCallOpen || openCallDeadline);
 
                 // Dates from the target edition
