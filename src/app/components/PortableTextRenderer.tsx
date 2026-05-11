@@ -45,12 +45,27 @@ const components: PortableTextComponents = {
       </h4>
     ),
 
-    // Body — editorial serif for literary feel
-    normal: ({ children }) => (
-      <p className="font-['Cormorant_Garamond'] text-lg md:text-xl leading-[1.85] text-volavan-cream/70 mb-6 last:mb-0">
-        {children}
-      </p>
-    ),
+    // Body — editorial serif for literary feel.
+    // If every span in the block is bold, treat it as a day/section sub-title
+    // (common pattern when editors use bold paragraphs as schedule headers).
+    normal: ({ children, value }) => {
+      const spans = value?.children ?? [];
+      const isAllBold =
+        spans.length > 0 &&
+        spans.every((s: any) => s._type !== 'block' && Array.isArray(s.marks) && s.marks.includes('strong') && s.text?.trim());
+      if (isAllBold) {
+        return (
+          <p className="font-['Manrope'] text-[10px] uppercase tracking-[0.25em] text-volavan-cream/60 mt-10 mb-3">
+            {children}
+          </p>
+        );
+      }
+      return (
+        <p className="font-['Cormorant_Garamond'] text-lg md:text-xl leading-[1.85] text-volavan-cream/70 mb-4 last:mb-0">
+          {children}
+        </p>
+      );
+    },
 
     // Pull quote — centered, no border, poetic
     blockquote: ({ children }) => (
@@ -62,12 +77,12 @@ const components: PortableTextComponents = {
 
   list: {
     bullet: ({ children }) => (
-      <ul className="mb-6 space-y-3 max-w-[60ch]">
+      <ul className="mb-4 space-y-1.5 max-w-[65ch] pl-3 border-l border-volavan-cream/10">
         {children}
       </ul>
     ),
     number: ({ children }) => (
-      <ol className="mb-6 space-y-3 max-w-[60ch] list-none counter-reset-[item]">
+      <ol className="mb-4 space-y-1.5 max-w-[65ch] pl-3 border-l border-volavan-cream/10">
         {children}
       </ol>
     ),
@@ -75,14 +90,13 @@ const components: PortableTextComponents = {
 
   listItem: {
     bullet: ({ children }) => (
-      <li className="font-['Cormorant_Garamond'] text-lg md:text-xl leading-[1.75] text-volavan-cream/70 flex gap-4">
-        <span className="text-volavan-aqua/40 shrink-0 mt-[2px]">—</span>
-        <span>{children}</span>
+      <li className="font-['Cormorant_Garamond'] text-base md:text-lg leading-[1.7] text-volavan-cream/65">
+        {children}
       </li>
     ),
     number: ({ children }) => (
-      <li className="font-['Cormorant_Garamond'] text-lg md:text-xl leading-[1.75] text-volavan-cream/70 flex gap-4">
-        <span>{children}</span>
+      <li className="font-['Cormorant_Garamond'] text-base md:text-lg leading-[1.7] text-volavan-cream/65">
+        {children}
       </li>
     ),
   },
