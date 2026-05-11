@@ -305,7 +305,7 @@ export const QUERIES = {
     categories
   }`,
 
-  journalPostBySlug: (slug: string) => `*[_type in ["journal", "videoPost"] && slug.current == "${slug}"][0] {
+  journalPostBySlug: (slug: string) => `*[_type in ["journal", "videoPost"] && slug.current == "${slug}" && (!defined(language) || language == $lang)][0] {
     _id,
     _type,
     title,
