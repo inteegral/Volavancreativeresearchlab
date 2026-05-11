@@ -193,6 +193,8 @@ export const QUERIES = {
       name,
       "slug": slug.current,
       tagline,
+      location,
+      country,
       concept,
       whatWeOffer,
       requirements,
