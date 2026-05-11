@@ -186,6 +186,18 @@ export function PublicLayout() {
             ))}
           </nav>
 
+          {/* Secondary — For Professionals */}
+          <div className="flex items-center gap-4">
+            <div className="w-6 h-px bg-volavan-cream/15" />
+            <Link
+              to="/curators"
+              className="font-['Manrope'] text-[9px] uppercase tracking-[0.25em] text-volavan-cream/30 hover:text-volavan-aqua transition-colors duration-300"
+            >
+              Call for Guest Curators
+            </Link>
+            <div className="w-6 h-px bg-volavan-cream/15" />
+          </div>
+
           {/* Contact Details */}
           <div className="flex flex-col gap-3 font-['Manrope'] text-xs leading-relaxed tracking-wide text-volavan-cream/40 uppercase">
             <p className="normal-case">Volavan cooperativa cultural CRL • Fermil • Portugal</p>
