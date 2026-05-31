@@ -5,6 +5,7 @@ import { motion } from "motion/react";
 import { getImageUrl, formatDate } from "../../../lib/sanity";
 import { PortableTextRenderer } from "../../../components/PortableTextRenderer";
 import { VideoPlayer } from "../../../components/VideoPlayer";
+import { GrantSection } from "./GrantSection";
 import type { SanityResidency, SanityProgram } from "../../../lib/sanity";
 
 // Renders feeIncludes plain text with section headings and bullet-style items
@@ -69,7 +70,7 @@ interface ResidencyContentProps {
   callCloseDate?: string;
 }
 
-type TabId = 'overview' | 'structure' | 'artists' | 'apply' | 'accommodation';
+type TabId = 'overview' | 'structure' | 'artists' | 'accommodation' | 'grant' | 'apply';
 
 export function ResidencyContent({
   residency,
@@ -82,11 +83,13 @@ export function ResidencyContent({
 }: ResidencyContentProps) {
   const hasArtists = residency.artists && residency.artists.length > 0;
   const hasStructure = !!residency.structure;
+  const hasGrant = !!(residency.grant?.enabled);
   const tabs: { id: TabId; label: string }[] = [
     { id: 'overview', label: 'Overview' },
     { id: 'structure', label: 'Program' },
     { id: 'artists', label: 'Artists' },
     { id: 'accommodation', label: 'Accommodation' },
+    ...(hasGrant ? [{ id: 'grant' as TabId, label: 'Grant' }] : []),
     { id: 'apply', label: 'Apply' },
   ];
 
@@ -429,6 +432,11 @@ export function ResidencyContent({
               </>);
             })()}
           </motion.div>
+        )}
+
+        {/* Grant */}
+        {activeTab === 'grant' && residency.grant && (
+          <GrantSection grant={residency.grant} />
         )}
 
         {/* Apply */}

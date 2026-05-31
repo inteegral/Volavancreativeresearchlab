@@ -180,6 +180,19 @@ export interface SanityResidency {
   };
   structure?: PortableTextBlock[];
   formsparkId?: string;
+  grant?: {
+    enabled?: boolean;
+    provider?: string;
+    intro?: string;
+    paymentNote?: string;
+    dailyAllowance?: number;
+    days?: number;
+    travelShort?: number;
+    travelLong?: number;
+    distanceThresholdKm?: number;
+    topups?: { label: string; amount: number }[];
+    accessibilityNote?: string;
+  };
   selectedCount?: number;
   program?: SanityProgram;
   location?: SanityLocation;

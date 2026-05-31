@@ -153,6 +153,7 @@ export const QUERIES = {
     gallery,
     seo,
     structure,
+    grant,
     "keyFigures": keyFigures[] {
       role,
       statement,
