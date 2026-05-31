@@ -9,6 +9,7 @@ export interface SanityUpcomingEdition {
   coverImage?: SanityImage;
   startDate?: string;
   endDate?: string;
+  residencyDates?: { start?: string; end?: string };
   callDates?: { open?: string; close?: string };
   location?: { name?: string; city?: string; country?: string };
   program?: {

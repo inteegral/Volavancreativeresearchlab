@@ -102,6 +102,7 @@ export const QUERIES = {
     coverImage,
     "startDate": residencyDates.start,
     "endDate": residencyDates.end,
+    residencyDates,
     callDates,
     "location": location-> {
       name,
