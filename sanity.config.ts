@@ -9,7 +9,7 @@ import { schemaTypes } from './sanity/schemaTypes'
 import { TranslationBadge } from './sanity/components/TranslationBadge'
 
 const singletons = ['home', 'about', 'settings', 'programsPage']
-const i18nTypes = ['artist', 'journal', 'about', 'home', 'programsPage', 'location']
+const i18nTypes = ['artist', 'journal', 'about', 'home', 'programsPage', 'location', 'residencyProgram']
 
 export default defineConfig({
   name: 'volavan',
@@ -110,7 +110,7 @@ export default defineConfig({
         { id: 'en', title: 'English' },
         { id: 'es', title: 'Español' },
       ],
-      schemaTypes: ['artist', 'journal', 'about', 'home', 'programsPage', 'location'],
+      schemaTypes: ['artist', 'journal', 'about', 'home', 'programsPage', 'location', 'residencyProgram'],
     }),
     assist({
       translate: {
@@ -139,7 +139,7 @@ export default defineConfig({
   },
   document: {
     badges: (prev, context) =>
-      ['artist', 'journal', 'home', 'about', 'programsPage', 'location'].includes(context.schemaType)
+      ['artist', 'journal', 'home', 'about', 'programsPage', 'location', 'residencyProgram'].includes(context.schemaType)
         ? [...prev, TranslationBadge]
         : prev,
     actions: (input, context) =>
