@@ -109,10 +109,6 @@ export default function ResidencyDetail() {
         residency={residency}
         program={program}
         slug={slug!}
-        isOpenCall={isOpenCall}
-        isOpenSoon={isOpenSoon}
-        callOpenDate={callOpenDate}
-        callCloseDate={callCloseDate}
       />
 
       <ResidencyCTA

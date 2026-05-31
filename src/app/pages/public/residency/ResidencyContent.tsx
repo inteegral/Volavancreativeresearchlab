@@ -64,22 +64,14 @@ interface ResidencyContentProps {
   residency: SanityResidency;
   program: SanityProgram;
   slug: string;
-  isOpenCall: boolean;
-  isOpenSoon?: boolean;
-  callOpenDate?: string;
-  callCloseDate?: string;
 }
 
-type TabId = 'overview' | 'structure' | 'artists' | 'accommodation' | 'grant' | 'apply';
+type TabId = 'overview' | 'structure' | 'artists' | 'accommodation' | 'grant';
 
 export function ResidencyContent({
   residency,
   program,
   slug,
-  isOpenCall,
-  isOpenSoon,
-  callOpenDate,
-  callCloseDate,
 }: ResidencyContentProps) {
   const hasArtists = residency.artists && residency.artists.length > 0;
   const hasStructure = !!residency.structure;
@@ -90,7 +82,6 @@ export function ResidencyContent({
     { id: 'artists', label: 'Artists' },
     { id: 'accommodation', label: 'Accommodation' },
     ...(hasGrant ? [{ id: 'grant' as TabId, label: 'Grant' }] : []),
-    { id: 'apply', label: 'Apply' },
   ];
 
   const [activeTab, setActiveTab] = useState<TabId>('overview');
@@ -437,30 +428,6 @@ export function ResidencyContent({
         {/* Grant */}
         {activeTab === 'grant' && residency.grant?.content && (
           <GrantSection content={residency.grant.content} />
-        )}
-
-        {/* Apply */}
-        {activeTab === 'apply' && (
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            {!isOpenCall ? (
-              isOpenSoon ? (
-                <div className="flex flex-col gap-4">
-                  <p className="font-['Cormorant_Garamond'] text-xl italic text-volavan-cream/70">
-                    The open call opens on {formatDate(callOpenDate!)}.
-                  </p>
-                  {callCloseDate && (
-                    <p className="font-['Manrope'] text-[11px] uppercase tracking-[0.2em] text-volavan-cream/40">
-                      Deadline — {formatDate(callCloseDate)}
-                    </p>
-                  )}
-                </div>
-              ) : (
-                <EmptyTab message="Applications are currently closed. Check back when the open call opens." />
-              )
-            ) : (
-              <EmptyTab message="Application details coming soon." />
-            )}
-          </motion.div>
         )}
 
       </div>
