@@ -87,6 +87,19 @@ export function useResidenciesPage() {
   };
 }
 
+export function useUpcomingEditions() {
+  const { language } = useLanguage();
+  const { data, error, isLoading } = useSWR(
+    ['upcomingEditions', language],
+    () => sanityService.getUpcomingEditions(language),
+    {
+      revalidateOnFocus: false,
+      dedupingInterval: 60000,
+    }
+  );
+  return { editions: (data ?? []) as import('../lib/sanity-types').SanityUpcomingEdition[], isLoading, isError: error };
+}
+
 export function useAllPrograms() {
   const { language } = useLanguage();
   const { data, error, isLoading } = useSWR(

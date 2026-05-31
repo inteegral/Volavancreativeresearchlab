@@ -1,20 +1,20 @@
 import { useMemo } from "react";
 import { SEOHead } from "../../components/SEOHead";
 import { OrganizationSchema } from "../../components/StructuredData";
-import { useHome, useAllPrograms, useJournalContent, useSettings } from "../../hooks/useSanity";
+import { useHome, useUpcomingEditions, useJournalContent, useSettings } from "../../hooks/useSanity";
 import { HomeHero } from "./home/HomeHero";
 import { UpcomingResidenciesSection } from "./home/UpcomingResidenciesSection";
 import { JournalSection } from "./home/JournalSection";
 
 export default function Home() {
   const { home: homeData, isError: homeError } = useHome();
-  const { programs, isLoading: programsLoading, isError: programsError } = useAllPrograms();
+  const { editions, isLoading: editionsLoading, isError: editionsError } = useUpcomingEditions();
   const { content: journalContent, isLoading: journalLoading } = useJournalContent();
   const { settings } = useSettings();
 
   const journalPosts = useMemo(() => journalContent.slice(0, 3), [journalContent]);
 
-  if (homeError || programsError) {
+  if (homeError || editionsError) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-volavan-earth text-volavan-cream/40">
         <p className="font-['Manrope'] text-xs uppercase tracking-[0.2em]">
@@ -40,7 +40,7 @@ export default function Home() {
         <div className="h-px bg-volavan-cream/20"></div>
       </div>
 
-      <UpcomingResidenciesSection programs={programs} programsLoading={programsLoading} />
+      <UpcomingResidenciesSection editions={editions} isLoading={editionsLoading} />
 
       {/* Visual Break */}
       <div className="w-full max-w-2xl mx-auto my-[30px] flex items-center justify-center gap-8 px-6">

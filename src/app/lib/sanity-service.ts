@@ -100,6 +100,16 @@ export const sanityService = {
     }
   },
 
+  getUpcomingEditions: async (lang: string = 'en') => {
+    try {
+      const editions = await sanityClient.fetch<any[]>(QUERIES.upcomingEditions, { lang });
+      return editions || [];
+    } catch (error) {
+      console.error('❌ Error fetching upcoming editions from Sanity:', error);
+      return [];
+    }
+  },
+
   getAllPrograms: async (lang: string = 'en'): Promise<SanityProgram[]> => {
     try {
       const programs = await sanityClient.fetch<any[]>(

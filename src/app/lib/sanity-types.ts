@@ -2,6 +2,24 @@
 // SANITY TYPE DEFINITIONS
 // ============================================================================
 
+export interface SanityUpcomingEdition {
+  _id: string;
+  year: number;
+  slug: string;
+  coverImage?: SanityImage;
+  startDate?: string;
+  endDate?: string;
+  callDates?: { open?: string; close?: string };
+  location?: { name?: string; city?: string; country?: string };
+  program?: {
+    _id: string;
+    name: string;
+    slug: string;
+    tagline?: string;
+    logo?: SanityImage;
+  };
+}
+
 export interface SanityImage {
   _type: 'image';
   asset: {

@@ -7,33 +7,23 @@ import { getStatus, getStatusBadge } from "../../../lib/residency-status";
 import { VLink } from "../../../components/ui/VButton";
 import { SanityImage } from "../../../components/SanityImage";
 import { SkeletonCard } from "../../../components/ui/skeleton";
-import type { SanityProgram } from "../../../lib/sanity";
+import type { SanityUpcomingEdition } from "../../../lib/sanity";
 
 function formatShortDate(dateStr: string): string {
   return new Date(dateStr).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 }
 
 interface UpcomingResidenciesSectionProps {
-  programs: SanityProgram[];
-  programsLoading: boolean;
+  editions: SanityUpcomingEdition[];
+  isLoading: boolean;
 }
 
-export function UpcomingResidenciesSection({ programs, programsLoading }: UpcomingResidenciesSectionProps) {
-  const upcomingResidencies = useMemo(() => {
-    return programs
-      .filter(program => {
-        if (!program.editions || program.editions.length === 0) return false;
-        return program.editions.some(e => getStatus(e) !== 'completed');
-      })
-      .sort((a, b) => {
-        const getDate = (p: typeof a) => {
-          const ed = p.editions?.find(e => getStatus(e) !== 'completed') ?? p.editions?.[0];
-          return ed?.startDate ? new Date(ed.startDate).getTime() : Infinity;
-        };
-        return getDate(a) - getDate(b);
-      })
+export function UpcomingResidenciesSection({ editions, isLoading }: UpcomingResidenciesSectionProps) {
+  const upcoming = useMemo(() => {
+    return editions
+      .filter(e => e.program && getStatus(e) !== 'concluded')
       .slice(0, 3);
-  }, [programs]);
+  }, [editions]);
 
   return (
     <div className="w-full max-w-5xl mx-auto mb-[150px]">
@@ -50,42 +40,35 @@ export function UpcomingResidenciesSection({ programs, programsLoading }: Upcomi
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {programsLoading ? (
+          {isLoading ? (
             <>
               <SkeletonCard />
               <SkeletonCard />
             </>
-          ) : upcomingResidencies.length === 0 ? (
+          ) : upcoming.length === 0 ? (
             <div className="col-span-2 text-center">
               <p className="font-['Manrope'] text-sm md:text-lg leading-relaxed text-volavan-cream/60 max-w-lg mx-auto">
                 No upcoming residencies at the moment.
               </p>
             </div>
           ) : (
-            upcomingResidencies.map((program) => {
-              // Pick the edition with an active/upcoming status, fallback to first
-              const latestEdition =
-                program.editions?.find(e => getStatus(e) !== 'completed') ?? program.editions?.[0];
-              if (!latestEdition) return null;
-
-              const editionStatus = getStatus(latestEdition);
+            upcoming.map((edition) => {
+              const program = edition.program!;
+              const editionStatus = getStatus(edition);
               const statusBadge = getStatusBadge(editionStatus);
               const isOpenCall = editionStatus === 'open_call';
-              const isOpenSoon = editionStatus === 'open_soon';
-              const coverImage = latestEdition.coverImage;
-              const showCallDates = true;
-              const openCallOpen = latestEdition.callDates?.open;
-              const openCallDeadline = latestEdition.callDates?.close;
+              const openCallOpen = edition.callDates?.open;
+              const openCallDeadline = edition.callDates?.close;
 
               return (
                 <Link
-                  key={program._id}
-                  to={`/residencies/${latestEdition.slug}`}
+                  key={edition._id}
+                  to={`/residencies/${edition.slug}`}
                   className="group relative overflow-hidden rounded-sm border border-volavan-cream/10 hover:border-volavan-cream/30 transition-all duration-500"
                 >
                   <div className="aspect-[4/3] overflow-hidden relative">
                     <SanityImage
-                      image={coverImage}
+                      image={edition.coverImage}
                       alt={program.name}
                       width={800}
                       height={600}
@@ -115,27 +98,25 @@ export function UpcomingResidenciesSection({ programs, programsLoading }: Upcomi
                         {program.tagline}
                       </p>
                     )}
-                    {latestEdition.startDate && latestEdition.endDate && (
+                    {edition.startDate && edition.endDate && (
                       <p className="font-['Manrope'] text-[13px] uppercase tracking-[0.18em] text-volavan-cream/40 flex items-center gap-2">
                         <Calendar size={11} className="opacity-60 shrink-0" />
-                        {formatShortDate(latestEdition.startDate)} — {formatShortDate(latestEdition.endDate)}
+                        {formatShortDate(edition.startDate)} — {formatShortDate(edition.endDate)}
                       </p>
                     )}
-                    {showCallDates && (
-                      <div className="flex flex-col gap-1 pl-3 border-l border-volavan-aqua/20">
-                        <p className="font-['Manrope'] text-[10px] uppercase tracking-[0.18em] text-volavan-aqua/50">
-                          <span className="text-volavan-aqua/30">Open Call</span>
-                          {openCallOpen && <><span className="mx-1.5 opacity-30">·</span>{formatShortDate(openCallOpen)}</>}
-                        </p>
-                        <p className="font-['Manrope'] text-[10px] uppercase tracking-[0.18em] text-volavan-aqua/70">
-                          <span className="text-volavan-aqua/40">Deadline</span>
-                          {openCallDeadline && <><span className="mx-1.5 opacity-30">·</span>{formatShortDate(openCallDeadline)}</>}
-                        </p>
-                      </div>
-                    )}
-                    {latestEdition.location && (
+                    <div className="flex flex-col gap-1 pl-3 border-l border-volavan-aqua/20">
+                      <p className="font-['Manrope'] text-[10px] uppercase tracking-[0.18em] text-volavan-aqua/50">
+                        <span className="text-volavan-aqua/30">Open Call</span>
+                        {openCallOpen && <><span className="mx-1.5 opacity-30">·</span>{formatShortDate(openCallOpen)}</>}
+                      </p>
+                      <p className="font-['Manrope'] text-[10px] uppercase tracking-[0.18em] text-volavan-aqua/70">
+                        <span className="text-volavan-aqua/40">Deadline</span>
+                        {openCallDeadline && <><span className="mx-1.5 opacity-30">·</span>{formatShortDate(openCallDeadline)}</>}
+                      </p>
+                    </div>
+                    {edition.location && (
                       <p className="font-['Manrope'] text-sm text-volavan-cream/70 text-left">
-                        {[latestEdition.location.city || latestEdition.location.name, latestEdition.location.country].filter(Boolean).join(', ')}
+                        {[edition.location.city || edition.location.name, edition.location.country].filter(Boolean).join(', ')}
                       </p>
                     )}
                   </div>

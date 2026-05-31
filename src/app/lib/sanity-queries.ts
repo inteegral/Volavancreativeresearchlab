@@ -95,6 +95,37 @@ export const QUERIES = {
     }
   }`,
 
+  upcomingEditions: `*[_type == "residency" && defined(program) && defined(residencyDates.start)] | order(residencyDates.start asc) {
+    _id,
+    year,
+    "slug": slug.current,
+    coverImage,
+    "startDate": residencyDates.start,
+    "endDate": residencyDates.end,
+    callDates,
+    "location": location-> {
+      name,
+      city,
+      country
+    },
+    "program": coalesce(
+      *[_type == "residencyProgram" && slug.current == ^.program->slug.current && language == $lang][0] {
+        _id,
+        name,
+        "slug": slug.current,
+        tagline,
+        logo
+      },
+      program-> {
+        _id,
+        name,
+        "slug": slug.current,
+        tagline,
+        logo
+      }
+    )
+  }`,
+
   allProgramsWithEditions: `*[_type == "residencyProgram" && (!defined(language) || language == $lang)] | order(name asc) {
     _id,
     name,
