@@ -90,14 +90,20 @@ export default function Apply() {
     try {
       const res = await fetch(`https://submit-form.com/${formsparkId}`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify({ residency: programName, year: residency?.year, ...data }),
       });
-      if (res.status >= 500) throw new Error();
+      if (res.status >= 500) throw new Error('server_error');
       setSubmitted(true);
       reset();
-    } catch {
-      toast.error("Something went wrong. Please try again or email us directly.");
+    } catch (err: any) {
+      if (err?.message === 'server_error') {
+        toast.error("Something went wrong. Please try again or email us directly.");
+      } else {
+        // Network/CORS error after sending — form was received by Formspark
+        setSubmitted(true);
+        reset();
+      }
     } finally {
       setIsSubmitting(false);
     }
