@@ -183,41 +183,12 @@ export const residency = defineType({
     defineField({
       name: 'grant',
       title: 'Grant / Financial Support',
-      description: 'Financial support info for selected residents (e.g. Culture Moves Europe)',
+      description: 'Financial support info for selected residents. Enable to show the Grant tab.',
       type: 'object',
       group: 'grant',
       fields: [
         defineField({ name: 'enabled', title: 'Show grant section', type: 'boolean', initialValue: false }),
-        defineField({ name: 'provider', title: 'Provider', type: 'string', description: 'e.g. Culture Moves Europe' }),
-        defineField({ name: 'intro', title: 'Introduction', type: 'text', rows: 3 }),
-        defineField({ name: 'paymentNote', title: 'Payment note', type: 'string', description: 'e.g. "Grant paid upon completion of full residency"' }),
-        defineField({ name: 'dailyAllowance', title: 'Daily allowance (€)', type: 'number' }),
-        defineField({ name: 'days', title: 'Duration (days)', type: 'number' }),
-        defineField({ name: 'travelShort', title: 'Travel — short distance (€)', type: 'number' }),
-        defineField({ name: 'travelLong', title: 'Travel — long distance (€)', type: 'number' }),
-        defineField({ name: 'distanceThresholdKm', title: 'Distance threshold (km)', type: 'number', initialValue: 5000 }),
-        defineField({
-          name: 'topups',
-          title: 'Additional top-ups',
-          type: 'array',
-          of: [
-            defineArrayMember({
-              type: 'object',
-              fields: [
-                defineField({ name: 'label', title: 'Label', type: 'string' }),
-                defineField({ name: 'amount', title: 'Amount (€)', type: 'number' }),
-              ],
-              preview: {
-                select: { title: 'label', subtitle: 'amount' },
-                prepare: ({ title, subtitle }: { title: string; subtitle: number }) => ({
-                  title,
-                  subtitle: subtitle != null ? `€${subtitle}` : '',
-                }),
-              },
-            }),
-          ],
-        }),
-        defineField({ name: 'accessibilityNote', title: 'Accessibility support note', type: 'text', rows: 4 }),
+        defineField({ name: 'content', title: 'Grant conditions', type: 'blockContent', description: 'Paste or write all grant conditions here.' }),
       ],
     }),
     defineField({

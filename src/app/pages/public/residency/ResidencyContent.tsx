@@ -435,8 +435,8 @@ export function ResidencyContent({
         )}
 
         {/* Grant */}
-        {activeTab === 'grant' && residency.grant && (
-          <GrantSection grant={residency.grant} />
+        {activeTab === 'grant' && residency.grant?.content && (
+          <GrantSection content={residency.grant.content} />
         )}
 
         {/* Apply */}

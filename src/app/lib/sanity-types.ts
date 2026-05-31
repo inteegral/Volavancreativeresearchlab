@@ -182,16 +182,7 @@ export interface SanityResidency {
   formsparkId?: string;
   grant?: {
     enabled?: boolean;
-    provider?: string;
-    intro?: string;
-    paymentNote?: string;
-    dailyAllowance?: number;
-    days?: number;
-    travelShort?: number;
-    travelLong?: number;
-    distanceThresholdKm?: number;
-    topups?: { label: string; amount: number }[];
-    accessibilityNote?: string;
+    content?: PortableTextBlock[];
   };
   selectedCount?: number;
   program?: SanityProgram;
