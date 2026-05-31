@@ -28,7 +28,7 @@ export default function Home() {
     <div className="flex flex-col items-center justify-center min-h-[calc(100vh-8rem)] px-6 py-12 text-center">
       <SEOHead
         url="/"
-        description="VOLAVAN is a creative research lab in rural Friuli. Artist residencies, workshops, and collaborative projects immersed in nature."
+        description="VOLAVAN is a creative research lab in rural Portugal. Artist residencies, workshops, and collaborative projects immersed in nature."
         image={settings?.defaultSeo?.ogImage?.asset?.url}
       />
       <OrganizationSchema />

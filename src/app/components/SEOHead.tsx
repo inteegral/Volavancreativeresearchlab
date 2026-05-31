@@ -18,7 +18,7 @@ interface SEOHeadProps {
 
 export function SEOHead({
   title,
-  description = "VOLAVAN is a creative research lab in rural Friuli. Artist residencies, workshops, and collaborative projects immersed in nature.",
+  description = "VOLAVAN is a creative research lab in rural Portugal. Artist residencies, workshops, and collaborative projects immersed in nature.",
   image,
   url,
   type = 'website',

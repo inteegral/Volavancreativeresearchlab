@@ -8,11 +8,10 @@ export function OrganizationSchema() {
     "name": "VOLAVAN",
     "url": "https://volavan.it",
     "logo": "https://volavan.it/favicon.svg",
-    "description": "Spazio di coliving e coworking rurale creativo in Friuli. Residenze artistiche, workshop e progetti collaborativi immersi nella natura.",
+    "description": "VOLAVAN is a creative research lab in rural Portugal. Artist residencies, workshops, and collaborative projects immersed in nature.",
     "address": {
       "@type": "PostalAddress",
-      "addressCountry": "IT",
-      "addressRegion": "Friuli Venezia Giulia"
+      "addressCountry": "PT"
     },
     "sameAs": []
   };
@@ -44,7 +43,7 @@ export function ResidencyEventSchema({
   description,
   startDate,
   endDate,
-  location = "Friuli Venezia Giulia, Italia",
+  location = "Portugal",
   image,
   url,
   applicationDeadline,
@@ -64,8 +63,7 @@ export function ResidencyEventSchema({
       "name": "VOLAVAN",
       "address": {
         "@type": "PostalAddress",
-        "addressCountry": "IT",
-        "addressRegion": "Friuli Venezia Giulia"
+        "addressCountry": "PT"
       }
     },
     "image": image || `${typeof window !== 'undefined' ? window.location.origin : 'https://volavan.it'}/og-image.png`,
