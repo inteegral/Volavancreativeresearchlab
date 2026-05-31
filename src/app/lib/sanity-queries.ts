@@ -95,7 +95,7 @@ export const QUERIES = {
     }
   }`,
 
-  upcomingEditions: `*[_type == "residency" && defined(program) && defined(residencyDates.start)] | order(residencyDates.start asc) {
+  upcomingEditions: `*[_type == "residency" && defined(program) && defined(residencyDates.start) && (!defined(residencyDates.end) || dateTime(residencyDates.end + "T00:00:00Z") >= dateTime(now()))] | order(residencyDates.start asc) {
     _id,
     year,
     "slug": slug.current,

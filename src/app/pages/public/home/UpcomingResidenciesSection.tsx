@@ -21,7 +21,7 @@ interface UpcomingResidenciesSectionProps {
 export function UpcomingResidenciesSection({ editions, isLoading }: UpcomingResidenciesSectionProps) {
   const upcoming = useMemo(() => {
     return editions
-      .filter(e => e.program && getStatus(e) !== 'concluded')
+      .filter(e => e.program && getStatus(e) !== 'completed')
       .slice(0, 3);
   }, [editions]);
 
