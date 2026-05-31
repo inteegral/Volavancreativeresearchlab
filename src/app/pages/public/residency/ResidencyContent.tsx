@@ -168,21 +168,6 @@ export function ResidencyContent({
               </motion.div>
             )}
 
-            {/* What We Offer */}
-            {program.whatWeOffer && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className={program.concept ? 'border-t border-volavan-cream/10 pt-16' : ''}
-              >
-                <h2 className="font-['Cormorant_Garamond'] text-2xl md:text-3xl italic text-volavan-aqua mb-8">
-                  What We Offer
-                </h2>
-                <PortableTextRenderer value={program.whatWeOffer} />
-              </motion.div>
-            )}
-
             {/* Key Figures */}
             {residency.keyFigures && residency.keyFigures.length > 0 && (
               <motion.div
@@ -464,21 +449,9 @@ export function ResidencyContent({
               ) : (
                 <EmptyTab message="Applications are currently closed. Check back when the open call opens." />
               )
-            ) : (<>
-              <h2 className="font-['Cormorant_Garamond'] text-2xl md:text-3xl italic text-volavan-aqua mb-8">
-                Application Requirements
-              </h2>
-              {program.applicationIntro && (
-                <p className="font-['Manrope'] text-base text-volavan-cream/70 mb-8 leading-relaxed whitespace-pre-line">
-                  {program.applicationIntro}
-                </p>
-              )}
-              {program.requirements ? (
-                <PortableTextRenderer value={program.requirements} />
-              ) : (
-                <EmptyTab />
-              )}
-            </>)}
+            ) : (
+              <EmptyTab message="Application details coming soon." />
+            )}
           </motion.div>
         )}
 

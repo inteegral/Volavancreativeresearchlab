@@ -64,24 +64,6 @@ export const residencyProgram = defineType({
       type: 'blockContent',
     }),
     defineField({
-      name: 'whatWeOffer',
-      title: 'What We Offer',
-      type: 'blockContent',
-    }),
-    defineField({
-      name: 'requirements',
-      title: 'Requirements',
-      description: 'What applicants need to submit',
-      type: 'blockContent',
-    }),
-    defineField({
-      name: 'applicationIntro',
-      title: 'Application Intro',
-      description: 'Opening sentence for the "How to Apply" section',
-      type: 'text',
-      rows: 2,
-    }),
-    defineField({
       name: 'video',
       title: 'Program Video',
       description: 'Optional YouTube video shown in the Overview tab of the program page',

@@ -172,8 +172,6 @@ export interface SanityResidency {
   }[];
   directorStatement?: { _key: string; _type: string; value: string; }[];
   description?: PortableTextBlock[];
-  whatWeOffer?: PortableTextBlock[];
-  requirements?: PortableTextBlock[];
   coverImage?: SanityImage;
   gallery?: SanityImage[];
   seo?: {
@@ -200,9 +198,6 @@ export interface SanityProgram {
   capacity?: number;
   logo?: SanityImage;
   concept?: PortableTextBlock[];
-  whatWeOffer?: PortableTextBlock[];
-  requirements?: PortableTextBlock[];
-  applicationIntro?: string;
   heroImage?: SanityImage;
   coverImage?: SanityImage;
   gallery?: SanityImage[];

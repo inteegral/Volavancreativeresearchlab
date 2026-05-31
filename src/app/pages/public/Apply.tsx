@@ -93,7 +93,7 @@ export default function Apply() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ residency: programName, year: residency?.year, ...data }),
       });
-      if (!res.ok) throw new Error();
+      if (res.status >= 500) throw new Error();
       setSubmitted(true);
       reset();
     } catch {

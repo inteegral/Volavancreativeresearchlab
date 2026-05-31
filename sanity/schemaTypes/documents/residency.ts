@@ -6,6 +6,14 @@ export const residency = defineType({
   title: 'Residency Edition',
   type: 'document',
   icon: CalendarIcon,
+  groups: [
+    { name: 'edition', title: 'Edition', default: true },
+    { name: 'program', title: 'Program' },
+    { name: 'artists', title: 'Artists' },
+    { name: 'accommodation', title: 'Accommodation' },
+    { name: 'apply', title: 'Apply' },
+    { name: 'seo', title: 'SEO' },
+  ],
   fields: [
     defineField({
       name: 'program',
@@ -14,6 +22,7 @@ export const residency = defineType({
       type: 'reference',
       to: [{ type: 'residencyProgram' }],
       validation: (r) => r.required(),
+      group: 'edition',
     }),
     defineField({
       name: 'coverImage',
@@ -21,6 +30,7 @@ export const residency = defineType({
       description: 'Hero image for this edition — JPG, PNG or WebP only',
       type: 'image',
       options: { hotspot: true, accept: 'image/jpeg,image/png,image/webp' },
+      group: 'edition',
     }),
     defineField({
       name: 'slug',
@@ -28,12 +38,14 @@ export const residency = defineType({
       description: 'URL identifier, e.g. son-2025',
       type: 'slug',
       validation: (r) => r.required(),
+      group: 'edition',
     }),
     defineField({
       name: 'year',
       title: 'Year',
       type: 'number',
       validation: (r) => r.required().integer().min(2000).max(2100),
+      group: 'edition',
     }),
     defineField({
       name: 'capacity',
@@ -41,25 +53,7 @@ export const residency = defineType({
       description: 'Number of artists to be selected for this edition',
       type: 'number',
       validation: (r) => r.integer().min(1),
-    }),
-    defineField({
-      name: 'feeAmount',
-      title: 'Fee Amount',
-      description: 'Leave empty if free',
-      type: 'number',
-    }),
-    defineField({
-      name: 'feeIncludes',
-      title: 'Fee Includes',
-      description: 'What is included in the fee (accommodation, meals, etc.)',
-      type: 'text',
-      rows: 8,
-    }),
-    defineField({
-      name: 'structure',
-      title: 'Structure',
-      description: 'How the residency is organized — cycles, dynamics, format',
-      type: 'blockContent',
+      group: 'edition',
     }),
     defineField({
       name: 'residencyDates',
@@ -69,6 +63,7 @@ export const residency = defineType({
         defineField({ name: 'start', type: 'date', title: 'Start' }),
         defineField({ name: 'end', type: 'date', title: 'End' }),
       ],
+      group: 'edition',
     }),
     defineField({
       name: 'callDates',
@@ -78,18 +73,29 @@ export const residency = defineType({
         defineField({ name: 'open', type: 'date', title: 'Call Opens' }),
         defineField({ name: 'close', type: 'date', title: 'Deadline' }),
       ],
+      group: 'edition',
     }),
     defineField({
-      name: 'location',
-      title: 'Location',
-      type: 'reference',
-      to: [{ type: 'location' }],
+      name: 'feeAmount',
+      title: 'Fee Amount',
+      description: 'Leave empty if free',
+      type: 'number',
+      group: 'edition',
+    }),
+    defineField({
+      name: 'feeIncludes',
+      title: 'Fee Includes',
+      description: 'What is included in the fee (accommodation, meals, etc.)',
+      type: 'text',
+      rows: 8,
+      group: 'edition',
     }),
     defineField({
       name: 'keyFigures',
       title: 'Key Figures',
       description: 'Artistic directors, curators, mentors and other key people for this edition',
       type: 'array',
+      group: 'edition',
       of: [
         defineArrayMember({
           type: 'object',
@@ -122,9 +128,31 @@ export const residency = defineType({
       ],
     }),
     defineField({
+      name: 'gallery',
+      title: 'Edition Gallery',
+      description: 'Photos specific to this edition — events, workshops, participants, documented moments. Shown exclusively on this edition\'s page. JPG, PNG or WebP only.',
+      type: 'array',
+      group: 'edition',
+      of: [
+        defineArrayMember({
+          type: 'image',
+          options: { hotspot: true, accept: 'image/jpeg,image/png,image/webp' },
+          fields: [defineField({ name: 'caption', type: 'string', title: 'Caption' })],
+        }),
+      ],
+    }),
+    defineField({
+      name: 'structure',
+      title: 'Program Content',
+      description: 'How the residency is organized — cycles, dynamics, format. This content appears in the "Program" tab on the edition page.',
+      type: 'blockContent',
+      group: 'program',
+    }),
+    defineField({
       name: 'artists',
       title: 'Artists',
       type: 'array',
+      group: 'artists',
       of: [
         defineArrayMember({
           type: 'object',
@@ -144,29 +172,26 @@ export const residency = defineType({
       ],
     }),
     defineField({
-      name: 'gallery',
-      title: 'Edition Gallery',
-      description: 'Photos specific to this edition — events, workshops, participants, documented moments. Shown exclusively on this edition\'s page. JPG, PNG or WebP only.',
-      type: 'array',
-      of: [
-        defineArrayMember({
-          type: 'image',
-          options: { hotspot: true, accept: 'image/jpeg,image/png,image/webp' },
-          fields: [defineField({ name: 'caption', type: 'string', title: 'Caption' })],
-        }),
-      ],
+      name: 'location',
+      title: 'Location',
+      description: 'Links to the Location document. To edit accommodation description and photos, open the linked Location document directly.',
+      type: 'reference',
+      to: [{ type: 'location' }],
+      group: 'accommodation',
     }),
     defineField({
       name: 'formsparkId',
-      title: 'Formspark ID',
-      description: 'The Formspark form ID for this edition\'s application form (e.g. "OiX6zdV28").',
+      title: 'Formspark Form ID',
+      description: 'The Formspark form ID for this edition\'s application form (e.g. "OiX6zdV28"). Application text (requirements, intro) is managed on the Program document.',
       type: 'string',
+      group: 'apply',
     }),
     defineField({
       name: 'seo',
       title: 'SEO',
       description: 'Override program SEO for this edition. Leave all fields empty to inherit from the program.',
       type: 'object',
+      group: 'seo',
       fields: [
         {
           name: 'title',
